@@ -1,6 +1,7 @@
 package com.citi.portfolio.dao;
 
 import com.citi.portfolio.entity.FundManager;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public interface FundManagerMapper {
 
     FundManager selectByPrimaryKey(Integer id);
 
-    ArrayList<FundManager> selectByUserName(String userName);
+    ArrayList<FundManager> selectByUserName(@Param("username")String username);
 
     ArrayList<FundManager> selectAll();
 

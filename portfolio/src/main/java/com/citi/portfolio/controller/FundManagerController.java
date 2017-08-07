@@ -3,7 +3,9 @@ package com.citi.portfolio.controller;
 
 
 import com.citi.portfolio.entity.FundManager;
+import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.service.serviceInterface.FundManagerService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,72 +23,68 @@ public class FundManagerController {
 
     @Autowired
     FundManagerService fundManagerService;
+    private static Logger logger = Logger.getLogger(FundManagerController.class);
 
-    @RequestMapping("/index")
-    public ModelAndView index() {
+    @RequestMapping("/loginForm")
+    public ModelAndView loginForm() {
 
         ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
 
     }
+    @RequestMapping("/registerForm")
+    public ModelAndView registerForm() {
+
+        ModelAndView modelAndView = new ModelAndView("sign");
+        return modelAndView;
+
+    }
     @RequestMapping("/register")
-    public ModelAndView register(@RequestParam(value = "username", required = true) String username,
+    public String register(@RequestParam(value = "username", required = true) String username,
                          @RequestParam(value = "password", required = true) String password,
-                         @RequestParam(value = "firstname", required = true) String firstname,
+                         @RequestParam(value = "firstName", required = true) String firstname,
                          @RequestParam(value = "lastName", required = true)String lastName,
                          @RequestParam(value = "telephone", required = true) String telephone,
                          @RequestParam(value = "email", required = true) String email) {
-        HashMap resultMap = fundManagerService.register(username,password,firstname,lastName,telephone,email);
-        boolean success = (boolean)resultMap.get("result");
-        if (success){
-            ModelAndView modelAndView = new ModelAndView("show");
-            modelAndView.addObject("resultMap",resultMap);
-            return modelAndView;
-        }
-        return  new ModelAndView("error");
+        String json  = fundManagerService.register(username,password,firstname,lastName,telephone,email).toJSONString();
+        logger.info("register new fundManager: "+ json);
+        return  json;
     }
 
     @RequestMapping("/login")
-    public ModelAndView login(@RequestParam(value = "username", required = true) String username,
+    public String login(@RequestParam(value = "username", required = true) String username,
                               @RequestParam(value = "password",required = true) String password) {
 
-            HashMap resultMap = fundManagerService.login(username,password);
-            ModelAndView modelAndView = new ModelAndView("show");
-            modelAndView.addObject("resultMap",resultMap);
-            return modelAndView;
+        String json  = fundManagerService.login(username,password).toJSONString();
+        logger.info("login fundManager: "+ json);
+        return  json;
 
     }
     @RequestMapping("/selectAll")
-    public ModelAndView selectAll() {
+    public String selectAll() {
 
-            HashMap resultMap = fundManagerService.selectAll();
-            ModelAndView modelAndView = new ModelAndView("show");
-            modelAndView.addObject("resultMap",resultMap);
-            return modelAndView;
+            String json= fundManagerService.selectAll().toJSONString();
+            return json;
 
     }
 
     @RequestMapping("/deleteFundManager")
-    public ModelAndView deleteFundManager(@RequestParam(value = "id", required = true) int id) {
+    public String deleteFundManager(@RequestParam(value = "id", required = true) int id) {
 
-        HashMap resultMap = fundManagerService.deleteFundManager(id);
-        ModelAndView modelAndView = new ModelAndView("show");
-        modelAndView.addObject("resultMap",resultMap);
-        return modelAndView;
+        String json = fundManagerService.deleteFundManager(id).toJSONString();
+        return json;
 
     }
 
     @RequestMapping("/updateFundManager")
-    public ModelAndView updateFundManager(@RequestParam(value = "firstName", required = true) String firstName,
+    public String updateFundManager(@RequestParam(value = "firstName", required = true) String firstName,
                                           @RequestParam(value = "lastName", required = true)String lastName,
                                           @RequestParam(value = "telephone", required = true) String telephone,
                                           @RequestParam(value = "email", required = true) String email,
                                           @RequestParam(value = "password", required = true) String password) {
 
-        HashMap resultMap = fundManagerService.updateFundManager(firstName, lastName, telephone, email, password);
-        ModelAndView modelAndView = new ModelAndView("show");
-        modelAndView.addObject("resultMap",resultMap);
-        return modelAndView;
+        String json= fundManagerService.updateFundManager(firstName, lastName, telephone, email, password).toJSONString();
+        return json;
 
     }
 

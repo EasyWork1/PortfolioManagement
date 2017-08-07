@@ -31,7 +31,7 @@
     select
     <include refid="Base_Column_List" />
     from fundmanager
-    where username LIKE '%${username,jdbcType=VARCHAR}%'
+    where username LIKE '%${username}%'
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from fundmanager
