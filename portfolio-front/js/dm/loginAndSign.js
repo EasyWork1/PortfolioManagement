@@ -35,9 +35,24 @@ function login() {
     }
 }
 
+function sign() {
+    var user = $("#sign-user").val();
+    var pass = $("#sign-pwd").val();
+    var address = $("#sign-mail").val();
+    if (user.length == 0 || pass.length == 0 || address.length ==0) {
+        alert("information imperfect !"); 
+        return false; 
+    } 
+    else {
+        self.location = "login.html";
+    }
+}
+
 function cancel() {
     // $("#user").value() = ""; 
     // $("#pwd").value() = ""; 
     // return false; 
 } 
+
+
 
