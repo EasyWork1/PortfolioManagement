@@ -39,15 +39,27 @@
                     <div class="intro-message">
                         <h1>Sign Page</h1>
                         <div class="list-inline intro-social-buttons "> 
-                            <label class="user">Username</label>
-                            <input type="text" id="sign-user" placeholder="Creat a username">
+                            <label class="frontLabel">FirstName</label>
+                            <input type="text" id="firstName" placeholder="Creat a FirstName">
                         </div>
                         <div class="list-inline intro-social-buttons "> 
-                            <label class="mail">Mailaddress</label>
-                            <input type="text" id="sign-mail" placeholder="you@example.com">
+                            <label class="frontLabel">LastName</label>
+                            <input type="text" id="lastName" placeholder="Creat a LastName">
+                        </div>
+                        <div class="list-inline intro-social-buttons "> 
+                            <label class="frontLabel">Telephone</label>
+                            <input type="text" id="telephone" placeholder="Creat a Telephone">
+                        </div>
+                        <div class="list-inline intro-social-buttons "> 
+                            <label class="frontLabel">MailAddress</label>
+                            <input type="text" id="email" placeholder="you@example.com">
+                        </div>
+                        <div class="list-inline intro-social-buttons "> 
+                            <label class="frontLabel">UserName</label>
+                            <input type="text" id="sign-user" placeholder="Creat a username">
                         </div>
                         <div class="list-inline intro-social-buttons"> 
-                            <label class="pwd">Password</label>
+                            <label class="frontLabel">PassWord</label>
                             <input type="password" id="sign-pwd" placeholder="Create a password">
                         </div>
                         <ul class="list-inline intro-social-buttons login-btn">

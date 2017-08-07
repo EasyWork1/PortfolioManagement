@@ -32,8 +32,11 @@ public class FundManagerController {
     @RequestMapping("/register")
     public ModelAndView register(@RequestParam(value = "username", required = true) String username,
                          @RequestParam(value = "password", required = true) String password,
-                         @RequestParam(value = "firstname", required = true) String firstname) {
-        HashMap resultMap = fundManagerService.register(username,password);
+                         @RequestParam(value = "firstname", required = true) String firstname,
+                         @RequestParam(value = "lastName", required = true)String lastName,
+                         @RequestParam(value = "telephone", required = true) String telephone,
+                         @RequestParam(value = "email", required = true) String email) {
+        HashMap resultMap = fundManagerService.register(username,password,firstname,lastName,telephone,email);
         boolean success = (boolean)resultMap.get("result");
         if (success){
             ModelAndView modelAndView = new ModelAndView("show");
@@ -51,6 +54,39 @@ public class FundManagerController {
             ModelAndView modelAndView = new ModelAndView("show");
             modelAndView.addObject("resultMap",resultMap);
             return modelAndView;
+
+    }
+    @RequestMapping("/selectAll")
+    public ModelAndView selectAll() {
+
+            HashMap resultMap = fundManagerService.selectAll();
+            ModelAndView modelAndView = new ModelAndView("show");
+            modelAndView.addObject("resultMap",resultMap);
+            return modelAndView;
+
+    }
+
+    @RequestMapping("/deleteFundManager")
+    public ModelAndView deleteFundManager(@RequestParam(value = "id", required = true) int id) {
+
+        HashMap resultMap = fundManagerService.deleteFundManager(id);
+        ModelAndView modelAndView = new ModelAndView("show");
+        modelAndView.addObject("resultMap",resultMap);
+        return modelAndView;
+
+    }
+
+    @RequestMapping("/updateFundManager")
+    public ModelAndView updateFundManager(@RequestParam(value = "firstName", required = true) String firstName,
+                                          @RequestParam(value = "lastName", required = true)String lastName,
+                                          @RequestParam(value = "telephone", required = true) String telephone,
+                                          @RequestParam(value = "email", required = true) String email,
+                                          @RequestParam(value = "password", required = true) String password) {
+
+        HashMap resultMap = fundManagerService.updateFundManager(firstName, lastName, telephone, email, password);
+        ModelAndView modelAndView = new ModelAndView("show");
+        modelAndView.addObject("resultMap",resultMap);
+        return modelAndView;
 
     }
 

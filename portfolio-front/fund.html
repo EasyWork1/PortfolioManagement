@@ -18,7 +18,8 @@
     <link href="css/sb-admin.css" rel="stylesheet">
 
     <link href="css/height.css" rel="stylesheet">
-
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/dm/fund.js"></script>
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
@@ -107,26 +108,41 @@
                           
                         </div>
 
-                        <div>
+                        <div class="table-responsive">
                             <table id= "tb_fund" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>FirstName</th> 
-                                        <th>Last Name</th> 
-                                        <th>Telephone</th> 
-                                        <th>Email</th>
-                                        <th>功能</th>
-                                        
+                                        <th>No</th> 
+                                        <th>Name</th> 
+                                        <th>FundManager</th> 
+                                        <th>Earning</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr id="cloneTr">  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>           
-                                    </tr>                                    
+                                    <tr onclick="trClick(this)">  
+                                        <td id="fundId">1</td>  
+                                        <td>aaa</td>  
+                                        <td>Demi</td>  
+                                        <td>10%</td>          
+                                    </tr>  
+                                    <tr onclick="trClick(this)">  
+                                        <td>2</td>  
+                                        <td>bbb</td>  
+                                        <td>Jeremy</td>  
+                                        <td>10%</td>          
+                                    </tr>   
+                                    <tr onclick="trClick(this)">  
+                                        <td>3</td>  
+                                        <td>ccc</td>  
+                                        <td>Keira</td>  
+                                        <td>10%</td>          
+                                    </tr>
+                                    <tr onclick="trClick(this)">  
+                                        <td>4</td>  
+                                        <td>ddd</td>  
+                                        <td>Elaine</td>  
+                                        <td>10%</td>          
+                                    </tr>                                   
                                 </tbody>
                             </table>
                         </div>
