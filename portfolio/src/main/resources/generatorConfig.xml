@@ -67,22 +67,6 @@
         </javaClientGenerator>
 
 
-        <table tableName="fundManager" domainObjectName="FundManager"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table tableName="bond" domainObjectName="Bond"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-        <table tableName="portfolio" domainObjectName="Portfolio"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
 
         <table tableName="position" domainObjectName="Position"
                enableCountByExample="false" enableUpdateByExample="false"
@@ -90,7 +74,7 @@
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="stock" domainObjectName="Stock"
+        <table tableName="positionHistory" domainObjectName="PositionHistory"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

@@ -2,7 +2,7 @@ package com.citi.portfolio.entity;
 
 import java.util.Date;
 
-public class Position {
+public class PositionHistory {
     private Integer id;
 
     private Double lastprice;
@@ -19,7 +19,9 @@ public class Position {
 
     private Integer portfolioid;
 
-    public Position(Integer id, Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid) {
+    private String buyorsell;
+
+    public PositionHistory(Integer id, Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid, String buyorsell) {
         this.id = id;
         this.lastprice = lastprice;
         this.quantity = quantity;
@@ -28,9 +30,10 @@ public class Position {
         this.datetime = datetime;
         this.asset = asset;
         this.portfolioid = portfolioid;
+        this.buyorsell = buyorsell;
     }
 
-    public Position() {
+    public PositionHistory() {
         super();
     }
 
@@ -96,5 +99,13 @@ public class Position {
 
     public void setPortfolioid(Integer portfolioid) {
         this.portfolioid = portfolioid;
+    }
+
+    public String getBuyorsell() {
+        return buyorsell;
+    }
+
+    public void setBuyorsell(String buyorsell) {
+        this.buyorsell = buyorsell == null ? null : buyorsell.trim();
     }
 }

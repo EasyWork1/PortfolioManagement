@@ -14,9 +14,10 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/fundmanager")
 public class FundManagerController {
 
     @Autowired
@@ -24,36 +25,28 @@ public class FundManagerController {
 
     @RequestMapping("/register")
     public ModelAndView register(@RequestParam(value = "username", required = true) String username,
-                         @RequestParam(value = "password", required = true) String password) {
-        boolean success = fundManagerService.insertUser(username,password);
+                         @RequestParam(value = "password", required = true) String password,
+                         @RequestParam(value = "firstname", required = true) String firstname) {
+        HashMap resultMap = fundManagerService.register(username,password);
+        boolean success = (boolean)resultMap.get("result");
         if (success){
             ModelAndView modelAndView = new ModelAndView("show");
-            modelAndView.addObject("username",username);
+            modelAndView.addObject("resultMap",resultMap);
             return modelAndView;
         }
-        return null;
+        return  new ModelAndView("error");
     }
 
-    @RequestMapping("/query")
-    public ModelAndView query(@RequestParam(value = "username", required = true) String username) {
+    @RequestMapping("/login")
+    public ModelAndView login(@RequestParam(value = "username", required = true) String username,
+                              @RequestParam(value = "password",required = true) String password) {
 
-        ArrayList<FundManager> fundManagers = fundManagerService.queryFundManager(username);
+            HashMap resultMap = fundManagerService.login(username,password);
             ModelAndView modelAndView = new ModelAndView("show");
-            modelAndView.addObject("username",username);
+            modelAndView.addObject("resultMap",resultMap);
             return modelAndView;
 
     }
 
-    private String creatMD5(String loginNum){
-        // 生成一个MD5加密计算摘要
-        MessageDigest md = null;
-        try {
-            md = MessageDigest.getInstance("MD5");
-            md.update(loginNum.getBytes());
 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return new BigInteger(1, md.digest()).toString(16);
-    }
 }
