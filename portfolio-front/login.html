@@ -19,6 +19,9 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/dm/loginAndSign.js"></script>
 <!--     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,18 +49,18 @@
                             <h1>Landing Page</h1>
                             <div class="list-inline intro-social-buttons "> 
                                 <label class="user">Username</label>
-                                <input type="text" name="user" placeholder="Username">
+                                <input type="text" id="user" placeholder="Username">
                             </div>
                             <div class="list-inline intro-social-buttons"> 
                                 <label class="pwd">Password</label>
-                                <input type="text" name="pwd" placeholder="Password">
+                                <input type="password" id="pwd" placeholder="Password">
                             </div>
                             <ul class="list-inline intro-social-buttons login-btn">
                                 <li>
-                                    <a href="index.html" class="btn btn-default btn-lg"> <span class="network-name">Login</span></a>
+                                    <button id="login" class="btn btn-default btn-lg" onclick="login()"">Login</button>
                                 </li>
                                 <li>
-                                    <a href="" class="btn btn-default btn-lg"> <span class="network-name">Cancel</span></a>
+                                    <button id="cancel" class="btn btn-default btn-lg" onclick="cancel()"">Cancel</button>
                                 </li>
                             </ul>
                             <div class="sign-row">
