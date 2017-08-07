@@ -19,6 +19,9 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/dm/loginAndSign.js"></script>
 </head>
     
 <body>
@@ -37,22 +40,22 @@
                         <h1>Sign Page</h1>
                         <div class="list-inline intro-social-buttons "> 
                             <label class="user">Username</label>
-                            <input type="text" name="user" placeholder="Creat a username">
+                            <input type="text" id="sign-user" placeholder="Creat a username">
                         </div>
                         <div class="list-inline intro-social-buttons "> 
                             <label class="mail">Mailaddress</label>
-                            <input type="text" name="mail" placeholder="you@example.com">
+                            <input type="text" id="sign-mail" placeholder="you@example.com">
                         </div>
                         <div class="list-inline intro-social-buttons"> 
                             <label class="pwd">Password</label>
-                            <input type="text" name="pwd" placeholder="Create a password">
+                            <input type="password" id="sign-pwd" placeholder="Create a password">
                         </div>
                         <ul class="list-inline intro-social-buttons login-btn">
                             <li>
-                                <a href="" class="btn btn-default btn-lg"> <span class="network-name">Sign</span></a>
+                                <button class="btn btn-default btn-lg" onclick="sign()"">Sign</button>
                             </li>
                             <li>
-                                <a href="" class="btn btn-default btn-lg"> <span class="network-name">Cancel</span></a>
+                                <button class="btn btn-default btn-lg" onclick="signCancel()"">Cancel</button>
                             </li>
                         </ul>
                         
