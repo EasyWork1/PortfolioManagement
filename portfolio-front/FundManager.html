@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="index.html">Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -217,25 +217,17 @@
                         </div>
 
                         <div>
-                            <table id= "tb_fundmanager" class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>FirstName</th> 
                                         <th>Last Name</th> 
                                         <th>Telephone</th> 
-                                        <th>Email</th>
-                                        <th>功能</th>
-                                        
+                                        <th>Email</th>      
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr id="cloneTr">  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>           
-                                    </tr>                                    
+                                <tbody id= "myTb">
+                                                                     
                                 </tbody>
                             </table>
                         </div>
@@ -254,8 +246,11 @@
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
+    <script src="js/lx/ajaxTest.js"></script> 
+
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
 
     <!-- Morris Charts JavaScript -->
     <script src="js/plugins/morris/raphael.min.js"></script>
@@ -269,6 +264,7 @@
     <script src="js/plugins/flot/jquery.flot.resize.js"></script>
     <script src="js/plugins/flot/jquery.flot.pie.js"></script>
     <script src="js/plugins/flot/flot-data.js"></script> 
+    
 
 </body>
 

@@ -6,6 +6,8 @@
         url: "../Handler/TestHandler.ashx?Method=GetModuleInfo",
         //data: { id: id, name: name },
         success: function(json) {
+          //打印信息
+          console.log(json);
           var typeData = json.Module;
           $.each(typeData, function(i, n) {
             var tbBody = ""
