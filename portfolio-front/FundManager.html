@@ -207,18 +207,46 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="col-lg-6">
+                <row>
+                     <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default" id="add_btn" onclick="changeVisibility()">
+                            <span class="glyphicon glyphicon-plus"></span>Add a New Manager
+                            </button>
+                          
+                     </div>
+                </row>                    
 
-                       
+                <row>
+                     <div id="add_edit_div" style="display: none">
+                     <br/>
+                        First Name：<input width=50px type="text" id="i1">
+                        Last Name：<input type="text" id="i2">
+                        TelePhone：<input type="TelePhone：" id="i3">
+                        <br/>
+                        Email：<input type="Email" id="i4">   
+                        Username：<input type="text" id="i5">   
+                        Password：<input type="password：" id="i6">   
+                     </div>
+                     <br/>
+                     <button id = "btn_save" type="button" class="btn btn-primary btn-sm" style="display: none" onclick="addManager()">SAVE</button>
+                     <button id = "btn_cancel" type="button" class="btn btn-primary btn-sm" style="display: none" onclick="cancelManager()" value="Reset">CANCEL</button>
+
+                </row>
+
+                <row >
+                     <div class="col-lg-6"> 
 
                         <div>
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
                                         <th>FirstName</th> 
                                         <th>Last Name</th> 
                                         <th>Telephone</th> 
-                                        <th>Email</th>      
+                                        <th>Email</th>   
+                                        <th>UserName</th> 
+                                        <th>Password</th> 
+                                        <th>操作</th>     
                                     </tr>
                                 </thead>
                                 <tbody id= "myTb">
@@ -226,7 +254,9 @@
                                 </tbody>
                             </table>
                         </div>
-                </div>
+                     </div>
+
+                </row>
                 <!-- /.row -->
 
             </div>
@@ -240,26 +270,9 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
-    <script src="js/lx/ajaxTest.js"></script> 
-
-    <!-- Bootstrap Core JavaScript -->
+     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-
-    <!-- Flot Charts JavaScript -->
-    <!--[if lte IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
-    <script src="js/plugins/flot/jquery.flot.js"></script>
-    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
-    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
-    <script src="js/plugins/flot/flot-data.js"></script> 
-    
+    <script src="js/lx/manager.js"></script>     
 
 </body>
 
