@@ -7,10 +7,13 @@ public class Portfolio {
 
     private Integer fundmanagerid;
 
-    public Portfolio(Integer id, String name, Integer fundmanagerid) {
+    private Double benefit;
+
+    public Portfolio(Integer id, String name, Integer fundmanagerid, Double benefit) {
         this.id = id;
         this.name = name;
         this.fundmanagerid = fundmanagerid;
+        this.benefit = benefit;
     }
 
     public Portfolio() {
@@ -39,5 +42,13 @@ public class Portfolio {
 
     public void setFundmanagerid(Integer fundmanagerid) {
         this.fundmanagerid = fundmanagerid;
+    }
+
+    public Double getBenefit() {
+        return benefit;
+    }
+
+    public void setBenefit(Double benefit) {
+        this.benefit = benefit;
     }
 }

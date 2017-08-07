@@ -68,17 +68,13 @@
 
 
 
-        <table tableName="position" domainObjectName="Position"
+        <table tableName="portfolio" domainObjectName="Portfolio"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="positionHistory" domainObjectName="PositionHistory"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+
 
 
     </context>

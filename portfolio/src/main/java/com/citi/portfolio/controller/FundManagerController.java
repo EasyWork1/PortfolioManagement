@@ -17,12 +17,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/fundmanager")
 public class FundManagerController {
 
     @Autowired
     FundManagerService fundManagerService;
 
+    @RequestMapping("/index")
+    public ModelAndView index() {
+
+        ModelAndView modelAndView = new ModelAndView("login");
+        return modelAndView;
+
+    }
     @RequestMapping("/register")
     public ModelAndView register(@RequestParam(value = "username", required = true) String username,
                          @RequestParam(value = "password", required = true) String password,

@@ -3,9 +3,12 @@ package com.citi.portfolio.service.serviceImp;
 import com.citi.portfolio.dao.FundManagerMapper;
 import com.citi.portfolio.entity.FundManager;
 import com.citi.portfolio.service.serviceInterface.FundManagerService;
+import com.citi.portfolio.util.FundManagerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +23,13 @@ public class FundManagerServiceImp implements FundManagerService {
         HashMap hashMap = new HashMap();
         FundManager fundManager = new FundManager();
         fundManager.setUsername(username);
-        fundManager.setPassword(password);
+        try {
+            fundManager.setPassword(FundManagerUtil.EncoderByMd5(password));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         hashMap.put("result",false);
         ArrayList<FundManager> fundManagers = fundManagerMapper.selectByUserName(username);
         if (fundManagers.isEmpty()){
@@ -53,9 +62,15 @@ public class FundManagerServiceImp implements FundManagerService {
         ArrayList<FundManager> fundManagers = fundManagerMapper.selectByUserName(username);
         if (!fundManagers.isEmpty()){
             FundManager fundManager = fundManagers.get(0);
-            if (fundManager.getPassword().equals(password)){
-                hashMap.put("result",true);
-                hashMap.put("fundManagers",fundManager);
+            try {
+                if (fundManager.getPassword().equals(FundManagerUtil.EncoderByMd5(password))){
+                    hashMap.put("result",true);
+                    hashMap.put("fundManagers",fundManager);
+                }
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
             }
 
         }
