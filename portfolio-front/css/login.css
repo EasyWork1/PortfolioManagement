@@ -1,0 +1,76 @@
+body {
+    margin-top: 50px;
+    background-color: #222;
+}
+
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
+}
+
+#wrapper {
+    padding-left: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+{
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+
+.intro-header {
+    padding-top: 170px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 170px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../img/intro-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.user ,.pwd,.mail{
+    font-size: 20px;
+    margin-top: 15px;
+    width: 120px;
+    text-align: right;
+}
+
+input {
+	    display: inline-block;
+    /* width: 220px; */
+    padding-left: 120p;
+    border: 0px;
+    background: none;
+    outline: none;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 15px;
+    border-bottom: 1px solid #ccc;
+    padding: 7px 8px;
+}
+
+.intro-divider {
+	width: 200px;
+	margin-top: 0px;
+	text-align: center;
+}
+
+.login-btn{
+    margin-top: 40px;
+    margin-left: 15px;
+}
+.login-btn li{
+    padding-right: 15px;
+}
+
+.sign-row {
+    margin-top: 20px;
+}
+
