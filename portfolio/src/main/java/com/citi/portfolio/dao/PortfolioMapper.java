@@ -2,6 +2,8 @@ package com.citi.portfolio.dao;
 
 import com.citi.portfolio.entity.Portfolio;
 
+import java.util.ArrayList;
+
 public interface PortfolioMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -10,6 +12,8 @@ public interface PortfolioMapper {
     int insertSelective(Portfolio record);
 
     Portfolio selectByPrimaryKey(Integer id);
+
+    ArrayList<Portfolio> selectByfundManagerId(Integer fundManagerId);
 
     int updateByPrimaryKeySelective(Portfolio record);
 

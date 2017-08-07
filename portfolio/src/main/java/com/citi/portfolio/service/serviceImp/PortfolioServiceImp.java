@@ -1,10 +1,15 @@
 package com.citi.portfolio.service.serviceImp;
 
+import com.citi.portfolio.dao.FundManagerMapper;
 import com.citi.portfolio.dao.PortfolioMapper;
+import com.citi.portfolio.entity.FundManager;
 import com.citi.portfolio.entity.Portfolio;
+import com.citi.portfolio.entity.Position;
 import com.citi.portfolio.service.serviceInterface.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class PortfolioServiceImp implements PortfolioService {
@@ -21,5 +26,11 @@ public class PortfolioServiceImp implements PortfolioService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public ArrayList<Portfolio> findPortfolioByFundManagerId(Integer fundManagerId) {
+        ArrayList<Portfolio> portfolios = portfolioMapper.selectByfundManagerId(fundManagerId);
+        return portfolios ;
     }
 }
