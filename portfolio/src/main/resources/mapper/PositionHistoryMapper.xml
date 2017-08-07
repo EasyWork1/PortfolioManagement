@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.citi.portfolio.dao.PositionHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.PositionHistory" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="lastPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="quantity" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="currency" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="securityId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dateTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="asset" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="portfolioId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="buyorsell" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, lastPrice, quantity, currency, securityId, dateTime, asset, portfolioId, buyorsell
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from positionhistory
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from positionhistory
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.citi.portfolio.entity.PositionHistory" >
+    insert into positionhistory (id, lastPrice, quantity, 
+      currency, securityId, dateTime, 
+      asset, portfolioId, buyorsell
+      )
+    values (#{id,jdbcType=INTEGER}, #{lastprice,jdbcType=DOUBLE}, #{quantity,jdbcType=DOUBLE}, 
+      #{currency,jdbcType=VARCHAR}, #{securityid,jdbcType=VARCHAR}, #{datetime,jdbcType=TIMESTAMP}, 
+      #{asset,jdbcType=VARCHAR}, #{portfolioid,jdbcType=INTEGER}, #{buyorsell,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.citi.portfolio.entity.PositionHistory" >
+    insert into positionhistory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lastprice != null" >
+        lastPrice,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="securityid != null" >
+        securityId,
+      </if>
+      <if test="datetime != null" >
+        dateTime,
+      </if>
+      <if test="asset != null" >
+        asset,
+      </if>
+      <if test="portfolioid != null" >
+        portfolioId,
+      </if>
+      <if test="buyorsell != null" >
+        buyorsell,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lastprice != null" >
+        #{lastprice,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=DOUBLE},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="securityid != null" >
+        #{securityid,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="asset != null" >
+        #{asset,jdbcType=VARCHAR},
+      </if>
+      <if test="portfolioid != null" >
+        #{portfolioid,jdbcType=INTEGER},
+      </if>
+      <if test="buyorsell != null" >
+        #{buyorsell,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.entity.PositionHistory" >
+    update positionhistory
+    <set >
+      <if test="lastprice != null" >
+        lastPrice = #{lastprice,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=DOUBLE},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="securityid != null" >
+        securityId = #{securityid,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        dateTime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="asset != null" >
+        asset = #{asset,jdbcType=VARCHAR},
+      </if>
+      <if test="portfolioid != null" >
+        portfolioId = #{portfolioid,jdbcType=INTEGER},
+      </if>
+      <if test="buyorsell != null" >
+        buyorsell = #{buyorsell,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.PositionHistory" >
+    update positionhistory
+    set lastPrice = #{lastprice,jdbcType=DOUBLE},
+      quantity = #{quantity,jdbcType=DOUBLE},
+      currency = #{currency,jdbcType=VARCHAR},
+      securityId = #{securityid,jdbcType=VARCHAR},
+      dateTime = #{datetime,jdbcType=TIMESTAMP},
+      asset = #{asset,jdbcType=VARCHAR},
+      portfolioId = #{portfolioid,jdbcType=INTEGER},
+      buyorsell = #{buyorsell,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

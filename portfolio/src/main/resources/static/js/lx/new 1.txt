@@ -1,0 +1,14 @@
+ <tr>
+                                        <td>Sam</td>
+                                        <td>2Smith</td>
+                                        <td>13208990876 </td>
+                                        <td>sam@gmail.com</td>
+                                        <td> 
+                                              <a href="#" id="save_btn" style="display:none">保存</a>   
+                                              <button type="button" class="btn btn-default"  id="edit_btn">
+                                              <span class="glyphicon glyphicon-edit"></span>修改
+                                              </button>
+                                              <button type="button" class="btn btn-default"  id="del_btn">
+                                              <span class="glyphicon glyphicon-remove"></span>删除
+                                              </button></td>   
+                                    </tr>

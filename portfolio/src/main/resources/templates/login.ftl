@@ -65,7 +65,7 @@
                             </ul>
                             <div class="sign-row">
                                 <label class="nocount">No account?</label>
-                                <a href="sign.html"><span class="sign">Sign</span></a> 
+                                <a href="sign.ftl"><span class="sign">Sign</span></a>
                             </div>
                             
                         </div>
