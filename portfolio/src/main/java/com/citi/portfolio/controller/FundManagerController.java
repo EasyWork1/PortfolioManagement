@@ -35,9 +35,13 @@ public class FundManagerController {
     }
 
     @RequestMapping("/query")
-    public String query(@RequestParam(value = "id", required = true) Integer id) {
+    public ModelAndView query(@RequestParam(value = "username", required = true) String username) {
 
-        ArrayList<FundManager> fundManagers = fundManagerService.insertUser(username,password);;
+        ArrayList<FundManager> fundManagers = fundManagerService.queryFundManager(username);
+            ModelAndView modelAndView = new ModelAndView("show");
+            modelAndView.addObject("username",username);
+            return modelAndView;
+
     }
 
     private String creatMD5(String loginNum){

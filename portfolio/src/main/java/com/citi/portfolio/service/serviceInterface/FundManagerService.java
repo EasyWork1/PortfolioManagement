@@ -1,6 +1,10 @@
 package com.citi.portfolio.service.serviceInterface;
 
+import com.citi.portfolio.entity.FundManager;
+
+import java.util.ArrayList;
+
 public interface FundManagerService {
     boolean insertUser(String username,String password);
-    boolean queryFundManager(String username);
+    ArrayList<FundManager> queryFundManager(String username);
 }
