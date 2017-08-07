@@ -8,6 +8,14 @@
       <arg column="fundManagerId" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
+
+  <resultMap id="myPortfolioMap" type="com.citi.portfolio.entity.MyPortfolio">
+    <id column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="symbols" property="symbols" jdbcType="INTEGER"/>
+    <result column="lotvalue" property="lotvalue" jdbcType="DOUBLE"/>
+    <result column="benefit" property="benefit" jdbcType="DOUBLE"/>
+    <result column="benefitPer" property="benefitPer" jdbcType="DOUBLE"/>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, fundManagerId
   </sql>
@@ -21,8 +29,21 @@
     select
     <include refid="Base_Column_List" />
     from portfolio
-    where fundManagerId = #{fundManagerId,jdbcType=INTEGER}
+    where fundManagerId = #{fundmanagerid,jdbcType=INTEGER}
   </select>
+  <select id="showMyPofolio" resultMap="myPortfolioMap">
+  select a.fundmanagerid,a.id,a.name,a.symbols,b.lotvalue,(b.lotvalue-a.buyprice) as benefit,
+    ROUND(b.lotvalue - a.buyprice * 100,2) || '%' as benefitPer from
+    (select a.fundmanagerid,a.id,a.name as name, count(*) as symbols, sum(b.quantity * b.lastprice) as buyprice
+    from portfolio a left join position b on a.id=b.portfolioid group by a.id,a.name) a
+    left join
+    (select b.portfolioid,sum(a.lastsale * b.quantity) as lotvalue from stock a left join position b
+    on a.id=b.securityId group by b.portfolioid) b
+    on b.portfolioid=a.id
+    where a.fundmanagerid = #{fundmanagerid,jdbcType=INTEGER}
+
+</select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from portfolio
     where id = #{id,jdbcType=INTEGER}

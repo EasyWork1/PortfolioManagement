@@ -1,8 +1,10 @@
 package com.citi.portfolio.dao;
 
+import com.citi.portfolio.entity.MyPortfolio;
 import com.citi.portfolio.entity.Portfolio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface PortfolioMapper {
     int deleteByPrimaryKey(Integer id);
@@ -13,9 +15,11 @@ public interface PortfolioMapper {
 
     Portfolio selectByPrimaryKey(Integer id);
 
-    ArrayList<Portfolio> selectByfundManagerId(Integer fundManagerId);
+    ArrayList<Portfolio> selectByfundManagerId(Integer fundmanagerid);
 
     int updateByPrimaryKeySelective(Portfolio record);
 
     int updateByPrimaryKey(Portfolio record);
+
+    ArrayList<MyPortfolio> showMyPofolio(Integer id);
 }
