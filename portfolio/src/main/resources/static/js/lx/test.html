@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<title>json数组转成表格</title> 
+<meta http-equiv="content-type" content="text/html;charset=gb2312"> 
+<style type="text/css"> 
+caption { 
+padding: 0 0 5px 0; 
+width: 450px; 
+font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif; 
+text-align: right; 
+} 
+td { 
+border:1px solid #c1dad7; 
+
+padding: 6px 6px 6px 12px; 
+color: #4f6b72; 
+text-align: center; 
+width:150px; 
+} 
+</style> 
+<script type="text/javascript"> 
+var data=[{name:'xiaoxiao',age:12,gender:'male'},{name:'xiao',age:22,gender:'male'},{name:'hh',age:12,gender:'female'},{name:'ran',age:20,gender:'female'}]; 
+
+//网页加载完成后执行该onload事件 
+onload = function(){ 
+var body=document.getElementsByTagName('body')[0]; 
+body.appendChild(createTable(data)); 
+}; 
+
+//根据传入的json数组创建表格 
+var createTable = function(data){ 
+
+//定义表格 
+var table=document.createElement('table'); 
+table.setAttribute('style','width: 450px;'); 
+
+//定义表格标题 
+var caption=document.createElement('caption'); 
+caption.innerHTML ='学生信息表'; 
+
+//将标题添加进表格 
+table.appendChild(caption); 
+//调用createTr()方法生成标题行并将其添加到table中。 
+table.appendChild(createTr('姓名','年龄','性别')); 
+table.childNodes[1].setAttribute('style','background:#cae8ea;'); 
+//alert(table.firstChild); 
+//for循环json对象,然后将循环到的对象通过createTr()方法生成行，添加到table中 
+for(var i=0;i<data.length;i++){ 
+table.appendChild(createTr(data[i].name,data[i].age,data[i].gender)); 
+} 
+return table; 
+}; 
+
+
+//根据用户传过来的变量生成表格中行的方法 
+var createTr = function(name,age,gender){ 
+//定义行元素标签 
+var tr=document.createElement('tr'); 
+//定义列元素标签 
+var tdName=document.createElement('td'); 
+//设置该列节点的文本节点的值 
+tdName.innerHTML = name; 
+var tdAge = document.createElement('td'); 
+
+tdAge.innerHTML = age; 
+var tdGender = document.createElement('td'); 
+
+tdGender.appendChild(document.createTextNode(gender));//等价与 tdGender.innerHTML = gender; 
+//将列值添加到行元素节点 
+tr.appendChild(tdName); 
+tr.appendChild(tdAge); 
+tr.appendChild(tdGender); 
+
+//返回生成的行标签 
+return tr; 
+}; 
+</script> 
+</head> 
+<body> 
+</body> 
+</html> 
