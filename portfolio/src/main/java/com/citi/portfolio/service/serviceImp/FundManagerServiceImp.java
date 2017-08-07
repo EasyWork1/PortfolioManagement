@@ -19,7 +19,7 @@ public class FundManagerServiceImp implements FundManagerService {
     @Autowired
     FundManagerMapper fundManagerMapper;
     @Override
-    public HashMap register(String username, String password) {
+    public HashMap register(String username, String password,String firstName,String lastName,String telephone,String email) {
         HashMap hashMap = new HashMap();
         FundManager fundManager = new FundManager();
         fundManager.setUsername(username);
@@ -30,7 +30,7 @@ public class FundManagerServiceImp implements FundManagerService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        hashMap.put("result",false);
+        hashMap.put("resultCode",0);
         ArrayList<FundManager> fundManagers = fundManagerMapper.selectByUserName(username);
         if (fundManagers.isEmpty()){
             int result = fundManagerMapper.insert(fundManager);
@@ -40,7 +40,7 @@ public class FundManagerServiceImp implements FundManagerService {
                 if (!fundManagers.isEmpty()){
                     fundManager = fundManagers.get(0);
                     hashMap.put("fundManager",fundManager);
-                    hashMap.put("result",true);
+                    hashMap.put("result",1);
                 }
                 hashMap.put("errorMessage","can't find FundManager in DataBase.");
             }
@@ -59,24 +59,53 @@ public class FundManagerServiceImp implements FundManagerService {
     @Override
     public HashMap login(String username,String password) {
         HashMap hashMap = new HashMap();
+        hashMap.put("resultCode",0);
         ArrayList<FundManager> fundManagers = fundManagerMapper.selectByUserName(username);
         if (!fundManagers.isEmpty()){
             FundManager fundManager = fundManagers.get(0);
             try {
                 if (fundManager.getPassword().equals(FundManagerUtil.EncoderByMd5(password))){
-                    hashMap.put("result",true);
-                    hashMap.put("fundManagers",fundManager);
+                    hashMap.put("resultCode",1);
+                    hashMap.put("fundManager",fundManager);
+                }
+                else{
+                    hashMap.put("errorMessage","password error.");
                 }
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
+                hashMap.put("errorMessage","NoSuchAlgorithmException");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
+                hashMap.put("errorMessage","UnsupportedEncodingException");
             }
 
         }
-        else {
-            hashMap.put("result",false);
-        }
+
        return hashMap;
+    }
+
+    @Override
+    public HashMap selectAll() {
+        HashMap hashMap = new HashMap();
+        ArrayList<FundManager> fundManagers = fundManagerMapper.selectAll();
+        hashMap.put("fundManagers",fundManagers);
+        return hashMap;
+    }
+
+    @Override
+    public HashMap deleteFundManager(int id) {
+        HashMap hashMap = new HashMap();
+        int resultLine = fundManagerMapper.deleteByPrimaryKey(id);
+        hashMap.put("resultLine",resultLine);
+        return hashMap;
+    }
+
+    @Override
+    public HashMap updateFundManager(String firstName, String lastName, String telephone, String email, String password) {
+        HashMap hashMap = new HashMap();
+        FundManager fundManager = new FundManager(firstName,lastName,telephone,email,password);
+        int resultLine = fundManagerMapper.updateByPrimaryKeySelective(fundManager);
+        hashMap.put("resultLine",resultLine);
+        return hashMap;
     }
 }

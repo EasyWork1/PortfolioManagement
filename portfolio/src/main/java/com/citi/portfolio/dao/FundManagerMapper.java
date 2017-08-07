@@ -15,6 +15,8 @@ public interface FundManagerMapper {
 
     ArrayList<FundManager> selectByUserName(String userName);
 
+    ArrayList<FundManager> selectAll();
+
     int updateByPrimaryKeySelective(FundManager record);
 
     int updateByPrimaryKey(FundManager record);

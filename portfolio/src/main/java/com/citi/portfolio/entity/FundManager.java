@@ -27,6 +27,13 @@ public class FundManager {
         this.username = username;
         this.password = password;
     }
+    public FundManager(String firstname, String lastname, String telephone, String email, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.telephone = telephone;
+        this.email = email;
+        this.password = password;
+    }
 
     public FundManager() {
         super();
