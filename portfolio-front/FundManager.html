@@ -193,7 +193,7 @@
 
                 <row>
                      <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default" id="add_btn" onclick="changeVisibility()">
+                            <button type="button" class="btn btn-primary btn-sm" id="add_btn" onclick="changeVisibility()">
                             <span class="glyphicon glyphicon-plus"></span>Add a New Manager
                             </button>
                           
@@ -203,24 +203,49 @@
                 <row>
                      <div id="add_edit_div" style="display: none">
 
-                        First Name：<input width=50px type="text" id="i1">
-                        <br/>
-                        Last Name：<input type="text" id="i2">
-                        <br/>
-                        Telephone：<input type="TelePhone：" id="i3">
-                        <br/>
-                        <br/>
-                        Email：<input type="Email" id="i4"> 
-                        <br/>  
-                        Username：<input type="text" id="i5">  
-                        <br/> 
-                        Password：<input type="password：" id="i6">   
-                     </div>
-                     <br/>
-                     <button id = "btn_save" type="button" class="btn btn-primary btn-sm" style="display: none" onclick="addManager()">SAVE</button>
-                     <button id = "btn_cancel" type="button" class="btn btn-primary btn-sm" style="display: none" onclick="cancelManager()" value="Reset">CANCEL</button>
-
+                     <table id="stuRecordTable" >
+                     <tr>
+                         <th style="width:210px; height:70px">
+                                <label>First Name</label>
+                                <input class="form-control" style="width:200px;" id="i1">                           
+                        </th> 
+                         <th style="width:210px;">
+                                <label>Last Name</label>
+                                <input class="form-control" style="width:200px;" id="i2">                           
+                         </th>
+                         <th style="width:210px;">
+                                <label>Telephone</label>
+                                <input class="form-control" style="width:200px;" id="i3">                           
+                        </th>
+                     
+                         <th style="width:210px; height:70px">
+                                <label>Email</label>
+                                <input class="form-control" style="width:200px;" id="i4">
+                         </th>
+                         <th style="width:210px; height:70px">
+                                <label>User Name</label>
+                                <input class="form-control" style="width:200px;" id="i5">
+                         </th>
+                         <th style="width:210px; height:70px">
+                                <label>Password</label>
+                                <input class="form-control" style="width:200px;" id="i6">
+                          </th>
+                     </tr>
+                     <tr>
+                        
+                         <td style=" height:70px">
+                                <button id = "btn_cancel" type="button" class="btn btn-primary btn-sm" onclick="cancelManager()" value="Reset" style="float:left;">CANCEL</button>
+                                 <button id = "btn_save" type="button" class="btn btn-primary btn-sm" onclick="addManager()" style="float:right;">SAVE</button>                      
+                                
+                         </td>
+                     </tr>
+                    
+                      
+                    </table>
+                    <br/>
+                    </div>  
                 </row>
+                <br/>
 
                 <row >
                      <div class="col-lg-6"> 
@@ -236,10 +261,11 @@
                                         <th>Email</th>   
                                         <th>UserName</th> 
                                         <th>Password</th> 
+                                        <th>Profit</th> 
                                         <th>Edit</th>     
                                     </tr>
-                                </thead>
-                                <tbody id= "myTb">
+                                </thead >
+                                <tbody id= "myTb" nowrap="nowrap">
                                   
                                                                      
                                 </tbody>
