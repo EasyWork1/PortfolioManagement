@@ -36,9 +36,9 @@
   </select>
   <select id="selectBondDTO" resultMap="BondDTOResultMap">
     select
-    <include refid="StockDTO_Column_List" />
+    <include refid="BondDTO_Column_List" />
     from bond s,price p
-    where bond.id = p.symbol
+    where s.isin = p.symbol
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from bond

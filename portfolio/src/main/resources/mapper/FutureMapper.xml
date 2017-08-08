@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.citi.portfolio.dao.FutureMapper" >
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.Future" >
+    <constructor >
+      <idArg column="ClrAlias" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ExchID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Exch" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Sym" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SecTyp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MatDt" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="UOMQty" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+
+  <resultMap id="FutureDTOResultMap" type="com.citi.portfolio.entity.DTO.FutureDTO" >
+    <constructor >
+      <idArg column="ClrAlias" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ExchID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Exch" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Sym" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SecTyp" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MatDt" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="UOMQty" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="bidPrice" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="offerPrice" javaType="java.lang.Double" jdbcType="DOUBLE" />
+    </constructor>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    ClrAlias, ExchID, Exch, Sym, Desc, SecTyp, MatDt, UOMQty
+  </sql>
+  <sql id="FutureDTO_Column_List" >
+    ClrAlias, ExchID, Exch, Sym, Desc, SecTyp, MatDt, UOMQty,date,bidPrice,offerPrice
+  </sql>
+  <select id="selectFutureDTO" resultMap="FutureDTOResultMap"  >
+    select 
+    <include refid="FutureDTO_Column_List" />
+    from future f,price p
+    where f.ClrAlias = p.symbol
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from future
+    where ClrAlias = #{clralias,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from future
+    where ClrAlias = #{clralias,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.citi.portfolio.entity.Future" >
+    insert into future (ClrAlias, ExchID, Exch, 
+      Sym, Desc, SecTyp, 
+      MatDt, UOMQty)
+    values (#{clralias,jdbcType=VARCHAR}, #{exchid,jdbcType=VARCHAR}, #{exch,jdbcType=VARCHAR}, 
+      #{sym,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{sectyp,jdbcType=VARCHAR}, 
+      #{matdt,jdbcType=DATE}, #{uomqty,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Future" >
+    insert into future
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clralias != null" >
+        ClrAlias,
+      </if>
+      <if test="exchid != null" >
+        ExchID,
+      </if>
+      <if test="exch != null" >
+        Exch,
+      </if>
+      <if test="sym != null" >
+        Sym,
+      </if>
+      <if test="desc != null" >
+        Desc,
+      </if>
+      <if test="sectyp != null" >
+        SecTyp,
+      </if>
+      <if test="matdt != null" >
+        MatDt,
+      </if>
+      <if test="uomqty != null" >
+        UOMQty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clralias != null" >
+        #{clralias,jdbcType=VARCHAR},
+      </if>
+      <if test="exchid != null" >
+        #{exchid,jdbcType=VARCHAR},
+      </if>
+      <if test="exch != null" >
+        #{exch,jdbcType=VARCHAR},
+      </if>
+      <if test="sym != null" >
+        #{sym,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="sectyp != null" >
+        #{sectyp,jdbcType=VARCHAR},
+      </if>
+      <if test="matdt != null" >
+        #{matdt,jdbcType=DATE},
+      </if>
+      <if test="uomqty != null" >
+        #{uomqty,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.entity.Future" >
+    update future
+    <set >
+      <if test="exchid != null" >
+        ExchID = #{exchid,jdbcType=VARCHAR},
+      </if>
+      <if test="exch != null" >
+        Exch = #{exch,jdbcType=VARCHAR},
+      </if>
+      <if test="sym != null" >
+        Sym = #{sym,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        Desc = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="sectyp != null" >
+        SecTyp = #{sectyp,jdbcType=VARCHAR},
+      </if>
+      <if test="matdt != null" >
+        MatDt = #{matdt,jdbcType=DATE},
+      </if>
+      <if test="uomqty != null" >
+        UOMQty = #{uomqty,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ClrAlias = #{clralias,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.Future" >
+    update future
+    set ExchID = #{exchid,jdbcType=VARCHAR},
+      Exch = #{exch,jdbcType=VARCHAR},
+      Sym = #{sym,jdbcType=VARCHAR},
+      Desc = #{desc,jdbcType=VARCHAR},
+      SecTyp = #{sectyp,jdbcType=VARCHAR},
+      MatDt = #{matdt,jdbcType=DATE},
+      UOMQty = #{uomqty,jdbcType=DOUBLE}
+    where ClrAlias = #{clralias,jdbcType=VARCHAR}
+  </update>
+</mapper>
