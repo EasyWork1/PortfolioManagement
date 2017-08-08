@@ -10,6 +10,6 @@ import java.util.ArrayList;
 public interface PositionService {
 
     JSONObject deletePosition(Integer positionId);
-//    JSONObject insertPosition(Double lastprice,Double quantity,String currency,String securityid,Date datetime,String asset, Integer portfolioid);
+    JSONObject insertPosition(Double lastprice,Double quantity,String currency,String securityid,Date datetime,String asset, Integer portfolioid);
 }
 

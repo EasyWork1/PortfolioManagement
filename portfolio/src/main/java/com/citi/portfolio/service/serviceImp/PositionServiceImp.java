@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.dao.FundManagerMapper;
 import com.citi.portfolio.dao.PortfolioMapper;
+import com.citi.portfolio.dao.PositionHistoryMapper;
 import com.citi.portfolio.dao.PositionMapper;
 import com.citi.portfolio.entity.FundManager;
 import com.citi.portfolio.entity.Portfolio;
 import com.citi.portfolio.entity.Position;
+import com.citi.portfolio.entity.PositionHistory;
 import com.citi.portfolio.service.serviceInterface.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,19 +21,30 @@ import java.util.Date;
 public class PositionServiceImp implements PositionService {
     @Autowired
     PositionMapper positionMapper;
+    @Autowired
+    PositionHistoryMapper positionHistoryMapper;
 
     @Override
     public JSONObject deletePosition(Integer positionId) {
         JSONObject jsonObject = new JSONObject();
         int result= positionMapper.deleteByPrimaryKey(positionId);
         jsonObject =(JSONObject) jsonObject.put("resultCode",result);
+        PositionHistory positionHistory = new PositionHistory();
+//        positionHistory.setAsset();
+        positionHistory.setBuyorsell("sell");
+positionHistoryMapper.insert(positionHistory);
         return jsonObject;
     }
-//
-//    @Override
-//    public JSONObject insertPosition(Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid) {
-//        return null;
-//    }
+
+    @Override
+    public JSONObject insertPosition(Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid) {
+        JSONObject jsonObject = new JSONObject();
+        Position position = new Position()
+
+        int result= positionMapper.insert()
+        jsonObject =(JSONObject) jsonObject.put("resultCode",result);
+        return jsonObject;
+    }
 
 
 //return    public JSONObject addPosition(Integer positionId,Integer portfolioId) {
