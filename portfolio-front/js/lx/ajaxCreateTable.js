@@ -1,13 +1,14 @@
 ajaxPost({  
-         type:"GET",  
-         url:"<c:url value='/logDetails.auth'/>",  
-         data:"datas="+datas;//要发送的数据  
+         type:"",  
+         url:"",  
+         data:"datas="+datas;//要发送的数据
+         dataType:"json"  
                                 
                  //object是后台传过来的java list数据集合  
                    success:function(objects){                         
                                         
                       //1,获取上面id为cloneTr的tr元素  
-                          var tr = $("#cloneTr");  
+                       var tr = $("#cloneTr");  
   
                        $.each(objects, function(index,item){                              
                              //克隆tr，每次遍历都可以产生新的tr                              

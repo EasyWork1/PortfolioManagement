@@ -221,7 +221,8 @@
                      <br/>
                         First Name：<input width=50px type="text" id="i1">
                         Last Name：<input type="text" id="i2">
-                        TelePhone：<input type="TelePhone：" id="i3">
+                        Telephone：<input type="TelePhone：" id="i3">
+                        <br/>
                         <br/>
                         Email：<input type="Email" id="i4">   
                         Username：<input type="text" id="i5">   
@@ -237,7 +238,7 @@
                      <div class="col-lg-6"> 
 
                         <div>
-                            <table class="table table-bordered table-hover table-striped">
+                            <table class="table table-bordered table-hover table-striped" id="tb_manager">
                                 <thead>
                                     <tr>
                                         <th>FirstName</th> 
@@ -250,15 +251,15 @@
                                     </tr>
                                 </thead>
                                 <tbody id= "myTb">
-                                    <tr>
+                                    <tr id="cloneTr">>
                                        <td>Amy</td>
                                        <td>Clark</td>
                                        <td>13209085678</td>
                                        <td>amy@qq.com</td>
                                        <td>amyc</td>
                                        <td>40040044</td>
-                                       <td><button type="button" class="btn btn-primary btn-sm">修改</button>
-                                            <button type="button" class="btn btn-primary btn-sm">删除</button>
+                                       <td><button type="button" class="btn btn-primary btn-sm" >修改</button>
+                                           <button type="button" class="btn btn-primary btn-sm" onclick="deleteManager(this);">删除</button>
                                        </td>
                                                                      
                                 </tbody>
@@ -281,7 +282,8 @@
     <script src="js/jquery.js"></script>
      <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/lx/manager.js"></script>     
+    <script src="js/lx/manager.js"></script>  
+    <script src="js/lx/ajaxGetData.js"></script> 
 
 </body>
 
