@@ -12,5 +12,5 @@ public interface FundManagerService {
     JSONObject login(String username, String password);
     JSONArray selectAll();
     JSONObject deleteFundManager(int id);
-    JSONObject updateFundManager(String firstName,String lastName,String telephone,String email,String password);
+    JSONObject updateFundManager(int id,String firstName,String lastName,String telephone,String email);
 }

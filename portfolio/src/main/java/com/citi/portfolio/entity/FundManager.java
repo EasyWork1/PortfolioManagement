@@ -27,12 +27,12 @@ public class FundManager {
         this.username = username;
         this.password = password;
     }
-    public FundManager(String firstname, String lastname, String telephone, String email, String password) {
+    public FundManager(int id,String firstname, String lastname, String telephone, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.telephone = telephone;
         this.email = email;
-        this.password = password;
+        this.id = id;
     }
 
     public FundManager() {

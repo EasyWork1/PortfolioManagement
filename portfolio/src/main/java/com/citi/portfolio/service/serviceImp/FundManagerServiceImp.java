@@ -113,9 +113,9 @@ public class FundManagerServiceImp implements FundManagerService {
     }
 
     @Override
-    public JSONObject updateFundManager(String firstName, String lastName, String telephone, String email, String password) {
+    public JSONObject updateFundManager(int id,String firstName, String lastName, String telephone, String email) {
         JSONObject jsonObject = new JSONObject();
-        FundManager fundManager = new FundManager(firstName,lastName,telephone,email,password);
+        FundManager fundManager = new FundManager(id,firstName,lastName,telephone,email);
         int resultCode = fundManagerMapper.updateByPrimaryKeySelective(fundManager);
         jsonObject.put("resultCode",resultCode);
         return jsonObject;

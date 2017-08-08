@@ -1,7 +1,7 @@
 package com.citi.portfolio.entity;
 
 public class Bond {
-    private Integer id;
+    private String isin;
 
     private String issuer;
 
@@ -11,8 +11,8 @@ public class Bond {
 
     private Integer maturityyear;
 
-    public Bond(Integer id, String issuer, Double coupon, String maturitymonth, Integer maturityyear) {
-        this.id = id;
+    public Bond(String isin, String issuer, Double coupon, String maturitymonth, Integer maturityyear) {
+        this.isin = isin;
         this.issuer = issuer;
         this.coupon = coupon;
         this.maturitymonth = maturitymonth;
@@ -23,12 +23,12 @@ public class Bond {
         super();
     }
 
-    public Integer getId() {
-        return id;
+    public String getIsin() {
+        return isin;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIsin(String isin) {
+        this.isin = isin == null ? null : isin.trim();
     }
 
     public String getIssuer() {

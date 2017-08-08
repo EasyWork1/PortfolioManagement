@@ -68,17 +68,12 @@
 
 
 
-        <table tableName="portfolio" domainObjectName="Portfolio"
+        <table tableName="bond" domainObjectName="Bond"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="position" domainObjectName="Position"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
 
 
 
