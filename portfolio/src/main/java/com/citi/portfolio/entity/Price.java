@@ -1,5 +1,7 @@
 package com.citi.portfolio.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class Price {
@@ -9,6 +11,7 @@ public class Price {
 
     private Double offerprice;
 
+    @JSONField(format="yyyy-MM-dd")
     private Date date;
 
     public Price(String symbol, Double bidprice, Double offerprice, Date date) {

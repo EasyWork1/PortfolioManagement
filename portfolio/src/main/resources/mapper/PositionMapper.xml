@@ -11,10 +11,11 @@
       <arg column="dateTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="asset" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="portfolioId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="benifit" javaType="java.lang.Double" jdbcType="DOUBLE" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, lastPrice, quantity, currency, securityId, dateTime, asset, portfolioId
+    id, lastPrice, quantity, currency, securityId, dateTime, asset, portfolioId, benifit
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -29,10 +30,12 @@
   <insert id="insert" parameterType="com.citi.portfolio.entity.Position">
     insert into position (id, lastPrice, quantity, 
       currency, securityId, dateTime, 
-      asset, portfolioId)
+      asset, portfolioId, benifit
+      )
     values (#{id,jdbcType=INTEGER}, #{lastprice,jdbcType=DOUBLE}, #{quantity,jdbcType=DOUBLE}, 
       #{currency,jdbcType=VARCHAR}, #{securityid,jdbcType=VARCHAR}, #{datetime,jdbcType=TIMESTAMP}, 
-      #{asset,jdbcType=VARCHAR}, #{portfolioid,jdbcType=INTEGER})
+      #{asset,jdbcType=VARCHAR}, #{portfolioid,jdbcType=INTEGER}, #{benifit,jdbcType=DOUBLE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Position">
     insert into position
@@ -61,6 +64,9 @@
       <if test="portfolioid != null">
         portfolioId,
       </if>
+      <if test="benifit != null">
+        benifit,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -86,6 +92,9 @@
       </if>
       <if test="portfolioid != null">
         #{portfolioid,jdbcType=INTEGER},
+      </if>
+      <if test="benifit != null">
+        #{benifit,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -113,6 +122,9 @@
       <if test="portfolioid != null">
         portfolioId = #{portfolioid,jdbcType=INTEGER},
       </if>
+      <if test="benifit != null">
+        benifit = #{benifit,jdbcType=DOUBLE},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -124,7 +136,8 @@
       securityId = #{securityid,jdbcType=VARCHAR},
       dateTime = #{datetime,jdbcType=TIMESTAMP},
       asset = #{asset,jdbcType=VARCHAR},
-      portfolioId = #{portfolioid,jdbcType=INTEGER}
+      portfolioId = #{portfolioid,jdbcType=INTEGER},
+      benifit = #{benifit,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

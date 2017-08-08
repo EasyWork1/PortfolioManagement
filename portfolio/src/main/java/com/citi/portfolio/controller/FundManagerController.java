@@ -47,6 +47,14 @@ public class FundManagerController {
         return modelAndView;
 
     }
+    @RequestMapping("/calculateBenifit")
+    public String benifit(@RequestParam(value = "id", required = true) int id) {
+
+        String json  = fundManagerService.calculateBenifit(id).toJSONString();
+        logger.info("login fundManager: "+ json);
+        return  json;
+
+    }
     @RequestMapping("/register")
     public String register(@RequestParam(value = "username", required = true) String username,
                          @RequestParam(value = "password", required = true) String password,

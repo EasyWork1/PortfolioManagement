@@ -1,5 +1,7 @@
 package com.citi.portfolio.entity.DTO;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class FutureDTO {
@@ -19,7 +21,7 @@ public class FutureDTO {
 
     private Double uomqty;
 
-
+    @JSONField(format="yyyy-MM-dd")
     private Date date;
 
     private Double bidprice;

@@ -19,7 +19,9 @@ public class Position {
 
     private Integer portfolioid;
 
-    public Position(Integer id, Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid) {
+    private Double benifit;
+
+    public Position(Integer id, Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid, Double benifit) {
         this.id = id;
         this.lastprice = lastprice;
         this.quantity = quantity;
@@ -28,6 +30,7 @@ public class Position {
         this.datetime = datetime;
         this.asset = asset;
         this.portfolioid = portfolioid;
+        this.benifit = benifit;
     }
 
     public Position() {
@@ -96,5 +99,13 @@ public class Position {
 
     public void setPortfolioid(Integer portfolioid) {
         this.portfolioid = portfolioid;
+    }
+
+    public Double getBenifit() {
+        return benifit;
+    }
+
+    public void setBenifit(Double benifit) {
+        this.benifit = benifit;
     }
 }

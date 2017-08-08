@@ -2,7 +2,7 @@ package com.citi.portfolio.controller;
 
 
 
-import com.citi.portfolio.service.serviceInterface.BondService;
+import com.citi.portfolio.service.serviceInterface.FutureService;
 import com.citi.portfolio.service.serviceInterface.StockService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class BondController {
+public class FutureController {
 
     @Autowired
-    BondService bondService;
-    private static Logger logger = Logger.getLogger(BondController.class);
+    FutureService futureService;
+    private static Logger logger = Logger.getLogger(FutureController.class);
 
-    @RequestMapping("/showBondsForm")
+
+    @RequestMapping("/showFuturesForm")
     public ModelAndView registerForm() {
 
-        ModelAndView modelAndView = new ModelAndView("bond");
+        ModelAndView modelAndView = new ModelAndView("future");
         return modelAndView;
 
     }
-
-    @RequestMapping("/selectAllBonds")
+    @RequestMapping("/selectAllFutures")
     public String selectAll() {
 
-        String json= bondService.selectAllBonds().toJSONString();
-        logger.info("select all bonds: "+ json);
+        String json= futureService.selectAllFutures().toJSONString();
+        logger.info("select all futures: "+ json);
         return json;
 
     }

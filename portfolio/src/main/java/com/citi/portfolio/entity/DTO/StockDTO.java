@@ -1,5 +1,7 @@
 package com.citi.portfolio.entity.DTO;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 
@@ -18,6 +20,7 @@ public class StockDTO {
 
     private String industry;
 
+    @JSONField(format="yyyy-MM-dd")
     private Date date;
 
     private String currency;

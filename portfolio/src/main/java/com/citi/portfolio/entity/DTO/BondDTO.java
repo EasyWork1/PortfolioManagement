@@ -1,5 +1,7 @@
 package com.citi.portfolio.entity.DTO;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class BondDTO {
@@ -13,6 +15,7 @@ public class BondDTO {
 
     private Integer maturityyear;
 
+    @JSONField(format="yyyy-MM-dd")
     private Date date;
 
     private Double bidprice;

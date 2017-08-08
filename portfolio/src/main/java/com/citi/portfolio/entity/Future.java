@@ -11,7 +11,7 @@ public class Future {
 
     private String sym;
 
-    private String desc;
+    private String desce;
 
     private String sectyp;
 
@@ -19,12 +19,12 @@ public class Future {
 
     private Double uomqty;
 
-    public Future(String clralias, String exchid, String exch, String sym, String desc, String sectyp, Date matdt, Double uomqty) {
+    public Future(String clralias, String exchid, String exch, String sym, String desce, String sectyp, Date matdt, Double uomqty) {
         this.clralias = clralias;
         this.exchid = exchid;
         this.exch = exch;
         this.sym = sym;
-        this.desc = desc;
+        this.desce = desce;
         this.sectyp = sectyp;
         this.matdt = matdt;
         this.uomqty = uomqty;
@@ -66,12 +66,12 @@ public class Future {
         this.sym = sym == null ? null : sym.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDesce() {
+        return desce;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDesce(String desce) {
+        this.desce = desce == null ? null : desce.trim();
     }
 
     public String getSectyp() {

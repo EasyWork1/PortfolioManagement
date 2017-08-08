@@ -13,4 +13,5 @@ public interface FundManagerService {
     JSONArray selectAll();
     JSONObject deleteFundManager(int id);
     JSONObject updateFundManager(int id,String firstName,String lastName,String telephone,String email);
+    JSONObject calculateBenifit(int id);
 }

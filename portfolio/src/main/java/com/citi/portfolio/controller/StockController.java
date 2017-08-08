@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class StockController {
@@ -16,6 +17,13 @@ public class StockController {
     StockService stockService;
     private static Logger logger = Logger.getLogger(StockController.class);
 
+    @RequestMapping("/showStocksForm")
+    public ModelAndView registerForm() {
+
+        ModelAndView modelAndView = new ModelAndView("stock");
+        return modelAndView;
+
+    }
 
     @RequestMapping("/selectAllStocks")
     public String selectAll() {

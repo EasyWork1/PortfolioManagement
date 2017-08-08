@@ -33,7 +33,7 @@
     symbol, name, lastSale, marketCap, IPOyear, sector, industry, date, currency
   </sql>
   <sql id="StockDTO_Column_List">
-    s.symbol, name, lastSale, marketCap, IPOyear, sector, industry, s.date, currency,bidPrice,offerPrice
+    s.symbol, name, lastSale, marketCap, IPOyear, sector, industry, p.date, currency,bidPrice,offerPrice
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
