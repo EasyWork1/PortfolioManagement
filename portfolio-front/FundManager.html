@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Bootstrap Admin Template</title>
+    <title>Admin-Portfolio Management System</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,6 +19,7 @@
 
     <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
+    <link href="css/height.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -152,40 +153,23 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i>Instrument</a>
-                    </li>
+                
                     <li class="active">
                         <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Instrument <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="stock.html">Stock</a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="bond.html">Bond</a>
+                            </li>
+                            <li>
+                                <a href="future.html">Future</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                     </li>
                 </ul>
             </div>
@@ -194,7 +178,7 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <div class="container-fluid white-place">
 
                 <!-- Page Heading -->
                 <div class="row">
@@ -209,7 +193,7 @@
 
                 <row>
                      <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default" id="add_btn" onclick="changeVisibility()">
+                            <button type="button" class="btn btn-primary btn-sm" id="add_btn" onclick="changeVisibility()">
                             <span class="glyphicon glyphicon-plus"></span>Add a New Manager
                             </button>
                           
@@ -218,21 +202,50 @@
 
                 <row>
                      <div id="add_edit_div" style="display: none">
-                     <br/>
-                        First Name：<input width=50px type="text" id="i1">
-                        Last Name：<input type="text" id="i2">
-                        Telephone：<input type="TelePhone：" id="i3">
-                        <br/>
-                        <br/>
-                        Email：<input type="Email" id="i4">   
-                        Username：<input type="text" id="i5">   
-                        Password：<input type="password：" id="i6">   
-                     </div>
-                     <br/>
-                     <button id = "btn_save" type="button" class="btn btn-primary btn-sm" style="display: none" onclick="addManager()">SAVE</button>
-                     <button id = "btn_cancel" type="button" class="btn btn-primary btn-sm" style="display: none" onclick="cancelManager()" value="Reset">CANCEL</button>
 
+                     <table id="stuRecordTable" >
+                     <tr>
+                         <th style="width:210px; height:70px">
+                                <label>First Name</label>
+                                <input class="form-control" style="width:200px;" id="i1">                           
+                        </th> 
+                         <th style="width:210px;">
+                                <label>Last Name</label>
+                                <input class="form-control" style="width:200px;" id="i2">                           
+                         </th>
+                         <th style="width:210px;">
+                                <label>Telephone</label>
+                                <input class="form-control" style="width:200px;" id="i3">                           
+                        </th>
+                     
+                         <th style="width:210px; height:70px">
+                                <label>Email</label>
+                                <input class="form-control" style="width:200px;" id="i4">
+                         </th>
+                         <th style="width:210px; height:70px">
+                                <label>User Name</label>
+                                <input class="form-control" style="width:200px;" id="i5">
+                         </th>
+                         <th style="width:210px; height:70px">
+                                <label>Password</label>
+                                <input class="form-control" style="width:200px;" id="i6">
+                          </th>
+                     </tr>
+                     <tr>
+                        
+                         <td style=" height:70px">
+                                <button id = "btn_cancel" type="button" class="btn btn-primary btn-sm" onclick="cancelManager()" value="Reset" style="float:left;">CANCEL</button>
+                                 <button id = "btn_save" type="button" class="btn btn-primary btn-sm" onclick="addManager()" style="float:right;">SAVE</button>                      
+                                
+                         </td>
+                     </tr>
+                    
+                      
+                    </table>
+                    <br/>
+                    </div>  
                 </row>
+                <br/>
 
                 <row >
                      <div class="col-lg-6"> 
@@ -248,10 +261,11 @@
                                         <th>Email</th>   
                                         <th>UserName</th> 
                                         <th>Password</th> 
+                                        <th>Profit</th> 
                                         <th>Edit</th>     
                                     </tr>
-                                </thead>
-                                <tbody id= "myTb">
+                                </thead >
+                                <tbody id= "myTb" nowrap="nowrap">
                                   
                                                                      
                                 </tbody>

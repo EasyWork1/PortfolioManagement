@@ -183,14 +183,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Futures
+                            Bonds
                         </h1>
                          <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="stock.html">Instrument</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-bar-chart-o"></i> Future
+                                <i class="fa fa-bar-chart-o"></i> Bond
                             </li>
                         </ol>
                         
@@ -201,24 +201,22 @@
                <div class="col-lg-6">
 
                         <div>
-                            <table id= "table_future" class="table table-bordered table-hover table-striped">
+                            <table id= "table_Bonds" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ExchId</th>
-                                        <th>ExchName</th>
-                                        <th>Desc</th>
-                                        <th>SecTyp</th>
-                                        <th>MaturityDate</th>
-                                        <th>UomQty</th>
+                                        <th>ISIN</th>
+                                        <th>Issuer</th>
+                                        <th>Coupon</th>
+                                        <th>MadurityMonth</th>
+                                        <th>MadurityYear</th>                                       
                                         <th>BidPrice</th>
                                         <th>OfferPrice</th>
                                         <th>Date</th>
-
                                     </tr>
                                 </thead>
-                                 <tbody id="futureTb">
-                                  
-                                 </tbody>
+                                <tbody id="bondTb">                             
+                                   
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -243,7 +241,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <script src="js/lx/future.js"></script>  
+    <script src="js/lx/bond.js"></script>  
 
 </body>
 
