@@ -14,14 +14,38 @@
       <arg column="currency" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
+  <resultMap id="StockDTOResultMap" type="com.citi.portfolio.entity.DTO.StockDTO">
+    <constructor>
+      <idArg column="symbol" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="lastSale" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="marketCap" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="IPOyear" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sector" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="industry" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="currency" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="bidPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="offerPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
   <sql id="Base_Column_List">
     symbol, name, lastSale, marketCap, IPOyear, sector, industry, date, currency
   </sql>
+  <sql id="StockDTO_Column_List">
+    s.symbol, name, lastSale, marketCap, IPOyear, sector, industry, s.date, currency,bidPrice,offerPrice
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from stock
     where symbol = #{symbol,jdbcType=VARCHAR}
+  </select>
+  <select id="selectStockDTO" resultMap="StockDTOResultMap">
+    select 
+    <include refid="StockDTO_Column_List" />
+    from stock s,price p
+    where s.symbol = p.symbol
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from stock

@@ -3,37 +3,58 @@
 <mapper namespace="com.citi.portfolio.dao.BondMapper">
   <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.Bond">
     <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="isin" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="issuer" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="coupon" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="maturityMonth" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="maturityYear" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List">
-    id, issuer, coupon, maturityMonth, maturityYear
+  <resultMap id="BondDTOResultMap" type="com.citi.portfolio.entity.DTO.BondDTO">
+    <constructor>
+      <idArg column="isin" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="issuer" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="coupon" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="maturityMonth" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="maturityYear" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="bidPrice" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="offerPrice" javaType="java.lang.Double" jdbcType="DOUBLE" />
+    </constructor>
+  </resultMap>
+  <sql id="BondDTO_Column_List">
+    isin, issuer, coupon, maturityMonth, maturityYear,date,bidPrice,offerPrice
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <sql id="Base_Column_List">
+    isin, issuer, coupon, maturityMonth, maturityYear
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from bond
-    where id = #{id,jdbcType=INTEGER}
+    where isin = #{isin,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectBondDTO" resultMap="BondDTOResultMap">
+    select
+    <include refid="StockDTO_Column_List" />
+    from bond s,price p
+    where bond.id = p.symbol
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from bond
-    where id = #{id,jdbcType=INTEGER}
+    where isin = #{isin,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.citi.portfolio.entity.Bond">
-    insert into bond (id, issuer, coupon, 
+    insert into bond (isin, issuer, coupon, 
       maturityMonth, maturityYear)
-    values (#{id,jdbcType=INTEGER}, #{issuer,jdbcType=VARCHAR}, #{coupon,jdbcType=DOUBLE}, 
+    values (#{isin,jdbcType=VARCHAR}, #{issuer,jdbcType=VARCHAR}, #{coupon,jdbcType=DOUBLE}, 
       #{maturitymonth,jdbcType=VARCHAR}, #{maturityyear,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Bond">
     insert into bond
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="isin != null">
+        isin,
       </if>
       <if test="issuer != null">
         issuer,
@@ -49,8 +70,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="isin != null">
+        #{isin,jdbcType=VARCHAR},
       </if>
       <if test="issuer != null">
         #{issuer,jdbcType=VARCHAR},
@@ -82,7 +103,7 @@
         maturityYear = #{maturityyear,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where isin = #{isin,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.Bond">
     update bond
@@ -90,6 +111,7 @@
       coupon = #{coupon,jdbcType=DOUBLE},
       maturityMonth = #{maturitymonth,jdbcType=VARCHAR},
       maturityYear = #{maturityyear,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    where isin = #{isin,jdbcType=VARCHAR}
   </update>
+
 </mapper>

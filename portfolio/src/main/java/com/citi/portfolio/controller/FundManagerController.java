@@ -88,13 +88,13 @@ public class FundManagerController {
     }
 
     @RequestMapping("/updateFundManager")
-    public String updateFundManager(@RequestParam(value = "firstName", required = true) String firstName,
+    public String updateFundManager(@RequestParam(value = "id", required = true) int id,
+                                        @RequestParam(value = "firstName", required = true) String firstName,
                                           @RequestParam(value = "lastName", required = true)String lastName,
                                           @RequestParam(value = "telephone", required = true) String telephone,
-                                          @RequestParam(value = "email", required = true) String email,
-                                          @RequestParam(value = "password", required = true) String password) {
+                                          @RequestParam(value = "email", required = true) String email) {
 
-        String json= fundManagerService.updateFundManager(firstName, lastName, telephone, email, password).toJSONString();
+        String json= fundManagerService.updateFundManager(id,firstName, lastName, telephone, email).toJSONString();
         logger.info("update fundManager: "+ json);
         return json;
 

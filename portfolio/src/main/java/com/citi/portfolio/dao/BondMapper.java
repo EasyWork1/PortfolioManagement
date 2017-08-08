@@ -1,20 +1,21 @@
 package com.citi.portfolio.dao;
 
 import com.citi.portfolio.entity.Bond;
+import com.citi.portfolio.entity.DTO.BondDTO;
 import com.citi.portfolio.entity.FundManager;
 
 import java.util.ArrayList;
 
 public interface BondMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String isin);
 
     int insert(Bond record);
 
     int insertSelective(Bond record);
 
-    ArrayList<Bond> selectAll();
+    ArrayList<BondDTO> selectAll();
 
-    Bond selectByPrimaryKey(Integer id);
+    Bond selectByPrimaryKey(String isin);
 
     int updateByPrimaryKeySelective(Bond record);
 

@@ -66,7 +66,7 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i>Instrument</a>
                     </li>
                     <li >
-                        <a href="FundManager.ftl"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
+                        <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
                     <li>
                         <a href="fundEarningExhibition.html"><i class="fa fa-fw fa-edit"></i>Fund Earning Exhibition</a>
@@ -122,45 +122,26 @@
                         </div>
                         
                         <div>
-                            <table id= "tb_fund" class="table table-bordered table-hover table-striped">
+                            <table id= "tb_Portfolio" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
                                         <th>Id</th> 
                                         <th>Name</th> 
-                                        <th>FundManagerId</th> 
+                                        <th>symbols</th> 
+                                        <th>Lotvalue</th>
                                         <th>Benefit</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
-                                <tbody id="portfolioTable">
+                                <tbody>
                                     <tr onclick="trClick(this)">  
                                         <td >1</td>  
                                         <td>aaa</td>  
-                                        <td>Demi</td>  
+                                        <td>3</td>
+                                        <td>9</td>
                                         <td>10%</td> 
                                         <td><button class="btn btn-primary btn-sm" onclick="deletePortfolio(this)">delete</button></td>         
-                                    </tr>  
-                                    <tr onclick="trClick(this)">  
-                                        <td>2</td>  
-                                        <td>bbb</td>  
-                                        <td>Jeremy</td>  
-                                        <td>10%</td>  
-                                        <td><button class="btn btn-primary btn-sm" onclick="deletePortfolio(this)">delete</button></td>         
-                                    </tr>   
-                                    <tr onclick="trClick(this)">  
-                                        <td>3</td>  
-                                        <td>ccc</td>  
-                                        <td>Keira</td>  
-                                        <td>10%</td> 
-                                        <td><button class="btn btn-primary btn-sm" onclick="deletePortfolio(this)">delete</button></td>          
-                                    </tr>
-                                    <tr onclick="trClick(this)">  
-                                        <td>4</td>  
-                                        <td>ddd</td>  
-                                        <td>Elaine</td>  
-                                        <td>10%</td> 
-                                        <td><button class="btn btn-primary btn-sm" onclick="deletePortfolio(this)">delete</button></td>          
-                                    </tr>                                   
+                                    </tr>                                    
                                 </tbody>
                             </table>
                         </div>
