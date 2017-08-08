@@ -3,10 +3,7 @@ package com.citi.portfolio.service.serviceImp;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.controller.FundManagerController;
-import com.citi.portfolio.dao.FundManagerMapper;
-import com.citi.portfolio.dao.PortfolioMapper;
-import com.citi.portfolio.dao.PositionMapper;
-import com.citi.portfolio.dao.StockMapper;
+import com.citi.portfolio.dao.*;
 import com.citi.portfolio.entity.MyPortfolio;
 import com.citi.portfolio.entity.Portfolio;
 import com.citi.portfolio.entity.Position;
@@ -16,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class PortfolioServiceImp implements PortfolioService {
@@ -27,18 +22,22 @@ public class PortfolioServiceImp implements PortfolioService {
     @Autowired
     PositionMapper positionMapper;
     @Autowired
-    StockMapper stockMapper;
-    @Autowired
-    FundManagerMapper fundManagerMapper;
-
+    PriceMapper priceMapper;
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(FundManagerController.class);
 
+    /**
+     * @author keira
+     * @param name
+     * @param fundmanagerid
+     * @return the jsonobject of insert portfolio
+     */
     @Override
     public JSONObject insertPortfolio(String name, Integer fundmanagerid) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("resultCode",0);
-
+        
+        //check the name is available
         if (portfolioMapper.selectByName(name) != null){
             jsonObject.put("errorMessage", "The portfolio name has already exist!");
         }else{
@@ -50,13 +49,13 @@ public class PortfolioServiceImp implements PortfolioService {
             portfolio.setBenefit(0d);
             if (portfolioMapper.insert(portfolio) != 0){
                 jsonObject = (JSONObject)JSONObject.toJSON(portfolio);
+                jsonObject.put("id",portfolioMapper.selectByName(name).getId());
                 jsonObject.put("resultCode",1);
             }else {
                 jsonObject.put("errorMessage", "insert error");
             }
         }
             return  jsonObject;
-
     }
 
     @Override
@@ -88,9 +87,9 @@ public class PortfolioServiceImp implements PortfolioService {
     public double calculateLotvalue(Integer id) {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
         double benefitSum = 0d;
-        double sumCost = 0d;
+        Calendar calendar = Calendar.getInstance();
         for (Position p :positions) {
-            benefitSum += getCurrentPrice(p.getSecurityid(),p.getAsset()) * p.getQuantity();
+            benefitSum += priceMapper.selectBySymbolAndDate(p.getSecurityid(),calendar.getTime()).getOfferprice() * p.getQuantity();
         }
         return benefitSum;
     }
@@ -103,14 +102,4 @@ public class PortfolioServiceImp implements PortfolioService {
         return sumCost;
     }
 
-    private double getCurrentPrice(String securityid, String asset) {
-        Stock stock;
-        // other security
-        if (!Objects.equals("Stock", asset)) {
-            return 0;
-        } else {
-            stock = stockMapper.selectByPrimaryKey(securityid);
-            return stock.getLastsale();
-        }
-    }
 }
