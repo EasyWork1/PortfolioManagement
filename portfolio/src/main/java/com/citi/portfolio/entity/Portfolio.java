@@ -9,11 +9,17 @@ public class Portfolio {
 
     private Double benefit;
 
-    public Portfolio(Integer id, String name, Integer fundmanagerid, Double benefit) {
+    private Integer symbols;
+
+    private Double lotvalue;
+
+    public Portfolio(Integer id, String name, Integer fundmanagerid, Double benefit, Integer symbols, Double lotvalue) {
         this.id = id;
         this.name = name;
         this.fundmanagerid = fundmanagerid;
         this.benefit = benefit;
+        this.symbols = symbols;
+        this.lotvalue = lotvalue;
     }
 
     public Portfolio() {
@@ -50,5 +56,21 @@ public class Portfolio {
 
     public void setBenefit(Double benefit) {
         this.benefit = benefit;
+    }
+
+    public Integer getSymbols() {
+        return symbols;
+    }
+
+    public void setSymbols(Integer symbols) {
+        this.symbols = symbols;
+    }
+
+    public Double getLotvalue() {
+        return lotvalue;
+    }
+
+    public void setLotvalue(Double lotvalue) {
+        this.lotvalue = lotvalue;
     }
 }

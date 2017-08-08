@@ -10,22 +10,16 @@
     <meta name="author" content="">
 
     <title>Admin</title>
-
-    <!-- Bootstrap Core CSS -->
-   
-
-    <!-- Custom CSS -->
-    
-    
     <script src="Scripts/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/dm/fund.js"></script>
+    
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
      <link href="css/bootstrap.min.css" rel="stylesheet">
      <link href="css/sb-admin.css" rel="stylesheet">
 
     <link href="css/height.css" rel="stylesheet">
+    <script type="text/javascript" src="js/dm/fund.js"></script>
 </head>
 
 <body>
@@ -105,10 +99,8 @@
 
                 <div class="col-lg-6">
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-plus fa-fw"></i><span class="network-name">Add</span>
+                            <i class="fa fa-plus fa-fw"></i><span class="network-name">Add a new portfolio</span>
                             </button>
-
-                       <!--  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"> Add</button> -->
                         <!-- /#wrapper -->
                         <!-- 模态框（Modal） -->
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -116,12 +108,14 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Create A New Portfolio</h4>
                                     </div>
-                                    <div class="modal-body">在这里添加一些文本</div>
+                                    <div class="modal-body">
+                                        <input type="text" id="PortfolioName" placeholder="Input PortfolioName"/>
+                                    </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" onclick="createPortfolio()">Add</button>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal -->
@@ -131,10 +125,11 @@
                             <table id= "tb_fund" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>id</th> 
+                                        <th>Id</th> 
                                         <th>Name</th> 
-                                        <th>fundManagerId</th> 
-                                        <th>benefit</th>
+                                        <th>FundManagerId</th> 
+                                        <th>Benefit</th>
+                                        <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -142,25 +137,29 @@
                                         <td >1</td>  
                                         <td>aaa</td>  
                                         <td>Demi</td>  
-                                        <td>10%</td>          
+                                        <td>10%</td> 
+                                        <td><button class="btn btn-primary btn-sm">delete</button></td>         
                                     </tr>  
                                     <tr onclick="trClick(this)">  
                                         <td>2</td>  
                                         <td>bbb</td>  
                                         <td>Jeremy</td>  
-                                        <td>10%</td>          
+                                        <td>10%</td>  
+                                        <td><button class="btn btn-primary btn-sm">delete</button></td>         
                                     </tr>   
                                     <tr onclick="trClick(this)">  
                                         <td>3</td>  
                                         <td>ccc</td>  
                                         <td>Keira</td>  
-                                        <td>10%</td>          
+                                        <td>10%</td> 
+                                        <td><button class="btn btn-primary btn-sm">delete</button></td>          
                                     </tr>
                                     <tr onclick="trClick(this)">  
                                         <td>4</td>  
                                         <td>ddd</td>  
                                         <td>Elaine</td>  
-                                        <td>10%</td>          
+                                        <td>10%</td> 
+                                        <td><button class="btn btn-primary btn-sm">delete</button></td>          
                                     </tr>                                   
                                 </tbody>
                             </table>

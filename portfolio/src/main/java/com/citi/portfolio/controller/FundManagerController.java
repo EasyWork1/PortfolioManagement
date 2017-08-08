@@ -25,6 +25,8 @@ public class FundManagerController {
     FundManagerService fundManagerService;
     private static Logger logger = Logger.getLogger(FundManagerController.class);
 
+
+
     @RequestMapping("/loginForm")
     public ModelAndView loginForm() {
 
@@ -60,7 +62,7 @@ public class FundManagerController {
         return  json;
 
     }
-    @RequestMapping("/selectAll")
+    @RequestMapping("/selectAllFundManagers")
     public String selectAll() {
 
             String json= fundManagerService.selectAll().toJSONString();
