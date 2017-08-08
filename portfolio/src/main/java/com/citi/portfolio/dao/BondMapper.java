@@ -13,7 +13,7 @@ public interface BondMapper {
 
     int insertSelective(Bond record);
 
-    ArrayList<BondDTO> selectAll();
+    ArrayList<BondDTO> selectBondDTO();
 
     Bond selectByPrimaryKey(String isin);
 

@@ -68,7 +68,7 @@
 
 
 
-        <table tableName="bond" domainObjectName="Bond"
+        <table tableName="future" domainObjectName="Future"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

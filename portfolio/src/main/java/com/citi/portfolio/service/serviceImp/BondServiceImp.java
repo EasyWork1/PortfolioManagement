@@ -22,7 +22,7 @@ public class BondServiceImp implements BondService {
     @Override
     public JSONArray selectAllBonds() {
         JSONArray json = new JSONArray();
-        ArrayList<BondDTO> bonds = bondMapper.selectAll();
+        ArrayList<BondDTO> bonds = bondMapper.selectBondDTO();
         json = (JSONArray) JSONObject.toJSON(bonds);
         return json;
     }
