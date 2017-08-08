@@ -32,7 +32,7 @@ public class PortfolioController {
         return  json;
     }
     @RequestMapping("/deletePortfolio")
-    public String insertPortfolio(@RequestParam(value = "id", required = true) Integer id) {
+    public String deletePortfolio(@RequestParam(value = "id", required = true) Integer id) {
         String json = portfolioService.deletePortfolio(id).toJSONString();
         return json;
     }

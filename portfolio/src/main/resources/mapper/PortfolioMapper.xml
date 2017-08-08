@@ -32,6 +32,12 @@
     from portfolio
     where fundManagerId = #{fundmanagerid,jdbcType=INTEGER}
   </select>
+  <select id="getCurrentSymbolsByPortfolioId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select
+    COUNT (*)
+    from POSITION
+    where portfolioId = #{portfolioid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from portfolio
     where id = #{id,jdbcType=INTEGER}

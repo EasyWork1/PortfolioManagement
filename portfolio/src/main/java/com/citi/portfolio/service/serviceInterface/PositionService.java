@@ -11,6 +11,9 @@ import java.util.Date;
 public interface PositionService {
 
     JSONObject deletePosition(Integer positionId);
-//    JSONObject insertPosition(Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid);
+    JSONObject insertPosition(String securityid, String asset, Integer portfolioid,Double quantity) ;
+    Integer selectByPortfolioIdAndSecurityId(String securityid, Integer portfolioid);
+    JSONArray selectAllPosition(Integer portfolioId);
+
 }
 

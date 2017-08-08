@@ -28,6 +28,8 @@
     from position
     where portfolioId = #{portfolioid,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from position
     where id = #{id,jdbcType=INTEGER}

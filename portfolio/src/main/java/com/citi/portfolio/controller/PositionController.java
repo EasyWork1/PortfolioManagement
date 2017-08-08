@@ -19,33 +19,30 @@ public class PositionController {
     private static Logger logger = Logger.getLogger(PositionController.class);
 
 
-    @RequestMapping("/selectAllStocks")
-    public String selectAll() {
-
-            String json= stockService.selectAllStocks().toJSONString();
+    @RequestMapping("/selectAllPositions")
+    public String selectAll(@RequestParam(value = "portfolio", required = true)Integer portfolioId) {
+            String json= positionService.selectAllPosition(portfolioId).toJSONString();
             return json;
+    }
+
+    @RequestMapping("/deletePosition")
+    public String deletePosition(@RequestParam(value = "id", required = true) Integer id) {
+        String json = positionService.deletePosition(id).toJSONString();
+        return json;
+    }
+
+
+    @RequestMapping("/insertPosition")
+    public String insertPosition(@RequestParam(value = "securityid", required = true)String securityid,
+                                 @RequestParam(value = "asset", required = true)String asset,
+                                 @RequestParam(value = "portfolioid", required = true)Integer portfolioid,
+                                 @RequestParam(value = "quantity", required = true)Double quantity){
+        String json  = positionService.insertPosition(securityid,asset,portfolioid,quantity).toJSONString();
+        logger.info("insert position "+ json);
+        return  json;
 
     }
 
-//    @RequestMapping("/deleteStock")
-//    public String deleteStock(@RequestParam(value = "id", required = true) String id) {
-//
-//        String json = stockService.deleteStock(id).toJSONString();
-//        return json;
-//
-//    }
-//
-//    @RequestMapping("/updateStock")
-//    public String updateStock(@RequestParam(value = "firstName", required = true) String firstName,
-//                                          @RequestParam(value = "lastName", required = true)String lastName,
-//                                          @RequestParam(value = "telephone", required = true) String telephone,
-//                                          @RequestParam(value = "email", required = true) String email,
-//                                          @RequestParam(value = "password", required = true) String password) {
-//
-//        String json= stockService.updateStock(firstName, lastName, telephone, email, password).toJSONString();
-//        return json;
-//
-//    }
 
 
 }
