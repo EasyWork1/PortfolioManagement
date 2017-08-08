@@ -24,8 +24,6 @@ public class PortfolioController {
         String json  = portfolioService.insertPortfolio(name,fundManagerId).toJSONString();
         logger.info("insert portfolio "+ json);
         return  json;
-
-
     }
     @RequestMapping("/myportfolio")
     public String myPortfolio(@RequestParam(value = "fundManagerId", required = true) Integer fundManagerId) {

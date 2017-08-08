@@ -1,6 +1,7 @@
 package com.citi.portfolio.service.serviceInterface;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.entity.Portfolio;
 
@@ -9,6 +10,6 @@ import java.util.HashMap;
 
 public interface PortfolioService {
     JSONObject insertPortfolio(String name,Integer fundmanagerid);
-    JSONObject findPortfolioByFundManagerId(Integer fundManagerId);
+    JSONArray findPortfolioByFundManagerId(Integer fundManagerId);
 
 }

@@ -1,5 +1,6 @@
 package com.citi.portfolio.service.serviceImp;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.dao.FundManagerMapper;
 import com.citi.portfolio.dao.PortfolioMapper;
@@ -38,6 +39,9 @@ public class PortfolioServiceImp implements PortfolioService {
             Portfolio portfolio = new Portfolio();
             portfolio.setFundmanagerid(fundmanagerid);
             portfolio.setName(name);
+            portfolio.setLotvalue(0d);
+            portfolio.setSymbols(0);
+            portfolio.setBenefit(0d);
             if (portfolioMapper.insert(portfolio) != 0){
                 jsonObject = (JSONObject)JSONObject.toJSON(portfolio);
                 jsonObject.put("resultCode",1);
@@ -53,11 +57,11 @@ public class PortfolioServiceImp implements PortfolioService {
     }
 
     @Override
-    public JSONObject findPortfolioByFundManagerId(Integer fundManagerid) {
-        JSONObject jsonObject = new JSONObject();
+    public JSONArray findPortfolioByFundManagerId(Integer fundManagerid) {
+        JSONArray jsonArray = new JSONArray();
         ArrayList<Portfolio> portfolios = portfolioMapper.selectByfundManagerId(fundManagerid);
-        jsonObject = (JSONObject) JSONObject.toJSON(portfolios);
-        return jsonObject;
+        jsonArray = (JSONArray) JSONObject.toJSON(portfolios);
+        return jsonArray;
 
     }
 
