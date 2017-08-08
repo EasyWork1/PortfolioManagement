@@ -3,7 +3,6 @@ function login() {
     var pass = $("#pwd").val();
     if (user.length == 0 || pass.length == 0) {
         alert("username or password cannot be none!"); 
-        $("#pwd").value() = ""; 
         return false; 
     } 
     else {
@@ -15,13 +14,16 @@ function login() {
                     data: { username: user,password:pass},  
                     dataType: "json",  
                     timeout: 15000,  
-                    success: function (data) {
+                    success: function (data) {  
                         var json = eval(data);
-                        alert(json.resultCode);
-                        alert(json.id);
+                        if (json.resultCode == 1) {
+                            self.location = "index.html?username="+json.username+"&id="+json.id;
+                        } else {
+                            alert(json.errorMessage);
+                        }
                     },
                     error: function (xhr, message) {
-                        displayError(xhr, message);
+                        alert(message);
                     }
                 });
     }
@@ -46,14 +48,16 @@ function sign() {
                     data: { firstName: firstName,lastName:lastName,telephone:telephone,email:email,username:userName,password:passWord},  
                     dataType: "json",  
                     timeout: 15000,  
-                    success: function (data) {
+                    success: function (data) {  
                         var json = eval(data);
-                        alert(json.id);
-                        self.location = "login.html";  
+                        if (json.resultCode == 1) {
+                            self.location = "index.html?username="+json.username+"&id="+json.id;
+                        } else {
+                            alert(json.errorMessage);
+                        }
                     },
                     error: function (xhr, message) {
-                        alert("test");
-                        displayError(xhr, message,"qww");
+                        alert(message);
                     }
                 });
     }
