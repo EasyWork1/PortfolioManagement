@@ -28,8 +28,57 @@
       });
     }
     $(function() {
-      getModuleInfo();
+      //getModuleInfo();
+      //addRow("15","Eric","sam","1238","@gmail.com","eric","123");
     });
+
+
+function createTable()
+{
+  //定义行元素标签 
+  var tr=document.createElement('tr'); 
+           
+
+}
+
+
+/*function addRow(id,firstName,lastName,telephone,email,username,password)
+{
+
+        var rs = $("#tb_manager").rows;  //table取到所有的行
+        var insertR = $("#stb_manager").insertRow(1); //给表格添加一行(不包单元格)
+        //insertR.innerHTML = rs[1].innerHTML;    
+        var c0 = insertR.insertCell(0);       
+        c0.innerHTML = id;
+
+        var c1 = insertR.insertCell(1);
+        c1.innerHTML = firstName;
+
+        var c2 = insertR.insertCell(2);
+        c2.innerHTML = lastName;
+
+        var c3 = insertR.insertCell(3);
+        c.innerHTML = telephone;
+
+        var c4 = insertR.insertCell(4);
+        c.innerHTML = email;
+
+        var c5 = insertR.insertCell(5);
+        c.innerHTML = username;
+
+        var c6 = insertR.insertCell(6);
+        c.innerHTML = password;
+
+        var c7 = insertR.insertCell(7);
+        c7.innerHTML ='<input type="button" value="删除" class="del"/><input type="button" value="修改" class="update"/>';
+
+
+}*/
+
+
+
+
+
 
 
 
