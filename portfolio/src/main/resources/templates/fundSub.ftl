@@ -67,7 +67,7 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i>Instrument</a>
                     </li>
                     <li >
-                        <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
+                        <a href="FundManager.ftl"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
                     <li>
                         <a href="fundEarningExhibition.html"><i class="fa fa-fw fa-edit"></i>Fund Earning Exhibition</a>
@@ -140,6 +140,7 @@
                                         <th>sector</th> 
                                         <th>industry</th> 
                                         <th>currency</th>
+                                        <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -151,7 +152,8 @@
                                         <td>1</td>  
                                         <td>aaa</td>  
                                         <td>20170807</td>  
-                                        <td>10%</td>         
+                                        <td>10%</td> 
+                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>                 
                                     </tr>  
                                     <tr>  
                                         <td>1</td>  
@@ -161,7 +163,8 @@
                                         <td>1</td>  
                                         <td>aaa</td>  
                                         <td>20170807</td>  
-                                        <td>10%</td>          
+                                        <td>10%</td>
+                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>           
                                     </tr>   
                                     <tr >  
                                         <td>1</td>  
@@ -171,7 +174,8 @@
                                         <td>1</td>  
                                         <td>aaa</td>  
                                         <td>20170807</td>  
-                                        <td>10%</td>           
+                                        <td>10%</td>
+                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>            
                                     </tr>
                                     <tr>  
                                         <td>1</td>  
@@ -181,7 +185,8 @@
                                         <td>1</td>  
                                         <td>aaa</td>  
                                         <td>20170807</td>  
-                                        <td>10%</td>           
+                                        <td>10%</td>
+                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>            
                                     </tr>                                   
                                 </tbody>
                             </table>

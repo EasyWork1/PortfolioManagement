@@ -1,14 +1,50 @@
 
-
-
 $(function(){
 
-    console.log("add to table");
-   
-   var tbBody = "<tr><td>" + "Eric" + "</td>"+"<td>" + "Green" + "</td>"+"<td>" + "12324" + "</td>"+"<td>" + "12324@gmail.com" + "</td>"+"<td>" + "Citi" + "</td>"+"<td>" + "123455" + "</td>" +"</tr>";
+    getAllManagerInfo();
+    //jsonInfo();
 
-   $("#myTb").append(tbBody);
 });
+
+function getAllManagerInfo() {
+      var http = 'http://localhost:8080/'; 
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: http+"selectAllFundManagers",
+        success: function(json) {
+          //打印信息
+        console.log("fundmanager查询返回的数据:"+json);
+        jsonInfo(json);
+          /*var typeData = json.Module;
+          $.each(typeData, function(i, n) {
+            var tbBody = ""
+            var trColor;
+            if (i % 2 == 0) {
+              trColor = "even";
+            }
+            else {
+              trColor = "odd";
+            }
+            tbBody += "<tr class='" + trColor + "'><td>" + n.ModuleNum + "</td>" + "<td>" + n.ModuleName + "</td>" + "<td>" + n.ModuleDes + "</td></tr>";
+            $("#myTb").append(tbBody);
+          });*/
+        },
+        error: function(json) {
+          alert("加载失败");
+        }
+      });
+ }
+
+ function jsonInfo(json)
+ {
+        var data = json;
+       //var data = [{"id":15,"username":"1","email":"1","lastname":"1","firstname":"1","telephone":"1","password":"xMpCOKC5I4INzFCab3WEmw=="},{"id":16,"username":"2","email":"2","lastname":"2","firstname":"2","telephone":"2","password":"yB5yjZ1ML2NvBn+JzBSGLA=="},{"id":17,"username":"pyr","email":"385121039@qq.com","lastname":"Pan","firstname":"Youran","telephone":"17621587563","password":"ICy5YqxZB1uWSwcVLSNLcA=="},{"id":18,"username":"zjh","email":"385121038@qq.com","lastname":"Zhou","firstname":"Jiehui","telephone":"18428367563","password":"ICy5YqxZB1uWSwcVLSNLcA=="}];
+        
+        for(var i=0;i<data.length;i++){ 
+             addRow(data[i].id,data[i].firstname,data[i].lastname,data[i].telephone,data[i].email,data[i].username,data[i].password);
+        } 
+}
 
 
 
@@ -39,27 +75,32 @@ function cancelManager()
 
 var row = 0 ; //定义全局行数用于修改
 //----获取行号-----
-function getRow(r){
+ function getRow(r){
  var i=r.parentNode.parentNode.rowIndex; 
  return i ;
 }
+
 function deleteManager(r)
 {
-    var arr = queryInfoByRow(r);
-    console.log("ready to delete a manager:username"+arr[4]);
+    var ID = r.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+    console.log("ready to delete a manager id："+ID);
+    
+   // var arr = queryInfoByRow(r);
+    //console.log("ready to delete a manager:id"+arr[0]+"/name:"+arr[1]);
 
    //ajax,向后台发送请求
    var http = 'http://localhost:8080/';  
                 $.ajax({  
                     type: "POST",  
-                    url: http+"deleteManager",  
-                    data: { id:15},  
+                    url: http+"deleteFundManager",  
+                    data: { id:ID},  
                     dataType: "json",  
                     timeout: 15000,  
                     success: function (data) {  
                         console.log("删除后台返回的数据："+data);
                         //解析数据成功才上传
-                        document.getElementById('tb_manager').deleteRow(getRow(r));
+                       // document.getElementById('tb_manager').deleteRow(getRow(r));
+                        
                     },
                     error: function (xhr, message) {
 
@@ -67,25 +108,19 @@ function deleteManager(r)
                         
                     }
                 });
-        alert("添加成功！！"); 
-}
-
-//弃用
-function del(obj) {
-    var trId = obj.parentNode.parentNode.id;
-    console.log(trId);
+        // alert("删除成功！！"); 
 }
 
 
-//----根据行号查信息----
+//----根据行号查信息----没用-----------
 function queryInfoByRow(r){
   
  var arr = new Array();
  for(var m=0 ; m<6;m++){
 
   //这里row要加1，否则就是表头
-  arr[m] = document.getElementById('tb_manager').rows[row+1].cells[m].innerText;
-  console.log(arr[m]);
+  arr[m] = document.getElementById('tb_manager').rows[2+1].cells[m].innerText;
+  console.log("Elaine:"+arr[m]);
  }
  return arr ; //返回该行数据
   
@@ -115,13 +150,13 @@ function addManager()
                 $.ajax({  
                     type: "POST",  
                     url: http+"register",  
-                    data: { firstName:firstName ,lastName:lastName,telephone:telephone,email:email,username:username,password:password},  
+                    data: {firstName:firstName ,lastName:lastName,telephone:telephone,email:email,username:username,password:password},  
                     dataType: "json",  
                     timeout: 15000,  
                     success: function (data) {  
                         console.log("增加后台返回的数据："+data);
-                        var tbBody = "<tr><td>" + firstName + "</td>"+"<td>" + lastName + "</td>"+"<td>" + telephone + "</td>"+"<td>" + email + "</td>"+"<td>" + username + "</td>"+"<td>" + password + "</td>" +"</tr>";
-                        $("#myTb").append(tbBody);
+                       // addRow(id,firstName,lastName,telephone,email,username,password);
+                        
                     },
                     error: function (xhr, message) {
 
@@ -135,15 +170,12 @@ function addManager()
 
 }
 
-
-
-
 function deleteInputText()
 {
      document.getElementById("i1").value="";
-      document.getElementById("i2").value="";
-       document.getElementById("i3").value="";
-        document.getElementById("i4").value="";
+     document.getElementById("i2").value="";
+     document.getElementById("i3").value="";
+     document.getElementById("i4").value="";
 }
 
 //网页加载完成后执行该onload事件 
@@ -158,3 +190,15 @@ function deleteInputText()
 } 
     
 }; */
+
+function addRow(id,firstName,lastName,telephone,email,username,password)
+{
+    console.log("add a new row to table");
+   
+    var tbBody = "<tr><td>" + id + "</td>"+"<td>" + firstName + "</td>"+"<td>" + lastName + "</td>"+"<td>" + telephone + "</td>"+"<td>" + email + "</td>"+"<td>" + username + "</td>"+"<td>" + password + "</td>" ;
+
+    var buttontd = "<td>"+'<input type="button" value="删除 " class="btn btn-primary btn-sm" onclick="deleteManager(this);"/><input type="button" value="修改" class="btn btn-primary btn-sm"/>'+"</td></tr>";
+    tbBody += buttontd;
+    $("#myTb").append(tbBody);
+
+}

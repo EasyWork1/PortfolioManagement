@@ -26,7 +26,13 @@ public class FundManagerController {
     private static Logger logger = Logger.getLogger(FundManagerController.class);
 
 
+    @RequestMapping("/showFundManagerForm")
+    public ModelAndView addManagerForm() {
 
+        ModelAndView modelAndView = new ModelAndView("fundManager");
+        return modelAndView;
+
+    }
     @RequestMapping("/loginForm")
     public ModelAndView loginForm() {
 
@@ -65,8 +71,10 @@ public class FundManagerController {
     @RequestMapping("/selectAllFundManagers")
     public String selectAll() {
 
-            String json= fundManagerService.selectAll().toJSONString();
-            return json;
+        String json= fundManagerService.selectAll().toJSONString();
+        logger.info("select all fundManager: "+ json);
+        return json;
+
 
     }
 
@@ -74,6 +82,7 @@ public class FundManagerController {
     public String deleteFundManager(@RequestParam(value = "id", required = true) int id) {
 
         String json = fundManagerService.deleteFundManager(id).toJSONString();
+        logger.info("delete fundManager: "+ json);
         return json;
 
     }
@@ -86,6 +95,7 @@ public class FundManagerController {
                                           @RequestParam(value = "password", required = true) String password) {
 
         String json= fundManagerService.updateFundManager(firstName, lastName, telephone, email, password).toJSONString();
+        logger.info("update fundManager: "+ json);
         return json;
 
     }

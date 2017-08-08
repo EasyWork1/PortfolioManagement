@@ -68,22 +68,18 @@
 
 
 
-        <table tableName="stock" domainObjectName="Stock"
+        <table tableName="portfolio" domainObjectName="Portfolio"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="bond" domainObjectName="Bond"
+        <table tableName="position" domainObjectName="Position"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="price" domainObjectName="Price"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+
 
 
 

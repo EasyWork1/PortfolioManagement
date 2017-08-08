@@ -66,7 +66,7 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i>Instrument</a>
                     </li>
                     <li >
-                        <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
+                        <a href="FundManager.ftl"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
                     <li>
                         <a href="fundEarningExhibition.html"><i class="fa fa-fw fa-edit"></i>Fund Earning Exhibition</a>

@@ -21,7 +21,7 @@ function createPortfolio() {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    // self.location = "fundSub.html";
+                    $("#myModal").modal('hide');
                     con = "<tr onclick=\"trClick(this)\">";
                     con += "<td>"+ json.id + "</td>";
                     con += "<td>"+ json.name + "</td>";
@@ -42,17 +42,42 @@ function createPortfolio() {
 
 function addStock() {
 	var stock = $("#stockshow").val();
-	var http = 'http://localhost:8080/';  
+    console.log(stock);
+    $("#myModal").modal('hide');
+	// var http = 'http://localhost:8080/';  
+ //        $.ajax({  
+ //            type: "POST",  
+ //            url: http+"register",  
+ //            data: { },  
+ //            dataType: "json",  
+ //            timeout: 15000,  
+ //            success: function (data) {  
+ //                var json = eval(data);
+ //                if (json.resultCode == 1) {
+                    
+ //                } else {
+ //                    alert(json.errorMessage);
+ //                }
+ //            },
+ //            error: function (xhr, message) {
+ //                alert(message);
+ //            }
+ //        });
+}
+
+function deletePortfolio(e){
+    var portfolioId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+    var http = 'http://localhost:8080/';  
         $.ajax({  
             type: "POST",  
-            url: http+"register",  
-            data: { },  
+            url: http+"deletePortfolio",  
+            data: {id:portfolioId},  
             dataType: "json",  
             timeout: 15000,  
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    self.location = "fundSub.html";
+                    document.getElementById('tb_Portfolio').deleteRow(getRow(e));  
                 } else {
                     alert(json.errorMessage);
                 }
@@ -63,19 +88,19 @@ function addStock() {
         });
 }
 
-function deletePortfolio(e){
+function deleteStock(e) {
+    var portfolioId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
     var http = 'http://localhost:8080/';  
         $.ajax({  
             type: "POST",  
             url: http+"deletePortfolio",  
-            data: {id:1},  
+            data: {id:portfolioId},  
             dataType: "json",  
             timeout: 15000,  
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    // self.location = "fundSub.html";
-                    alert("success");   
+                    document.getElementById('tb_fundSub').deleteRow(getRow(e));   
                 } else {
                     alert(json.errorMessage);
                 }
@@ -84,4 +109,9 @@ function deletePortfolio(e){
                 alert(message);
             }
         });
+}
+
+function getRow(r){
+     var i=r.parentNode.parentNode.rowIndex; 
+     return i ;
 }
