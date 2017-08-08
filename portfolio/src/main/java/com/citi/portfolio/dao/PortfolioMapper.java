@@ -15,6 +15,8 @@ public interface PortfolioMapper {
 
     Portfolio selectByPrimaryKey(Integer id);
 
+    Portfolio selectByName(String name);
+
     ArrayList<Portfolio> selectByfundManagerId(Integer fundmanagerid);
 
     int updateByPrimaryKeySelective(Portfolio record);

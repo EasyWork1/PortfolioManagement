@@ -1,5 +1,6 @@
 package com.citi.portfolio.service.serviceImp;
 
+import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.dao.FundManagerMapper;
 import com.citi.portfolio.dao.PortfolioMapper;
 import com.citi.portfolio.dao.PositionMapper;
@@ -29,28 +30,35 @@ public class PortfolioServiceImp implements PortfolioService {
     FundManagerMapper fundManagerMapper;
 
     @Override
-    public boolean insertPortfolio(Integer id, String name, Integer fundmanagerid) {
-        Portfolio portfolio = new Portfolio();
-        portfolio.setId(id);
-        portfolio.setFundmanagerid(fundmanagerid);
-        portfolio.setName(name);
-        if (portfolioMapper.insert(portfolio) != 0){
-            return true;
+    public JSONObject insertPortfolio(String name, Integer fundmanagerid) {
+            JSONObject jsonObject = new JSONObject();
+         jsonObject.put("resultCode",0);
+
+        if (portfolioMapper.selectByName(name).equals(null)){
+            Portfolio portfolio = new Portfolio();
+            portfolio.setFundmanagerid(fundmanagerid);
+            portfolio.setName(name);
+            if (portfolioMapper.insert(portfolio) != 0){
+                jsonObject = (JSONObject)JSONObject.toJSON(portfolio);
+                jsonObject.put("resultCode",1);
+            }else {
+                jsonObject.put("errorMessage", "insert error");
+            }
+
+        }else{
+            jsonObject.put("errorMessage", "The portfolio name has already exist!");
         }
-        return false;
+            return  jsonObject;
+
     }
 
     @Override
-    public HashMap findPortfolioByFundManagerId(Integer fundManagerid) {
+    public JSONObject findPortfolioByFundManagerId(Integer fundManagerid) {
+        JSONObject jsonObject = new JSONObject();
+        ArrayList<Portfolio> portfolios = portfolioMapper.selectByfundManagerId(fundManagerid);
+        jsonObject = (JSONObject) JSONObject.toJSON(portfolios);
+        return jsonObject;
 
-        HashMap hashMap = new HashMap();
-        ArrayList<MyPortfolio> portfolios= portfolioMapper.showMyPofolio(fundManagerid);;
-
-            hashMap.put("result",true);
-            hashMap.put("portfolios",portfolios);
-            hashMap.put("fundmanager",fundManagerMapper.selectByPrimaryKey(fundManagerid));
-
-        return hashMap;
     }
 
     @Override

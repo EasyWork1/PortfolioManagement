@@ -1,13 +1,14 @@
 package com.citi.portfolio.service.serviceInterface;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.entity.Portfolio;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface PortfolioService {
-    boolean insertPortfolio(Integer id, String name,Integer fundmanagerid);
-    HashMap findPortfolioByFundManagerId(Integer fundManagerId);
-    double calculateBenefit(Integer id);
+    JSONObject insertPortfolio(String name,Integer fundmanagerid);
+    JSONObject findPortfolioByFundManagerId(Integer fundManagerId);
+    JSONObject calculateBenefit(Integer id);
 }
