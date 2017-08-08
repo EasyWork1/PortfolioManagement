@@ -2,7 +2,8 @@ function login() {
     var user = $("#user").val();
     var pass = $("#pwd").val();
     if (user.length == 0 || pass.length == 0) {
-        alert("username or password cannot be none!"); 
+        alert("username or password cannot be none!");
+        cancel();
         return false; 
     } 
     else {
@@ -64,9 +65,8 @@ function sign() {
 }
 
 function cancel() {
-    // $("#user").value() = ""; 
-    // $("#pwd").value() = ""; 
-    // return false; 
+    document.getElementById("user").value="";
+    document.getElementById("pwd").value="";
 } 
 
 

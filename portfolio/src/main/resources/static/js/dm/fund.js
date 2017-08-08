@@ -1,3 +1,35 @@
+$(function(){
+
+    getAllPortfolioInfo();
+
+});
+
+function getAllManagerInfo() {
+      var http = 'http://localhost:8080/'; 
+      $.ajax({
+        type: "POST",
+        data:{fundManagerId:1},
+        dataType: "json",
+        url: http+"myportfolio",
+        success: function(json) {
+          //打印信息
+        console.log("fundmanager查询返回的数据:"+json);
+        jsonInfo(json);
+        },
+        error: function(json) {
+          alert("加载失败");
+        }
+      });
+ }
+
+ function jsonInfo(json)
+ {
+        var data = json;
+        for(var i=0;i<data.length;i++){ 
+             addPortfolioRow(data[i].id,data[i].name,data[i].symbols,data[i].Lotvalue,data[i].benefit);
+        } 
+}
+
 function trClick(e) {
     var Id = e.children[0].innerHTML;
     console.log(Id);
@@ -22,7 +54,7 @@ function createPortfolio() {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    addPortfolioRow(json.id,json.name,json.fundManagerid,json.benefit); 
+                    addPortfolioRow(json.id,json.name,json.symbols,json.Lotvalue,json.benefit); 
                 } else {
                     alert(json.errorMessage);
                 }
@@ -110,11 +142,11 @@ function getRow(r){
      return i ;
 }
 
-function addPortfolioRow(id,name,fundManagerid,benefit)
+function addPortfolioRow(id,name,symbols,Lotvalue,benefit)
 {
     console.log("add a new row to tb_Portfolio");
    
-    var tbBody = "<tr onclick=\"trClick(this)\"><td>" + id + "</td>"+"<td>" + name + "</td>"+"<td>" + fundManagerid + "</td>"+"<td>" + benefit ;
+    var tbBody = "<tr onclick=\"trClick(this)\"><td>" + id + "</td>"+"<td>" + name + "</td>"+"<td>" + symbols + "</td>"+"<td>" +Lotvalue+ "</td>"+"<td>"+ benefit +"</td>";
 
     var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
     tbBody += buttontd;
