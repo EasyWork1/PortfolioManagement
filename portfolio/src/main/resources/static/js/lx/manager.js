@@ -31,7 +31,7 @@ function getAllManagerInfo() {
           });*/
         },
         error: function(json) {
-          alert("加载失败");
+          alert("Fail To Load!");
         }
       });
  }
@@ -100,9 +100,17 @@ function deleteManager(r)
                         console.log("删除后台返回的数据："+data);
                         //解析数据成功才上传
                        // document.getElementById('tb_manager').deleteRow(getRow(r));
+                        var json = eval(data);
+                        if (json.resultCode == 1) {
+                            self.location = "showFundManagerForm";
+                            alert("Delete Success!"); 
+                        } else {
+                            alert(json.errorMessage);
+                        }
                         
                     },
                     error: function (xhr, message) {
+                        alert("Access Failure!");
 
                         console.log("访问失败");
                         
@@ -143,7 +151,7 @@ function addManager()
     }
     else
     {
-        console.log("input correct："+firstName+"/"+lastName+"/"+telephone+"/"+email+"/"+username+"/"+password);
+        //console.log("input correct："+firstName+"/"+lastName+"/"+telephone+"/"+email+"/"+username+"/"+password);
 
         //ajax向后台发送请求，参数要改
         var http = 'http://localhost:8080/';  
@@ -156,15 +164,21 @@ function addManager()
                     success: function (data) {  
                         console.log("增加后台返回的数据："+data);
                        // addRow(id,firstName,lastName,telephone,email,username,password);
-                        
+                        var json = eval(data);
+                        if (json.resultCode == 1) {
+                            self.location = "showFundManagerForm";
+                            alert("Add Success！"); 
+                        } else {
+                            alert(json.errorMessage);
+                        }
                     },
                     error: function (xhr, message) {
-
+                        alert("Access Failure!");
                         console.log("访问失败");
                         
                     }
                 });
-        alert("添加成功！！"); 
+        
     }
     
 
@@ -197,8 +211,73 @@ function addRow(id,firstName,lastName,telephone,email,username,password)
    
     var tbBody = "<tr><td>" + id + "</td>"+"<td>" + firstName + "</td>"+"<td>" + lastName + "</td>"+"<td>" + telephone + "</td>"+"<td>" + email + "</td>"+"<td>" + username + "</td>"+"<td>" + password + "</td>" ;
 
-    var buttontd = "<td>"+'<input type="button" value="删除 " class="btn btn-primary btn-sm" onclick="deleteManager(this);"/><input type="button" value="修改" class="btn btn-primary btn-sm"/>'+"</td></tr>";
+    var buttontd = "<td>"+'<input type="button" value="delete" class="btn btn-primary btn-sm" onclick="deleteManager(this);"/><input type="button" value="modify" class="btn btn-primary btn-sm" onclick="modManager(this);"/>'+"</td></tr>";
     tbBody += buttontd;
     $("#myTb").append(tbBody);
 
+}
+
+function modManager(obj){
+    
+    var operatorCell1 = obj.parentNode.parentNode.getElementsByTagName("td")[1]; //取到要操作的td对象
+    var operatorCell2 = obj.parentNode.parentNode.getElementsByTagName("td")[2]; //取到要操作的td对象
+    var operatorCell3 = obj.parentNode.parentNode.getElementsByTagName("td")[3]; //取到要操作的td对象
+    var operatorCell4 = obj.parentNode.parentNode.getElementsByTagName("td")[4]; //取到要操作的td对象
+   
+    if(obj.value == "modify"){
+                    obj.value = "ok";
+                    operatorCell1.innerHTML ="<input value='"+operatorCell1.innerHTML+"'/>";//把内容变成文本框
+                    operatorCell2.innerHTML ="<input value='"+operatorCell2.innerHTML+"'/>";
+                    operatorCell3.innerHTML ="<input value='"+operatorCell3.innerHTML+"'/>";
+                    operatorCell4.innerHTML ="<input value='"+operatorCell4.innerHTML+"'/>";
+                    //做修改操作
+            }else{
+
+                    var firstname = operatorCell1.getElementsByTagName("input")[0].value;
+                    var lastname = operatorCell2.getElementsByTagName("input")[0].value;
+                    var telephone = operatorCell3.getElementsByTagName("input")[0].value;
+                    var email = operatorCell4.getElementsByTagName("input")[0].value;
+                    operatorCell1.innerHTML = firstname;
+                    operatorCell2.innerHTML = lastname;//把文本框变成内容
+                    operatorCell3.innerHTML = telephone;//把文本框变成内容
+                    operatorCell4.innerHTML = email;//把文本框变成内容
+
+                    var ID = obj.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+
+                    console.log("ready to modify a fundmanager, ID:"+ID);
+
+                    //ajax,向后台发送请求
+                    var http = 'http://localhost:8080/';  
+                    $.ajax({  
+                    type: "POST",  
+                    url: http+"updateFundManager",  
+                    data: { id:ID, firstName:firstname,lastName:lastname,telephone:telephone,email:email},  
+                    dataType: "json",  
+                    timeout: 15000,  
+                    success: function (data) {  
+                        console.log("修改后台返回的数据："+data);
+                        //解析数据成功才上传
+                       // document.getElementById('tb_manager').deleteRow(getRow(r));
+                        var json = eval(data);
+                        if (json.resultCode == 1) {
+                            alert("Modify Success!"); 
+                            self.location = "showFundManagerForm";
+                            //obj.value = "modify";                          
+                        } else {
+                            alert(json.errorMessage);
+                        }
+                        
+                    },
+                    error: function (xhr, message) {
+                        alert("Access Failure!");
+
+                        console.log("访问失败");
+                        
+                    }
+                });
+       
+                }
+
+     
+     
 }
