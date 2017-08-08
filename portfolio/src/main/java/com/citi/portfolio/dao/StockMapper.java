@@ -1,6 +1,9 @@
 package com.citi.portfolio.dao;
 
+import com.citi.portfolio.entity.Bond;
 import com.citi.portfolio.entity.Stock;
+
+import java.util.ArrayList;
 
 public interface StockMapper {
     int deleteByPrimaryKey(String symbol);
@@ -8,6 +11,7 @@ public interface StockMapper {
     int insert(Stock record);
 
     int insertSelective(Stock record);
+    ArrayList<Stock> selectAll();
 
     Stock selectByPrimaryKey(String symbol);
 

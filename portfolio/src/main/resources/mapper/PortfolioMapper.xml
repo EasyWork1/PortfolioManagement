@@ -1,79 +1,108 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.citi.portfolio.dao.PortfolioMapper" >
-  <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.Portfolio" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="fundManagerId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.portfolio.dao.PortfolioMapper">
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.Portfolio">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="fundManagerId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="benefit" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="symbols" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="lotvalue" javaType="java.lang.Double" jdbcType="DOUBLE" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, fundManagerId
+  <sql id="Base_Column_List">
+    id, name, fundManagerId, benefit, symbols, lotvalue
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from portfolio
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectByfundManagerId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from portfolio
-    where fundManagerId = #{fundManagerId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from portfolio
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.citi.portfolio.entity.Portfolio" >
-    insert into portfolio (id, name, fundManagerId
+  <insert id="insert" parameterType="com.citi.portfolio.entity.Portfolio">
+    insert into portfolio (id, name, fundManagerId, 
+      benefit, symbols, lotvalue
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{fundmanagerid,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{fundmanagerid,jdbcType=INTEGER}, 
+      #{benefit,jdbcType=DOUBLE}, #{symbols,jdbcType=INTEGER}, #{lotvalue,jdbcType=DOUBLE}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Portfolio" >
+  <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Portfolio">
     insert into portfolio
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="fundmanagerid != null" >
+      <if test="fundmanagerid != null">
         fundManagerId,
       </if>
+      <if test="benefit != null">
+        benefit,
+      </if>
+      <if test="symbols != null">
+        symbols,
+      </if>
+      <if test="lotvalue != null">
+        lotvalue,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="fundmanagerid != null" >
+      <if test="fundmanagerid != null">
         #{fundmanagerid,jdbcType=INTEGER},
+      </if>
+      <if test="benefit != null">
+        #{benefit,jdbcType=DOUBLE},
+      </if>
+      <if test="symbols != null">
+        #{symbols,jdbcType=INTEGER},
+      </if>
+      <if test="lotvalue != null">
+        #{lotvalue,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.entity.Portfolio" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.entity.Portfolio">
     update portfolio
-    <set >
-      <if test="name != null" >
+    <set>
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="fundmanagerid != null" >
+      <if test="fundmanagerid != null">
         fundManagerId = #{fundmanagerid,jdbcType=INTEGER},
+      </if>
+      <if test="benefit != null">
+        benefit = #{benefit,jdbcType=DOUBLE},
+      </if>
+      <if test="symbols != null">
+        symbols = #{symbols,jdbcType=INTEGER},
+      </if>
+      <if test="lotvalue != null">
+        lotvalue = #{lotvalue,jdbcType=DOUBLE},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.Portfolio" >
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.Portfolio">
     update portfolio
     set name = #{name,jdbcType=VARCHAR},
-      fundManagerId = #{fundmanagerid,jdbcType=INTEGER}
+      fundManagerId = #{fundmanagerid,jdbcType=INTEGER},
+      benefit = #{benefit,jdbcType=DOUBLE},
+      symbols = #{symbols,jdbcType=INTEGER},
+      lotvalue = #{lotvalue,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -97,10 +97,10 @@ public class FundManagerServiceImp implements FundManagerService {
     }
 
     @Override
-    public JSONObject selectAll() {
-        JSONObject jsonObject = new JSONObject();
+    public JSONArray selectAll() {
+        JSONArray jsonObject = new JSONArray();
         ArrayList<FundManager> fundManagers = fundManagerMapper.selectAll();
-        jsonObject = (JSONObject) JSONObject.toJSON(fundManagers);
+        jsonObject = (JSONArray) JSONObject.toJSON(fundManagers);
         return jsonObject;
     }
 
