@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin-Portfolio Management System</title>
+    <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -153,7 +153,6 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                
                     <li class="active">
                         <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
@@ -184,88 +183,65 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            FundManager
+                            Bonds
                         </h1>
+                         <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a href="stock.html">Instrument</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-bar-chart-o"></i> Bond
+                            </li>
+                        </ol>
                         
                     </div>
                 </div>
-                <!-- /.row -->
-
-                <row>
-                     <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default" id="add_btn" onclick="changeVisibility()">
-                            <span class="glyphicon glyphicon-plus"></span>Add a New Manager
-                            </button>
-                          
-                     </div>
-                </row>                    
-
-                <row>
-                     <div id="add_edit_div" style="display: none">
-
-                        First Name：<input width=50px type="text" id="i1">
-                        <br/>
-                        Last Name：<input type="text" id="i2">
-                        <br/>
-                        Telephone：<input type="TelePhone：" id="i3">
-                        <br/>
-                        <br/>
-                        Email：<input type="Email" id="i4"> 
-                        <br/>  
-                        Username：<input type="text" id="i5">  
-                        <br/> 
-                        Password：<input type="password：" id="i6">   
-                     </div>
-                     <br/>
-                     <button id = "btn_save" type="button" class="btn btn-primary btn-sm" style="display: none" onclick="addManager()">SAVE</button>
-                     <button id = "btn_cancel" type="button" class="btn btn-primary btn-sm" style="display: none" onclick="cancelManager()" value="Reset">CANCEL</button>
-
-                </row>
-
-                <row >
-                     <div class="col-lg-6"> 
+            <!--显示操作的表格-->
+            <row>
+               <div class="col-lg-6">
 
                         <div>
-                            <table class="table table-bordered table-hover table-striped" id="tb_manager">
+                            <table id= "table_Bonds" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th> 
-                                        <th>FirstName</th> 
-                                        <th>LastName</th> 
-                                        <th>Telephone</th> 
-                                        <th>Email</th>   
-                                        <th>UserName</th> 
-                                        <th>Password</th> 
-                                        <th>Edit</th>     
+                                        <th>ISIN</th>
+                                        <th>Issuer</th>
+                                        <th>Coupon</th>
+                                        <th>MadurityMonth</th>
+                                        <th>MadurityYear</th>                                       
+                                        <th>BidPrice</th>
+                                        <th>OfferPrice</th>
+                                        <th>Date</th>
                                     </tr>
                                 </thead>
-                                <tbody id= "myTb">
-                                  
-                                                                     
+                                <tbody id="bondTb">                             
+                                   
                                 </tbody>
                             </table>
                         </div>
-                     </div>
+                    </div>
 
-                </row>
-                <!-- /.row -->
+            </row>
+
+        
+              
+
             </div>
-           
+            <!-- /.container-fluid -->
 
         </div>
         <!-- /#page-wrapper -->
-
-</div>
 
     </div>
     <!-- /#wrapper -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-     <!-- Bootstrap Core JavaScript -->
+
+    <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/lx/manager.js"></script>  
-    <script src="js/lx/ajaxGetData.js"></script> 
+
+    <script src="js/lx/bond.js"></script>  
 
 </body>
 
