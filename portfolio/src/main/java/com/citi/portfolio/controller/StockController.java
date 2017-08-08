@@ -25,25 +25,6 @@ public class StockController {
 
     }
 
-    @RequestMapping("/deleteStock")
-    public String deleteStock(@RequestParam(value = "id", required = true) String id) {
-
-        String json = stockService.deleteStock(id).toJSONString();
-        return json;
-
-    }
-
-    @RequestMapping("/updateStock")
-    public String updateStock(@RequestParam(value = "firstName", required = true) String firstName,
-                                          @RequestParam(value = "lastName", required = true)String lastName,
-                                          @RequestParam(value = "telephone", required = true) String telephone,
-                                          @RequestParam(value = "email", required = true) String email,
-                                          @RequestParam(value = "password", required = true) String password) {
-
-        String json= stockService.updateStock(firstName, lastName, telephone, email, password).toJSONString();
-        return json;
-
-    }
 
 
 }

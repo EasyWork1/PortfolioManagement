@@ -1,5 +1,6 @@
 package com.citi.portfolio.service.serviceImp;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.dao.BondMapper;
 import com.citi.portfolio.dao.StockMapper;
@@ -19,23 +20,11 @@ public class StockServiceImp implements StockService {
 
 
     @Override
-    public JSONObject selectAllStocks() {
-        JSONObject jsonObject = new JSONObject();
+    public JSONArray selectAllStocks() {
+        JSONArray json = new JSONArray();
         ArrayList<Stock> stocks = stockMapper.selectAll();
-        jsonObject = (JSONObject) JSONObject.toJSON(stocks);
-        return jsonObject;
+        json = (JSONArray) JSONObject.toJSON(stocks);
+        return json;
     }
 
-    @Override
-    public JSONObject deleteStock(String id) {
-        JSONObject jsonObject = new JSONObject();
-        int result= stockMapper.deleteByPrimaryKey(id);
-        jsonObject =(JSONObject) jsonObject.put("resultCode",result);
-        return jsonObject;
-    }
-
-    @Override
-    public JSONObject updateStock(String firstName, String lastName, String telephone, String email, String password) {
-        return null;
-    }
 }

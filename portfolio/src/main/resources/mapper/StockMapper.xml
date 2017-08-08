@@ -1,33 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.citi.portfolio.dao.StockMapper" >
-  <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.Stock" >
-    <constructor >
-      <idArg column="symbol" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="lastSale" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="marketCap" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="IPOyear" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="sector" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="industry" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="date" jdbcType="DATE" javaType="java.util.Date" />
-      <arg column="currency" jdbcType="VARCHAR" javaType="java.lang.String" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.portfolio.dao.StockMapper">
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.Stock">
+    <constructor>
+      <idArg column="symbol" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="lastSale" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="marketCap" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="IPOyear" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sector" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="industry" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="currency" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     symbol, name, lastSale, marketCap, IPOyear, sector, industry, date, currency
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from stock
     where symbol = #{symbol,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from stock
     where symbol = #{symbol,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.citi.portfolio.entity.Stock" >
+  <insert id="insert" parameterType="com.citi.portfolio.entity.Stock">
     insert into stock (symbol, name, lastSale, 
       marketCap, IPOyear, sector, 
       industry, date, currency
@@ -37,98 +37,98 @@
       #{industry,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{currency,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Stock" >
+  <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Stock">
     insert into stock
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="symbol != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="symbol != null">
         symbol,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="lastsale != null" >
+      <if test="lastsale != null">
         lastSale,
       </if>
-      <if test="marketcap != null" >
+      <if test="marketcap != null">
         marketCap,
       </if>
-      <if test="ipoyear != null" >
+      <if test="ipoyear != null">
         IPOyear,
       </if>
-      <if test="sector != null" >
+      <if test="sector != null">
         sector,
       </if>
-      <if test="industry != null" >
+      <if test="industry != null">
         industry,
       </if>
-      <if test="date != null" >
+      <if test="date != null">
         date,
       </if>
-      <if test="currency != null" >
+      <if test="currency != null">
         currency,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="symbol != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="symbol != null">
         #{symbol,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="lastsale != null" >
+      <if test="lastsale != null">
         #{lastsale,jdbcType=DOUBLE},
       </if>
-      <if test="marketcap != null" >
+      <if test="marketcap != null">
         #{marketcap,jdbcType=BIGINT},
       </if>
-      <if test="ipoyear != null" >
+      <if test="ipoyear != null">
         #{ipoyear,jdbcType=INTEGER},
       </if>
-      <if test="sector != null" >
+      <if test="sector != null">
         #{sector,jdbcType=VARCHAR},
       </if>
-      <if test="industry != null" >
+      <if test="industry != null">
         #{industry,jdbcType=VARCHAR},
       </if>
-      <if test="date != null" >
+      <if test="date != null">
         #{date,jdbcType=DATE},
       </if>
-      <if test="currency != null" >
+      <if test="currency != null">
         #{currency,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.entity.Stock" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.entity.Stock">
     update stock
-    <set >
-      <if test="name != null" >
+    <set>
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="lastsale != null" >
+      <if test="lastsale != null">
         lastSale = #{lastsale,jdbcType=DOUBLE},
       </if>
-      <if test="marketcap != null" >
+      <if test="marketcap != null">
         marketCap = #{marketcap,jdbcType=BIGINT},
       </if>
-      <if test="ipoyear != null" >
+      <if test="ipoyear != null">
         IPOyear = #{ipoyear,jdbcType=INTEGER},
       </if>
-      <if test="sector != null" >
+      <if test="sector != null">
         sector = #{sector,jdbcType=VARCHAR},
       </if>
-      <if test="industry != null" >
+      <if test="industry != null">
         industry = #{industry,jdbcType=VARCHAR},
       </if>
-      <if test="date != null" >
+      <if test="date != null">
         date = #{date,jdbcType=DATE},
       </if>
-      <if test="currency != null" >
+      <if test="currency != null">
         currency = #{currency,jdbcType=VARCHAR},
       </if>
     </set>
     where symbol = #{symbol,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.Stock" >
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.Stock">
     update stock
     set name = #{name,jdbcType=VARCHAR},
       lastSale = #{lastsale,jdbcType=DOUBLE},

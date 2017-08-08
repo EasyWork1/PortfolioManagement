@@ -1,95 +1,90 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.citi.portfolio.dao.BondMapper" >
-  <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.Bond" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="issuer" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="coupon" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="maturityMonth" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="maturityYear" jdbcType="INTEGER" javaType="java.lang.Integer" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.citi.portfolio.dao.BondMapper">
+  <resultMap id="BaseResultMap" type="com.citi.portfolio.entity.Bond">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="issuer" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="coupon" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="maturityMonth" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="maturityYear" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, issuer, coupon, maturityMonth, maturityYear
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-  select
-  <include refid="Base_Column_List" />
-  from bond
-  where id = #{id,jdbcType=INTEGER}
-</select>
-  <select id="selectAll" resultMap="BaseResultMap"  >
-    select
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
     <include refid="Base_Column_List" />
     from bond
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from bond
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.citi.portfolio.entity.Bond" >
+  <insert id="insert" parameterType="com.citi.portfolio.entity.Bond">
     insert into bond (id, issuer, coupon, 
       maturityMonth, maturityYear)
     values (#{id,jdbcType=INTEGER}, #{issuer,jdbcType=VARCHAR}, #{coupon,jdbcType=DOUBLE}, 
       #{maturitymonth,jdbcType=VARCHAR}, #{maturityyear,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Bond" >
+  <insert id="insertSelective" parameterType="com.citi.portfolio.entity.Bond">
     insert into bond
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="issuer != null" >
+      <if test="issuer != null">
         issuer,
       </if>
-      <if test="coupon != null" >
+      <if test="coupon != null">
         coupon,
       </if>
-      <if test="maturitymonth != null" >
+      <if test="maturitymonth != null">
         maturityMonth,
       </if>
-      <if test="maturityyear != null" >
+      <if test="maturityyear != null">
         maturityYear,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="issuer != null" >
+      <if test="issuer != null">
         #{issuer,jdbcType=VARCHAR},
       </if>
-      <if test="coupon != null" >
+      <if test="coupon != null">
         #{coupon,jdbcType=DOUBLE},
       </if>
-      <if test="maturitymonth != null" >
+      <if test="maturitymonth != null">
         #{maturitymonth,jdbcType=VARCHAR},
       </if>
-      <if test="maturityyear != null" >
+      <if test="maturityyear != null">
         #{maturityyear,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.entity.Bond" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.citi.portfolio.entity.Bond">
     update bond
-    <set >
-      <if test="issuer != null" >
+    <set>
+      <if test="issuer != null">
         issuer = #{issuer,jdbcType=VARCHAR},
       </if>
-      <if test="coupon != null" >
+      <if test="coupon != null">
         coupon = #{coupon,jdbcType=DOUBLE},
       </if>
-      <if test="maturitymonth != null" >
+      <if test="maturitymonth != null">
         maturityMonth = #{maturitymonth,jdbcType=VARCHAR},
       </if>
-      <if test="maturityyear != null" >
+      <if test="maturityyear != null">
         maturityYear = #{maturityyear,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.Bond" >
+  <update id="updateByPrimaryKey" parameterType="com.citi.portfolio.entity.Bond">
     update bond
     set issuer = #{issuer,jdbcType=VARCHAR},
       coupon = #{coupon,jdbcType=DOUBLE},
