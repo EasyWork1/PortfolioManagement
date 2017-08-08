@@ -20,6 +20,7 @@
      <link href="css/sb-admin.css" rel="stylesheet">
 
     <link href="css/height.css" rel="stylesheet">
+    <link href="css/fund.css" rel="stylesheet">
     <script type="text/javascript" src="js/dm/fund.js"></script>
 </head>
 
@@ -110,7 +111,13 @@
                                         <h4 class="modal-title" id="myModalLabel">Choose a stock</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <select class="form-control" id="stockshow">
+                                        <select class="form-control select-fund" id="chooseType">
+                                            <option>Type</option>
+                                            <option>Bond</option>
+                                            <option>Future</option>
+                                            <option>Stock</option>
+                                        </select>
+                                        <select class="form-control select-fund" id="chooseDetail">
                                             <option>stock1</option>
                                             <option>stock2</option>
                                             <option>stock3</option>
@@ -129,7 +136,9 @@
                         <div>
                          
                         <div>
-                            <table id= "tb_fundSub" class="table table-bordered table-hover table-striped">
+
+                            <table id= "tb_Stocks" class="table table-bordered table-hover table-striped">
+                                <label>Stocks</label>
                                 <thead>
                                     <tr>
                                         <th>symbol</th> 
@@ -138,7 +147,11 @@
                                         <th>marketCap</th>
                                         <th>IPOyear</th> 
                                         <th>sector</th> 
-                                        <th>industry</th> 
+                                        <th>industry</th>
+                                        <th>offerprice</th> 
+                                        <th>bidprice</th> 
+                                        <th>date</th>  
+                                        <th>sector</th>  
                                         <th>currency</th>
                                         <th>Edit</th>
                                     </tr>
@@ -153,41 +166,74 @@
                                         <td>aaa</td>  
                                         <td>20170807</td>  
                                         <td>10%</td> 
-                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>                 
-                                    </tr>  
-                                    <tr>  
-                                        <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>Demi</td>  
-                                        <td>10%</td> 
                                         <td>1</td>  
                                         <td>aaa</td>  
                                         <td>20170807</td>  
                                         <td>10%</td>
-                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>           
-                                    </tr>   
-                                    <tr >  
-                                        <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>Demi</td>  
-                                        <td>10%</td> 
-                                        <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>20170807</td>  
-                                        <td>10%</td>
-                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>            
+                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>
+                                    </tr>                     
+                                </tbody>
+                            </table>
+                            <table id= "tb_Bonds" class="table table-bordered table-hover table-striped">
+                                <label>Bonds</label>
+                                <thead>
+                                    <tr>
+                                        <th>isin</th> 
+                                        <th>offerprice</th> 
+                                        <th>bidprice</th> 
+                                        <th>maturityyear</th> 
+                                        <th>maturitymonth</th>  
+                                        <th>coupon</th>
+                                        <th>date</th>
+                                        <th>Edit</th>
                                     </tr>
-                                    <tr>  
-                                        <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>Demi</td>  
+                                </thead>
+                                <tbody>
+                                    <tr >  
+                                        <td>20170807</td>  
+                                        <td>10%</td> 
                                         <td>10%</td> 
                                         <td>1</td>  
                                         <td>aaa</td>  
                                         <td>20170807</td>  
                                         <td>10%</td>
-                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>            
-                                    </tr>                                   
+                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>
+                                    </tr>                     
+                                </tbody>
+                            </table>
+                            <table id= "tb_Bonds" class="table table-bordered table-hover table-striped">
+                                <label>Futures</label>
+                                <thead>
+                                    <tr>
+                                        <th>bidprice</th> 
+                                        <th>offerprice</th> 
+                                        <th>uomqty</th> 
+                                        <th>desc</th> 
+                                        <th>clralias</th>  
+                                        <th>exchid</th>
+                                        <th>sectyp</th>  
+                                        <th>sym</th>
+                                        <th>date</th> 
+                                        <th>matdt</th>
+                                        <th>exch</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr >  
+                                        <td>20170807</td>  
+                                        <td>10%</td> 
+                                        <td>10%</td> 
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>20170807</td>  
+                                        <td>10%</td>
+                                        <td>20170807</td>  
+                                        <td>10%</td> 
+                                        <td>10%</td> 
+                                        <td>1</td> 
+                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>
+                                    </tr>                     
                                 </tbody>
                             </table>
                         </div>

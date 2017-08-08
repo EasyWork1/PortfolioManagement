@@ -4,7 +4,7 @@ $(function(){
 
 });
 
-function getAllManagerInfo() {
+function getAllPortfolioInfo() {
       var http = 'http://localhost:8080/'; 
       $.ajax({
         type: "POST",
@@ -12,9 +12,9 @@ function getAllManagerInfo() {
         dataType: "json",
         url: http+"myportfolio",
         success: function(json) {
-          //打印信息
-        console.log("fundmanager查询返回的数据:"+json);
-        jsonInfo(json);
+              //打印信息
+            console.log("myportfolio查询返回的数据:"+json);
+            jsonInfo(json);
         },
         error: function(json) {
           alert("加载失败");
@@ -26,7 +26,7 @@ function getAllManagerInfo() {
  {
         var data = json;
         for(var i=0;i<data.length;i++){ 
-             addPortfolioRow(data[i].id,data[i].name,data[i].symbols,data[i].Lotvalue,data[i].benefit);
+             addPortfolioRow(data[i].id,data[i].name,data[i].symbols,data[i].lotvalue,data[i].benefit);
         } 
 }
 
@@ -92,6 +92,7 @@ function addStock() {
 }
 
 function deletePortfolio(e){
+    event.stopPropagation(); 
     var portfolioId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
     var http = 'http://localhost:8080/';  
         $.ajax({  
