@@ -45,9 +45,9 @@ public class PortfolioServiceImp implements PortfolioService {
             Portfolio portfolio = new Portfolio();
             portfolio.setFundmanagerid(fundmanagerid);
             portfolio.setName(name);
-//            portfolio.setLotvalue(0d);
-//            portfolio.setSymbols(0);
-//            portfolio.setBenefit(0d);
+            portfolio.setLotvalue(0d);
+            portfolio.setSymbols(0);
+            portfolio.setBenefit(0d);
             if (portfolioMapper.insert(portfolio) != 0){
                 jsonObject = (JSONObject)JSONObject.toJSON(portfolio);
                 jsonObject.put("resultCode",1);
@@ -63,11 +63,14 @@ public class PortfolioServiceImp implements PortfolioService {
     public JSONArray findPortfolioByFundManagerId(Integer fundManagerid) {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Portfolio> portfolios = portfolioMapper.selectByfundManagerId(fundManagerid);
-        for (Portfolio p:portfolios
-             ) {
-            p.setBenefit(calculateLotvalue(p.getId()) - getCost(p.getId()));
-            p.setSymbols(portfolios.size());
-            p.setLotvalue(calculateLotvalue(p.getId()));
+
+        if (!portfolios.isEmpty()){
+            for (Portfolio p:portfolios
+                    ) {
+                p.setBenefit(calculateLotvalue(p.getId()) - getCost(p.getId()));
+                p.setSymbols(portfolios.size());
+                p.setLotvalue(calculateLotvalue(p.getId()));
+            }
         }
         jsonArray = (JSONArray) JSONObject.toJSON(portfolios);
         return jsonArray;
@@ -86,7 +89,7 @@ public class PortfolioServiceImp implements PortfolioService {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
         double benefitSum = 0d;
         double sumCost = 0d;
-        for (Position p :positions ) {
+        for (Position p :positions) {
             benefitSum += getCurrentPrice(p.getSecurityid(),p.getAsset()) * p.getQuantity();
         }
         return benefitSum;

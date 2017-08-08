@@ -156,7 +156,7 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i>Instrument</a>
                     </li>
                     <li class="active">
-                        <a href="fundManager.ftl"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
+                        <a href="FundManager.ftl"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
                     <li>
                         <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
@@ -241,8 +241,9 @@
                             <table class="table table-bordered table-hover table-striped" id="tb_manager">
                                 <thead>
                                     <tr>
+                                        <th>ID</th> 
                                         <th>FirstName</th> 
-                                        <th>Last Name</th> 
+                                        <th>LastName</th> 
                                         <th>Telephone</th> 
                                         <th>Email</th>   
                                         <th>UserName</th> 
@@ -251,16 +252,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id= "myTb">
-                                    <tr id="cloneTr">>
-                                       <td>Amy</td>
-                                       <td>Clark</td>
-                                       <td>13209085678</td>
-                                       <td>amy@qq.com</td>
-                                       <td>amyc</td>
-                                       <td>40040044</td>
-                                       <td><button type="button" class="btn btn-primary btn-sm" >修改</button>
-                                           <button type="button" class="btn btn-primary btn-sm" onclick="deleteManager(this);">删除</button>
-                                       </td>
+                                  
                                                                      
                                 </tbody>
                             </table>

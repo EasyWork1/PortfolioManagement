@@ -18,6 +18,13 @@
     from price
     where symbol = #{symbol,jdbcType=VARCHAR}
   </select>
+  <select id="  selectBySymbolAndDate" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from price
+    where symbol = #{symbol,jdbcType=VARCHAR} and
+          date = #{date,jdbcType=DATE}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from price
     where symbol = #{symbol,jdbcType=VARCHAR}
