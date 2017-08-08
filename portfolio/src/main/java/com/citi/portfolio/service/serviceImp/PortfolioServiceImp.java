@@ -61,16 +61,22 @@ public class PortfolioServiceImp implements PortfolioService {
 
     }
 
-    @Override
     public double calculateBenefit(Integer id) {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
         double benefitSum = 0d;
         double sumCost = 0d;
         for (Position p :positions ) {
             benefitSum += getCurrentPrice(p.getSecurityid(),p.getAsset()) * p.getQuantity();
+        }
+        return benefitSum;
+    }
+    public double getCost(Integer id) {
+        ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
+        double sumCost = 0d;
+        for (Position p :positions ) {
             sumCost += p.getLastprice() * p.getQuantity();
         }
-        return benefitSum/sumCost;
+        return sumCost;
     }
 
     private double getCurrentPrice(String securityid, String asset) {

@@ -10,5 +10,5 @@ import java.util.HashMap;
 public interface PortfolioService {
     JSONObject insertPortfolio(String name,Integer fundmanagerid);
     JSONObject findPortfolioByFundManagerId(Integer fundManagerId);
-    JSONObject calculateBenefit(Integer id);
+
 }
