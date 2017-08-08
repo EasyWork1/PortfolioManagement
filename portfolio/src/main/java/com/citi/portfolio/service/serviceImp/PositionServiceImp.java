@@ -3,10 +3,7 @@ package com.citi.portfolio.service.serviceImp;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.dao.*;
-import com.citi.portfolio.entity.FundManager;
-import com.citi.portfolio.entity.Portfolio;
-import com.citi.portfolio.entity.Position;
-import com.citi.portfolio.entity.PositionHistory;
+import com.citi.portfolio.entity.*;
 import com.citi.portfolio.service.serviceInterface.PositionHistoryService;
 import com.citi.portfolio.service.serviceInterface.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,12 @@ public class PositionServiceImp implements PositionService {
     PortfolioMapper portfolioMapper;
     @Autowired
     PriceMapper priceMapper;
+    @Autowired
+    BondMapper bondMapper;
+    @Autowired
+    StockMapper stockMapper;
+    @Autowired
+    FutureMapper futureMapper;
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
@@ -74,10 +77,29 @@ public class PositionServiceImp implements PositionService {
     }
 
     @Override
+    public JSONArray selectSymbol(String asset, String querysymbol) {
+        JSONArray jsonArray = new JSONArray();
+        if("Bond".equals(asset)) {
+            ArrayList<Bond> bonds = bondMapper.selectBondBySymbol(querysymbol.toUpperCase().trim());
+            jsonArray = (JSONArray) JSONObject.toJSON(bonds.subList(0,9));
+        }
+        if("Stock".equals(asset)){
+            ArrayList<Stock> stocks = stockMapper.selectStockBySymbol(querysymbol.toUpperCase().trim());
+            jsonArray = (JSONArray) JSONObject.toJSON(stocks.subList(0,9));
+        }
+        if ("Future".equals(asset)){
+            ArrayList<Future> futures = futureMapper.selectFutureBySymbol(querysymbol.toUpperCase().trim());
+            jsonArray = (JSONArray) JSONObject.toJSON(futures.subList(0,9));
+        }
+
+        return  jsonArray;
+
+    }
+
+    @Override
     public JSONObject insertPosition(String securityid, String asset, Integer portfolioid,Double quantity) {
         JSONObject jsonObject = new JSONObject();
         int result = 1;
-
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioid);
         if (!positions.isEmpty()) {
             for (Position p : positions
@@ -97,12 +119,17 @@ public class PositionServiceImp implements PositionService {
             position.setQuantity(quantity);
             position.setSecurityid(securityid);
             position.setAsset(asset);
+            position.setBenifit(0d);
             position.setPortfolioid(portfolioid);
             if (positionMapper.insert(position) != 0) {
-                jsonObject = (JSONObject) JSONObject.toJSON(position);
-                if (selectByPortfolioIdAndSecurityId(securityid, portfolioid) != -1) {
-                    jsonObject.put("id", selectByPortfolioIdAndSecurityId(securityid, portfolioid));
-                } else {
+                Integer id = selectByPortfolioIdAndSecurityId(securityid, portfolioid);
+                if (id != -1) {
+                    //add to position history
+                    positionHistoryService.insertPositionHistory(positionMapper.selectByPrimaryKey(id), "buy");
+                    jsonObject = (JSONObject) JSONObject.toJSON(position);
+                    jsonObject.put("id", id);
+                }else{
+                    result=0;
                     jsonObject.put("errorMessage", "insert error");
                 }
             }else {

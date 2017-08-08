@@ -41,6 +41,13 @@
     from stock
     where symbol = #{symbol,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectStockBySymbol" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stock
+    where symbol LIKE '%${querysymbol}%'
+  </select>
   <select id="selectStockDTO" resultMap="StockDTOResultMap">
     select 
     <include refid="StockDTO_Column_List" />

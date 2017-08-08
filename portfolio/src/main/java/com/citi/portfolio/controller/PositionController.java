@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class PositionController {
@@ -18,6 +19,14 @@ public class PositionController {
     PositionService positionService;
     private static Logger logger = Logger.getLogger(PositionController.class);
 
+
+    @RequestMapping("/positionForm")
+    public ModelAndView positionForm() {
+
+        ModelAndView modelAndView = new ModelAndView("fundSub");
+        return modelAndView;
+
+    }
 
     @RequestMapping("/selectAllPositions")
     public String selectAll(@RequestParam(value = "portfolio", required = true)Integer portfolioId) {
@@ -30,7 +39,14 @@ public class PositionController {
         String json = positionService.deletePosition(id).toJSONString();
         return json;
     }
+    @RequestMapping("/searchSecurity")
+    public String insertPosition(@RequestParam(value = "asset", required = true)String asset,
+                                 @RequestParam(value = "querysymbol", required = true)String querysymbol){
+        String json  = positionService.selectSymbol(asset,querysymbol).toJSONString();
+        logger.info("search security "+ json);
+        return  json;
 
+    }
 
     @RequestMapping("/insertPosition")
     public String insertPosition(@RequestParam(value = "securityid", required = true)String securityid,

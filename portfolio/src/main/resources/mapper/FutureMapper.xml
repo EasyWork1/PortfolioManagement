@@ -48,6 +48,13 @@
     from future
     where ClrAlias = #{clralias,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectFutureBySymbol" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from future
+    where ClrAlias LIKE '%${symbol}%'
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from future
     where ClrAlias = #{clralias,jdbcType=VARCHAR}

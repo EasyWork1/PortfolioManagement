@@ -45,6 +45,7 @@ function addStock() {
 
 function searchSymbol() {
     var type = $("#chooseType").val();
+    var querysymbol = $("#searchInput").val();
     document.getElementById("tb_Result").style="display:";
     if (type == "Type") {
     	return false;
@@ -53,7 +54,7 @@ function searchSymbol() {
         $.ajax({  
             type: "POST",  
             url: http+"searchSecurity",  
-            data: {asset:type,symbol:chooseSymbol},  
+            data: {asset:type,querysymbol:querysymbol},
             dataType: "json",  
             timeout: 15000,  
             success: function (data) {  

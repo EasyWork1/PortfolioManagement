@@ -15,8 +15,9 @@ public interface PositionMapper {
 
     ArrayList<Position> selectByPortfolioId(Integer portfolioid);
 
-
     int updateByPrimaryKeySelective(Position record);
 
     int updateByPrimaryKey(Position record);
+
+
 }

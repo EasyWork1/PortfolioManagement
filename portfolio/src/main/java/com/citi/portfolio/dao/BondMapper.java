@@ -15,6 +15,8 @@ public interface BondMapper {
 
     ArrayList<BondDTO> selectBondDTO();
 
+    ArrayList<Bond> selectBondBySymbol(String symbol);
+
     Bond selectByPrimaryKey(String isin);
 
     int updateByPrimaryKeySelective(Bond record);

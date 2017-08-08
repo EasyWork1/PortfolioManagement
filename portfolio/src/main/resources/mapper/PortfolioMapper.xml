@@ -34,7 +34,7 @@
   </select>
   <select id="getCurrentSymbolsByPortfolioId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
     select
-    COUNT (*)
+    COUNT(*) as symbols
     from POSITION
     where portfolioId = #{portfolioid,jdbcType=INTEGER}
   </select>
