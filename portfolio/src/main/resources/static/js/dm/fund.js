@@ -11,6 +11,7 @@ function createPortfolio() {
         return false; 
     } 
     else {
+        $("#myModal").modal('hide');
         var http = 'http://localhost:8080/';  
         $.ajax({  
             type: "POST",  
@@ -21,14 +22,7 @@ function createPortfolio() {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    $("#myModal").modal('hide');
-                    con = "<tr onclick=\"trClick(this)\">";
-                    con += "<td>"+ json.id + "</td>";
-                    con += "<td>"+ json.name + "</td>";
-                    con += "<td>"+ json.fundManagerid + "</td>";
-                    con += "<td>"+ json.benefit + "</td>";
-                    con += "<td><button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button></td></tr>";
-                     $("#tb_Portfolio").append(con);     
+                    addPortfolioRow(json.id,json.name,json.fundManagerid,json.benefit); 
                 } else {
                     alert(json.errorMessage);
                 }
@@ -115,3 +109,18 @@ function getRow(r){
      var i=r.parentNode.parentNode.rowIndex; 
      return i ;
 }
+
+function addPortfolioRow(id,name,fundManagerid,benefit)
+{
+    console.log("add a new row to tb_Portfolio");
+   
+    var tbBody = "<tr onclick=\"trClick(this)\"><td>" + id + "</td>"+"<td>" + name + "</td>"+"<td>" + fundManagerid + "</td>"+"<td>" + benefit ;
+
+    var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
+    tbBody += buttontd;
+    $("#tb_Portfolio").append(tbBody);
+
+}
+
+
+
