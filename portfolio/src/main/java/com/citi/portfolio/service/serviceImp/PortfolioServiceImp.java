@@ -2,6 +2,7 @@ package com.citi.portfolio.service.serviceImp;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.citi.portfolio.controller.FundManagerController;
 import com.citi.portfolio.dao.FundManagerMapper;
 import com.citi.portfolio.dao.PortfolioMapper;
 import com.citi.portfolio.dao.PositionMapper;
@@ -30,27 +31,29 @@ public class PortfolioServiceImp implements PortfolioService {
     @Autowired
     FundManagerMapper fundManagerMapper;
 
+
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(FundManagerController.class);
+
     @Override
     public JSONObject insertPortfolio(String name, Integer fundmanagerid) {
-            JSONObject jsonObject = new JSONObject();
-         jsonObject.put("resultCode",0);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("resultCode",0);
 
-        if (portfolioMapper.selectByName(name).equals(null)){
+        if (portfolioMapper.selectByName(name) != null){
+            jsonObject.put("errorMessage", "The portfolio name has already exist!");
+        }else{
             Portfolio portfolio = new Portfolio();
             portfolio.setFundmanagerid(fundmanagerid);
             portfolio.setName(name);
-            portfolio.setLotvalue(0d);
-            portfolio.setSymbols(0);
-            portfolio.setBenefit(0d);
+//            portfolio.setLotvalue(0d);
+//            portfolio.setSymbols(0);
+//            portfolio.setBenefit(0d);
             if (portfolioMapper.insert(portfolio) != 0){
                 jsonObject = (JSONObject)JSONObject.toJSON(portfolio);
                 jsonObject.put("resultCode",1);
             }else {
                 jsonObject.put("errorMessage", "insert error");
             }
-
-        }else{
-            jsonObject.put("errorMessage", "The portfolio name has already exist!");
         }
             return  jsonObject;
 
@@ -60,6 +63,12 @@ public class PortfolioServiceImp implements PortfolioService {
     public JSONArray findPortfolioByFundManagerId(Integer fundManagerid) {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Portfolio> portfolios = portfolioMapper.selectByfundManagerId(fundManagerid);
+        for (Portfolio p:portfolios
+             ) {
+            p.setBenefit(calculateLotvalue(p.getId()) - getCost(p.getId()));
+            p.setSymbols(portfolios.size());
+            p.setLotvalue(calculateLotvalue(p.getId()));
+        }
         jsonArray = (JSONArray) JSONObject.toJSON(portfolios);
         return jsonArray;
 
@@ -73,7 +82,7 @@ public class PortfolioServiceImp implements PortfolioService {
         return jsonObject;
     }
 
-    public double calculateBenefit(Integer id) {
+    public double calculateLotvalue(Integer id) {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
         double benefitSum = 0d;
         double sumCost = 0d;

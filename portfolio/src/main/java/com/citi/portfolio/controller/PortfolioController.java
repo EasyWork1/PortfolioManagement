@@ -10,13 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/portfolio")
 public class PortfolioController {
 
     @Autowired
     PortfolioService portfolioService;
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(FundManagerController.class);
 
+    @RequestMapping("/portfolioForm")
+    public ModelAndView portfolioForm() {
+
+        ModelAndView modelAndView = new ModelAndView("fund");
+        return modelAndView;
+
+    }
 
     @RequestMapping("/insertPortfolio")
     public String insertPortfolio(@RequestParam(value = "name", required = true) String name,

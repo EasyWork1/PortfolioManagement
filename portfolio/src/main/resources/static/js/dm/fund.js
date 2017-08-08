@@ -22,7 +22,7 @@ function createPortfolio() {
                 var json = eval(data);
                 if (json.resultCode == 1) {
                     // self.location = "fundSub.html";
-                    con = "<tr onclick="trClick(this)">";
+                    con = "<tr onclick=\"trClick(this)\">";
                     con += "<td>"+ json.id + "</td>";
                     con += "<td>"+ json.name + "</td>";
                     con += "<td>"+ json.fundManagerid + "</td>";
