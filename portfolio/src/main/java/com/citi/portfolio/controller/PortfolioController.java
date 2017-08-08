@@ -25,6 +25,12 @@ public class PortfolioController {
         logger.info("insert portfolio "+ json);
         return  json;
     }
+    @RequestMapping("/deletePortfolio")
+    public String insertPortfolio(@RequestParam(value = "id", required = true) Integer id) {
+        String json = portfolioService.deletePortfolio(id).toJSONString();
+        return json;
+
+    }
     @RequestMapping("/myportfolio")
     public String myPortfolio(@RequestParam(value = "fundManagerId", required = true) Integer fundManagerId) {
 

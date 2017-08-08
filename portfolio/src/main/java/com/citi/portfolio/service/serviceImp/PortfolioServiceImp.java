@@ -65,6 +65,14 @@ public class PortfolioServiceImp implements PortfolioService {
 
     }
 
+    @Override
+    public JSONObject deletePortfolio(Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        int result = portfolioMapper.deleteByPrimaryKey(id);
+        jsonObject.put("resultCode",result);
+        return jsonObject;
+    }
+
     public double calculateBenefit(Integer id) {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
         double benefitSum = 0d;

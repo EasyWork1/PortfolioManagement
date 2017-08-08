@@ -11,5 +11,5 @@ import java.util.HashMap;
 public interface PortfolioService {
     JSONObject insertPortfolio(String name,Integer fundmanagerid);
     JSONArray findPortfolioByFundManagerId(Integer fundManagerId);
-
+    JSONObject deletePortfolio(Integer id);
 }
