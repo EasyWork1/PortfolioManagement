@@ -1,14 +1,14 @@
  //获取发布模块类型
     function getModuleInfo() {
+      var http = 'http://localhost:8080/'; 
       $.ajax({
-        type: "GET",
+        type: "POST",
         dataType: "json",
-        url: "../Handler/TestHandler.ashx?Method=GetModuleInfo",
-        //data: { id: id, name: name },
+        url: http+"selectAllFundManagers",
         success: function(json) {
           //打印信息
-          console.log(json);
-          var typeData = json.Module;
+        console.log("fundmanager查询返回的数据"+json);
+          /*var typeData = json.Module;
           $.each(typeData, function(i, n) {
             var tbBody = ""
             var trColor;
@@ -20,7 +20,7 @@
             }
             tbBody += "<tr class='" + trColor + "'><td>" + n.ModuleNum + "</td>" + "<td>" + n.ModuleName + "</td>" + "<td>" + n.ModuleDes + "</td></tr>";
             $("#myTb").append(tbBody);
-          });
+          });*/
         },
         error: function(json) {
           alert("加载失败");
@@ -33,7 +33,7 @@
 
 
 
-$(function(){
+/*$(function(){
     $('#send').click(function(){
          $.ajax({
              type: "GET",
@@ -52,4 +52,4 @@ $(function(){
                       }
          });
     });
-});
+});*/

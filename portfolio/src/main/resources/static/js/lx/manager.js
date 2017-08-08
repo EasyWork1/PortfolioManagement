@@ -37,11 +37,59 @@ function cancelManager()
     changeVisibility2();
 }
 
-function deleteManager()
+var row = 0 ; //定义全局行数用于修改
+//----获取行号-----
+function getRow(r){
+ var i=r.parentNode.parentNode.rowIndex; 
+ return i ;
+}
+function deleteManager(r)
 {
-    console.log("ready to delete a manager");
+    var arr = queryInfoByRow(r);
+    console.log("ready to delete a manager:username"+arr[4]);
+
+   //ajax,向后台发送请求
+   var http = 'http://localhost:8080/';  
+                $.ajax({  
+                    type: "POST",  
+                    url: http+"deleteManager",  
+                    data: { id:15},  
+                    dataType: "json",  
+                    timeout: 15000,  
+                    success: function (data) {  
+                        console.log("删除后台返回的数据："+data);
+                        //解析数据成功才上传
+                        document.getElementById('tb_manager').deleteRow(getRow(r));
+                    },
+                    error: function (xhr, message) {
+
+                        console.log("访问失败");
+                        
+                    }
+                });
+        alert("添加成功！！"); 
 }
 
+//弃用
+function del(obj) {
+    var trId = obj.parentNode.parentNode.id;
+    console.log(trId);
+}
+
+
+//----根据行号查信息----
+function queryInfoByRow(r){
+  
+ var arr = new Array();
+ for(var m=0 ; m<6;m++){
+
+  //这里row要加1，否则就是表头
+  arr[m] = document.getElementById('tb_manager').rows[row+1].cells[m].innerText;
+  console.log(arr[m]);
+ }
+ return arr ; //返回该行数据
+  
+}
 
 function addManager()
 {
@@ -71,7 +119,7 @@ function addManager()
                     dataType: "json",  
                     timeout: 15000,  
                     success: function (data) {  
-                        console.log("后台返回的数据："+data);
+                        console.log("增加后台返回的数据："+data);
                         var tbBody = "<tr><td>" + firstName + "</td>"+"<td>" + lastName + "</td>"+"<td>" + telephone + "</td>"+"<td>" + email + "</td>"+"<td>" + username + "</td>"+"<td>" + password + "</td>" +"</tr>";
                         $("#myTb").append(tbBody);
                     },
@@ -81,15 +129,14 @@ function addManager()
                         
                     }
                 });
-  
-
-        
-
         alert("添加成功！！"); 
     }
     
 
 }
+
+
+
 
 function deleteInputText()
 {
@@ -98,3 +145,16 @@ function deleteInputText()
        document.getElementById("i3").value="";
         document.getElementById("i4").value="";
 }
+
+//网页加载完成后执行该onload事件 
+/*onload = function( ){ 
+    var tbBody="";
+
+    for(var i=0;i<data.length;i++){ 
+   
+    tbBody = "<tr><td>" + data[i].firstName + "</td>"+"<td>" + data[i].lastName + "</td>"+"<td>" + data[i].telephone + "</td>"+"<td>" + data[i].email + "</td>"+"<td>" + data[i].username + "</td>"+"<td>" + data[i].password + "</td>" +"</tr>";
+   
+    $("#myTb").append(tbBody);
+} 
+    
+}; */
