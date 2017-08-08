@@ -21,7 +21,7 @@
 
     <link href="css/height.css" rel="stylesheet">
     <link href="css/fund.css" rel="stylesheet">
-    <script type="text/javascript" src="js/dm/fund.js"></script>
+    <script type="text/javascript" src="js/dm/fundSub.js"></script>
 </head>
 
 <body>
@@ -92,7 +92,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Portfolio
+                            My symbols
                         </h1>
                         
                     </div>
@@ -101,14 +101,14 @@
 
                 <div class="col-lg-6">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-plus fa-fw"></i><span class="network-name">Add stock</span>
+                            <i class="fa fa-plus fa-fw"></i><span class="network-name">Add symbol</span>
                          </button>
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel">Choose a stock</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Choose a symbol</h4>
                                     </div>
                                     <div class="modal-body">
                                         <select class="form-control select-fund" id="chooseType">
@@ -117,18 +117,27 @@
                                             <option>Future</option>
                                             <option>Stock</option>
                                         </select>
-                                        <select class="form-control select-fund" id="chooseDetail">
-                                            <option>stock1</option>
-                                            <option>stock2</option>
-                                            <option>stock3</option>
-                                            <option>stock4</option>
-                                            <option>stock5</option>
-                                        </select>
+                                        <div class="form-group input-group search-group">
+                                             <input type="text" class="form-control" id="searchInput">
+                                             <span class="input-group-btn"><button class="btn btn-default" type="button" onclick="searchSymbol()"><i class="fa fa-search"></i></button></span>
+                                        </div>
+                                        <label style="margin-left: 50px;">quantity:</label>
+                                        <input type="text" id="quantityNum" class="form-control">
+                                        <table id= "tb_Result" class="table table-bordered table-hover table-striped" style="display: none">
+                                            <thead>
+                                                <tr>
+                                                    <th>symbol</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>                   
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary" onclick="addStock()">Add</button>
                                     </div>
+                                    
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal -->
                         </div>
@@ -137,101 +146,22 @@
                          
                         <div>
 
-                            <table id= "tb_Stocks" class="table table-bordered table-hover table-striped">
-                                <label>Stocks</label>
+                            <table id= "tb_Symbol" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
                                         <th>symbol</th> 
-                                        <th>name</th> 
-                                        <th>lastSale</th> 
-                                        <th>marketCap</th>
-                                        <th>IPOyear</th> 
-                                        <th>sector</th> 
-                                        <th>industry</th>
-                                        <th>offerprice</th> 
-                                        <th>bidprice</th> 
-                                        <th>date</th>  
-                                        <th>sector</th>  
+                                        <th>lastprice</th>   
                                         <th>currency</th>
+                                        <th>quantity</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr >  
                                         <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>Demi</td>  
-                                        <td>10%</td> 
-                                        <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>20170807</td>  
-                                        <td>10%</td> 
-                                        <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>20170807</td>  
-                                        <td>10%</td>
-                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>
-                                    </tr>                     
-                                </tbody>
-                            </table>
-                            <table id= "tb_Bonds" class="table table-bordered table-hover table-striped">
-                                <label>Bonds</label>
-                                <thead>
-                                    <tr>
-                                        <th>isin</th> 
-                                        <th>offerprice</th> 
-                                        <th>bidprice</th> 
-                                        <th>maturityyear</th> 
-                                        <th>maturitymonth</th>  
-                                        <th>coupon</th>
-                                        <th>date</th>
-                                        <th>Edit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr >  
-                                        <td>20170807</td>  
-                                        <td>10%</td> 
-                                        <td>10%</td> 
-                                        <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>20170807</td>  
-                                        <td>10%</td>
-                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>
-                                    </tr>                     
-                                </tbody>
-                            </table>
-                            <table id= "tb_Bonds" class="table table-bordered table-hover table-striped">
-                                <label>Futures</label>
-                                <thead>
-                                    <tr>
-                                        <th>bidprice</th> 
-                                        <th>offerprice</th> 
-                                        <th>uomqty</th> 
-                                        <th>desc</th> 
-                                        <th>clralias</th>  
-                                        <th>exchid</th>
-                                        <th>sectyp</th>  
-                                        <th>sym</th>
-                                        <th>date</th> 
-                                        <th>matdt</th>
-                                        <th>exch</th>
-                                        <th>Edit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr >  
-                                        <td>20170807</td>  
-                                        <td>10%</td> 
-                                        <td>10%</td> 
-                                        <td>1</td>  
-                                        <td>aaa</td>  
-                                        <td>20170807</td>  
-                                        <td>10%</td>
-                                        <td>20170807</td>  
-                                        <td>10%</td> 
-                                        <td>10%</td> 
-                                        <td>1</td> 
+                                        <td>Bond</td>  
+                                        <td>USD</td>  
+                                        <td>3</td> 
                                         <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>
                                     </tr>                     
                                 </tbody>

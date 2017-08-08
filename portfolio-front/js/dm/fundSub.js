@@ -1,0 +1,136 @@
+$(function(){
+
+    getAllSymbolInfo();
+});
+
+var chooseSymbol = "";
+
+function getAllSymbolInfo() {
+
+}
+
+function addStock() {
+    $("#myModal").modal('hide');
+    cleanModel();
+	var symbol = $("#searchInput").val();
+	var asset = $("#chooseType").val();
+    var quantity = $("#quantityNum").val();
+    console.log("symbol:"+symbol+"asset:"+asset+"quantity"+quantity);
+	if (symbol.length == 0 || asset == "Type" || quantity.length ==0) {
+        alert("symbol information bad!"); 
+        return false; 
+    } 
+    else {
+        var http = 'http://localhost:8080/';  
+        $.ajax({  
+            type: "POST",  
+            url: http+"insertPosition",  
+            data: {securityid:chooseSymbol,asset:asset,portfolioid:2,quantity:quantity},  
+            dataType: "json",  
+            timeout: 15000,  
+            success: function (data) {  
+                var json = eval(data);
+                if (json.resultCode == 1) {
+                    addSymbolRow(json.securityid,json.lastprice,json.currency,json.quantity); 
+                } else {
+                    alert(json.errorMessage);
+                }
+            },
+            error: function (xhr, message) {
+                alert(message);
+            }
+        });
+    }
+}
+
+function searchSymbol() {
+    var type = $("#chooseType").val();
+    document.getElementById("tb_Result").style="display:";
+    if (type == "Type") {
+    	return false;
+    } else {
+    	var http = 'http://localhost:8080/';  
+        $.ajax({  
+            type: "POST",  
+            url: http+"searchSecurity",  
+            data: {asset:type,symbol:chooseSymbol},  
+            dataType: "json",  
+            timeout: 15000,  
+            success: function (data) {  
+                var json = eval(data);
+                if (json.resultCode == 1) {
+                	$.each(json, function(index, item){
+                		addResultRow(json.symbol);
+                	}); 
+                } else {
+                    alert(json.errorMessage);
+                }
+            },
+            error: function (xhr, message) {
+                alert(message);
+            }
+        });
+    }
+}
+
+function deleteStock(e) {
+	event.stopPropagation();
+    var portfolioId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+    var http = 'http://localhost:8080/';  
+        $.ajax({  
+            type: "POST",  
+            url: http+"deletePortfolio",  
+            data: {id:portfolioId},  
+            dataType: "json",  
+            timeout: 15000,  
+            success: function (data) {  
+                var json = eval(data);
+                if (json.resultCode == 1) {
+                    document.getElementById('tb_fundSub').deleteRow(getRow(e));   
+                } else {
+                    alert(json.errorMessage);
+                }
+            },
+            error: function (xhr, message) {
+                alert(message);
+            }
+        });
+}
+
+function getRow(r){
+     var i=r.parentNode.parentNode.rowIndex; 
+     return i ;
+}
+
+function cleanModel() {
+	$("#tb_Result tr:not(:first)").html("");
+	document.getElementById("tb_Result").style="display:none";
+	document.getElementById("searchInput").value="";
+}
+
+function addResultRow(symbol) {
+	console.log("add a new row to tb_Result");
+   
+    var tbBody = "<tr><td>" + symbol + "</td>";
+
+    var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
+    tbBody += buttontd;
+    $("#tb_Result").append(tbBody);
+}
+
+function addSymbolRow(securityid,lastprice,currency,quantity)
+{
+    console.log("add a new row to tb_fundSub");
+   
+    var tbBody = "<tr \"trClick(this)\"><td>" + securityid + "</td>"+"<td>" + lastprice + "</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+ "</td>";
+
+    var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
+    tbBody += buttontd;
+    $("#tb_fundSub").append(tbBody);
+
+}
+
+function trClick(e) {
+    chooseSymbol = e.children[0].innerHTML;
+}
+

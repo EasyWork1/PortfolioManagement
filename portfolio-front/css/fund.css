@@ -1,5 +1,15 @@
 .select-fund {
-	display: inline;
+	display: inline-flex;
 	width: 120px;
 	margin-right: 20px; 
+}
+
+.search-group {
+	display: inline-flex;
+	width: 200px;
+}
+
+#quantityNum {
+	display: inline-flex;
+	width: 50px;
 }
