@@ -54,7 +54,7 @@ function createPortfolio() {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    addPortfolioRow(json.id,json.name,json.symbols,json.Lotvalue,json.benefit); 
+                    addPortfolioRow(json.id,json.name,json.symbols,json.lotvalue,json.benefit); 
                 } else {
                     alert(json.errorMessage);
                 }
