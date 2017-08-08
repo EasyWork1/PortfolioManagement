@@ -18,7 +18,8 @@
     <link href="css/sb-admin.css" rel="stylesheet">
 
     <link href="css/height.css" rel="stylesheet">
-
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/dm/fund.js"></script>
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
@@ -31,18 +32,18 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">Admin</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Admin</a>
             </div>
             <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
+            <ul class="nav navbar-right top-nav">    
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Smith<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -69,10 +70,10 @@
                     <li >
                         <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="fundEarningExhibition.html"><i class="fa fa-fw fa-edit"></i>Fund Earning Exhibition</a>
                     </li>
-                    <li >
+                    <li class="active">
                         <a href="fund.html"><i class="fa fa-fw fa-table"></i> Portfolio</a>
                     </li>
                     <li>
@@ -91,7 +92,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Fund Earning Exhibition
+                            Portfolio
                         </h1>
                         
                     </div>
@@ -99,27 +100,61 @@
                 <!-- /.row -->
 
                 <div class="col-lg-6">
-
-                        <div class="table-responsive">
-                            <table id= "tb_fundmanager" class="table table-bordered table-hover table-striped">
+                        <div>
+                            <table id= "tb_fundSub" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>FirstName</th> 
-                                        <th>Last Name</th> 
-                                        <th>Telephone</th> 
-                                        <th>Email</th>
-                                        <th>Feature</th>
-                                        
+                                        <th>symbol</th> 
+                                        <th>name</th> 
+                                        <th>lastSale</th> 
+                                        <th>marketCap</th>
+                                        <th>IPOyear</th> 
+                                        <th>sector</th> 
+                                        <th>industry</th> 
+                                        <th>currency</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr id="cloneTr">  
-                                    <td>sa</td>  
-                                    <td>sa</td>  
-                                    <td>19837058234</td>  
-                                    <td>abc@163.com</td>  
-                                    <td>haha</td>           
-                                    </tr>                                    
+                                    <tr >  
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>Demi</td>  
+                                        <td>10%</td> 
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>20170807</td>  
+                                        <td>10%</td>         
+                                    </tr>  
+                                    <tr>  
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>Demi</td>  
+                                        <td>10%</td> 
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>20170807</td>  
+                                        <td>10%</td>          
+                                    </tr>   
+                                    <tr >  
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>Demi</td>  
+                                        <td>10%</td> 
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>20170807</td>  
+                                        <td>10%</td>           
+                                    </tr>
+                                    <tr>  
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>Demi</td>  
+                                        <td>10%</td> 
+                                        <td>1</td>  
+                                        <td>aaa</td>  
+                                        <td>20170807</td>  
+                                        <td>10%</td>           
+                                    </tr>                                   
                                 </tbody>
                             </table>
                         </div>
@@ -136,5 +171,4 @@
     <!-- /#wrapper -->
 
 </body>
-
 </html>

@@ -1,5 +1,8 @@
 package com.citi.portfolio.service.serviceImp;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.dao.FundManagerMapper;
 import com.citi.portfolio.entity.FundManager;
 import com.citi.portfolio.service.serviceInterface.FundManagerService;
@@ -19,10 +22,16 @@ public class FundManagerServiceImp implements FundManagerService {
     @Autowired
     FundManagerMapper fundManagerMapper;
     @Override
-    public HashMap register(String username, String password) {
-        HashMap hashMap = new HashMap();
+    public JSONObject register(String username, String password, String firstName, String lastName, String telephone, String email) {
+        JSONObject jsonObject = new JSONObject();
         FundManager fundManager = new FundManager();
         fundManager.setUsername(username);
+        fundManager.setPassword(password);
+        fundManager.setFirstname(firstName);
+        fundManager.setLastname(lastName);
+        fundManager.setTelephone(telephone);
+        fundManager.setEmail(email);
+
         try {
             fundManager.setPassword(FundManagerUtil.EncoderByMd5(password));
         } catch (NoSuchAlgorithmException e) {
@@ -30,7 +39,7 @@ public class FundManagerServiceImp implements FundManagerService {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        hashMap.put("result",false);
+        jsonObject.put("resultCode",0);
         ArrayList<FundManager> fundManagers = fundManagerMapper.selectByUserName(username);
         if (fundManagers.isEmpty()){
             int result = fundManagerMapper.insert(fundManager);
@@ -39,44 +48,76 @@ public class FundManagerServiceImp implements FundManagerService {
                 fundManagers = fundManagerMapper.selectByUserName(username);
                 if (!fundManagers.isEmpty()){
                     fundManager = fundManagers.get(0);
-                    hashMap.put("fundManager",fundManager);
-                    hashMap.put("result",true);
+                    jsonObject = (JSONObject) JSONObject.toJSON(fundManager);
+                    jsonObject.put("resultCode",1);
                 }
-                hashMap.put("errorMessage","can't find FundManager in DataBase.");
+                else{
+                    jsonObject.put("errorMessage","can't find FundManager in DataBase.");
+                }
+
             }
             else{
-                hashMap.put("errorMessage","insert failed.");
+                jsonObject.put("errorMessage","insert failed.");
             }
 
         }
         else{
-            hashMap.put("errorMessage","username has exsit.");
+            jsonObject.put("errorMessage","username has exsit.");
         }
 
-        return hashMap;
+        return jsonObject;
     }
 
     @Override
-    public HashMap login(String username,String password) {
-        HashMap hashMap = new HashMap();
+    public JSONObject login(String username,String password) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("resultCode",0);
         ArrayList<FundManager> fundManagers = fundManagerMapper.selectByUserName(username);
         if (!fundManagers.isEmpty()){
             FundManager fundManager = fundManagers.get(0);
             try {
                 if (fundManager.getPassword().equals(FundManagerUtil.EncoderByMd5(password))){
-                    hashMap.put("result",true);
-                    hashMap.put("fundManagers",fundManager);
+                    jsonObject = (JSONObject)JSONObject.toJSON(fundManager);
+                    jsonObject.put("resultCode",1);
+                }
+                else{
+                    jsonObject.put("errorMessage","password error.");
                 }
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
+                jsonObject.put("errorMessage","NoSuchAlgorithmException");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
+                jsonObject.put("errorMessage","UnsupportedEncodingException");
             }
 
         }
-        else {
-            hashMap.put("result",false);
-        }
-       return hashMap;
+
+       return jsonObject;
+    }
+
+    @Override
+    public JSONObject selectAll() {
+        JSONObject jsonObject = new JSONObject();
+        ArrayList<FundManager> fundManagers = fundManagerMapper.selectAll();
+        jsonObject = (JSONObject) JSONObject.toJSON(fundManagers);
+        return jsonObject;
+    }
+
+    @Override
+    public JSONObject deleteFundManager(int id) {
+        JSONObject jsonObject = new JSONObject();
+        int result = fundManagerMapper.deleteByPrimaryKey(id);
+        jsonObject.put("resultCode",result);
+        return jsonObject;
+    }
+
+    @Override
+    public JSONObject updateFundManager(String firstName, String lastName, String telephone, String email, String password) {
+        JSONObject jsonObject = new JSONObject();
+        FundManager fundManager = new FundManager(firstName,lastName,telephone,email,password);
+        int resultCode = fundManagerMapper.updateByPrimaryKeySelective(fundManager);
+        jsonObject.put("resultCode",resultCode);
+        return jsonObject;
     }
 }
