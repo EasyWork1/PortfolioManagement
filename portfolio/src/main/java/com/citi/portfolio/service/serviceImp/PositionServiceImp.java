@@ -10,6 +10,7 @@ import com.citi.portfolio.entity.FundManager;
 import com.citi.portfolio.entity.Portfolio;
 import com.citi.portfolio.entity.Position;
 import com.citi.portfolio.entity.PositionHistory;
+import com.citi.portfolio.service.serviceInterface.PositionHistoryService;
 import com.citi.portfolio.service.serviceInterface.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,27 +25,36 @@ public class PositionServiceImp implements PositionService {
     @Autowired
     PositionHistoryMapper positionHistoryMapper;
 
+    PositionHistoryService positionHistoryService;
+
     @Override
     public JSONObject deletePosition(Integer positionId) {
         JSONObject jsonObject = new JSONObject();
-        int result= positionMapper.deleteByPrimaryKey(positionId);
-        jsonObject =(JSONObject) jsonObject.put("resultCode",result);
-        PositionHistory positionHistory = new PositionHistory();
-//        positionHistory.setAsset();
-        positionHistory.setBuyorsell("sell");
-positionHistoryMapper.insert(positionHistory);
+        int result = 0;
+        if (positionHistoryService.insertPositionHistory(positionMapper.selectByPrimaryKey(positionId),"sell")) {
+            result = positionMapper.deleteByPrimaryKey(positionId);
+            if (result == 0){
+                positionHistoryMapper.deleteByPrimaryKey(positionId);
+                jsonObject.put("errorMessage","delete error");
+            }
+        }
+        else {
+            jsonObject.put("errorMessage","delete error :: insert into history error");
+        }
+        jsonObject.put("resultCode", result);
+
         return jsonObject;
     }
-
-    @Override
-    public JSONObject insertPosition(Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid) {
-        JSONObject jsonObject = new JSONObject();
-        Position position = new Position()
-
-        int result= positionMapper.insert()
-        jsonObject =(JSONObject) jsonObject.put("resultCode",result);
-        return jsonObject;
-    }
+//
+//    @Override
+//    public JSONObject insertPosition(Double lastprice, Double quantity, String currency, String securityid, Date datetime, String asset, Integer portfolioid) {
+//        JSONObject jsonObject = new JSONObject();
+//        Position position = new Position();
+//
+//        //int result= positionMapper.insert();
+//        jsonObject =(JSONObject) jsonObject.put("resultCode",result);
+//        return jsonObject;
+//    }
 
 
 //return    public JSONObject addPosition(Integer positionId,Integer portfolioId) {

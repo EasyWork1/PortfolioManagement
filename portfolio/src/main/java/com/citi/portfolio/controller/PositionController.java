@@ -2,6 +2,8 @@ package com.citi.portfolio.controller;
 
 
 
+import com.citi.portfolio.dao.PositionMapper;
+import com.citi.portfolio.service.serviceInterface.PositionService;
 import com.citi.portfolio.service.serviceInterface.StockService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PositionController {
 
-//    @Autowired
-//    Position stockService;
-//    private static Logger logger = Logger.getLogger(PositionController.class);
-//
-//
-//    @RequestMapping("/selectAllStocks")
-//    public String selectAll() {
-//
-//            String json= stockService.selectAllStocks().toJSONString();
-//            return json;
-//
-//    }
-//
+    @Autowired
+    PositionService positionService;
+    private static Logger logger = Logger.getLogger(PositionController.class);
+
+
+    @RequestMapping("/selectAllStocks")
+    public String selectAll() {
+
+            String json= stockService.selectAllStocks().toJSONString();
+            return json;
+
+    }
+
 //    @RequestMapping("/deleteStock")
 //    public String deleteStock(@RequestParam(value = "id", required = true) String id) {
 //

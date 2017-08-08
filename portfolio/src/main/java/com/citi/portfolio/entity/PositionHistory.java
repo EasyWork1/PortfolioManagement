@@ -108,4 +108,19 @@ public class PositionHistory {
     public void setBuyorsell(String buyorsell) {
         this.buyorsell = buyorsell == null ? null : buyorsell.trim();
     }
+
+    @Override
+    public String toString() {
+        return "PositionHistory{" +
+                "id=" + id +
+                ", lastprice=" + lastprice +
+                ", quantity=" + quantity +
+                ", currency='" + currency + '\'' +
+                ", securityid='" + securityid + '\'' +
+                ", datetime=" + datetime +
+                ", asset='" + asset + '\'' +
+                ", portfolioid=" + portfolioid +
+                ", buyorsell='" + buyorsell + '\'' +
+                '}';
+    }
 }

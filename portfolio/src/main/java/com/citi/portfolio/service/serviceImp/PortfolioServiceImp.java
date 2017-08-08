@@ -24,7 +24,7 @@ public class PortfolioServiceImp implements PortfolioService {
     @Autowired
     PriceMapper priceMapper;
 
-    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(FundManagerController.class);
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
     /**
      * @author keira
@@ -67,7 +67,6 @@ public class PortfolioServiceImp implements PortfolioService {
             for (Portfolio p:portfolios
                     ) {
                 p.setBenefit(calculateLotvalue(p.getId()) - getCost(p.getId()));
-                p.setSymbols(portfolios.size());
                 p.setLotvalue(calculateLotvalue(p.getId()));
             }
         }
@@ -81,6 +80,7 @@ public class PortfolioServiceImp implements PortfolioService {
         JSONObject jsonObject = new JSONObject();
         int result = portfolioMapper.deleteByPrimaryKey(id);
         jsonObject.put("resultCode",result);
+        logger.info("delete portfolio: " + id );
         return jsonObject;
     }
 
