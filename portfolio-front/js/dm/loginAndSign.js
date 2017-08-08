@@ -3,7 +3,6 @@ function login() {
     var pass = $("#pwd").val();
     if (user.length == 0 || pass.length == 0) {
         alert("username or password cannot be none!"); 
-        $("#pwd").value() = ""; 
         return false; 
     } 
     else {
@@ -16,10 +15,15 @@ function login() {
                     dataType: "json",  
                     timeout: 15000,  
                     success: function (data) {  
-                        self.location = "index.html";  
+                        var json = eval(data);
+                        if (json.resultCode == 1) {
+                            self.location = "index.html?username="+json.username+"&id="+json.id;
+                        } else {
+                            alert(json.errorMessage);
+                        }
                     },
                     error: function (xhr, message) {
-                        displayError(xhr, message);
+                        alert(message);
                     }
                 });
     }
@@ -45,10 +49,15 @@ function sign() {
                     dataType: "json",  
                     timeout: 15000,  
                     success: function (data) {  
-                        self.location = "login.html";  
+                        var json = eval(data);
+                        if (json.resultCode == 1) {
+                            self.location = "index.html?username="+json.username+"&id="+json.id;
+                        } else {
+                            alert(json.errorMessage);
+                        }
                     },
                     error: function (xhr, message) {
-                        displayError(xhr, message);
+                        alert(message);
                     }
                 });
     }

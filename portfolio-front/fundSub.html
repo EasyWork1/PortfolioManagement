@@ -11,17 +11,16 @@
 
     <title>Admin</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <link href="css/height.css" rel="stylesheet">
     <script src="Scripts/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="js/dm/fund.js"></script>
+    <script src="js/bootstrap.js"></script>
+    
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+     <link href="css/sb-admin.css" rel="stylesheet">
+
+    <link href="css/height.css" rel="stylesheet">
+    <script type="text/javascript" src="js/dm/fund.js"></script>
 </head>
 
 <body>
@@ -100,6 +99,35 @@
                 <!-- /.row -->
 
                 <div class="col-lg-6">
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-plus fa-fw"></i><span class="network-name">Add stock</span>
+                         </button>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Choose a stock</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <select class="form-control" id="stockshow">
+                                            <option>stock1</option>
+                                            <option>stock2</option>
+                                            <option>stock3</option>
+                                            <option>stock4</option>
+                                            <option>stock5</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" onclick="addStock()">Add</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                        
+                        <div>
+                         
                         <div>
                             <table id= "tb_fundSub" class="table table-bordered table-hover table-striped">
                                 <thead>
