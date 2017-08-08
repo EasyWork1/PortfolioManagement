@@ -19,9 +19,11 @@ public interface PortfolioMapper {
 
     ArrayList<Portfolio> selectByfundManagerId(Integer fundmanagerid);
 
+    int getCurrentSymbolsByPortfolioId(Integer portfolioid);
+
     int updateByPrimaryKeySelective(Portfolio record);
 
     int updateByPrimaryKey(Portfolio record);
 
-    ArrayList<MyPortfolio> showMyPofolio(Integer id);
+
 }

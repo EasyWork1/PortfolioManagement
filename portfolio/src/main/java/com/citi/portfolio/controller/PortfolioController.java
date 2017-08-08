@@ -14,7 +14,7 @@ public class PortfolioController {
 
     @Autowired
     PortfolioService portfolioService;
-    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(FundManagerController.class);
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioController.class);
 
     @RequestMapping("/portfolioForm")
     public ModelAndView portfolioForm() {
@@ -32,10 +32,9 @@ public class PortfolioController {
         return  json;
     }
     @RequestMapping("/deletePortfolio")
-    public String insertPortfolio(@RequestParam(value = "id", required = true) Integer id) {
+    public String deletePortfolio(@RequestParam(value = "id", required = true) Integer id) {
         String json = portfolioService.deletePortfolio(id).toJSONString();
         return json;
-
     }
     @RequestMapping("/myportfolio")
     public String myPortfolio(@RequestParam(value = "fundManagerId", required = true) Integer fundManagerId) {
