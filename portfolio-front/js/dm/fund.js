@@ -33,7 +33,7 @@ function getAllPortfolioInfo() {
 function trClick(e) {
     var Id = e.children[0].innerHTML;
     console.log(Id);
-    self.location = "fundSub.html"; 
+    self.location = "http://localhost:8080/positionForm"; 
 }
 
 function createPortfolio() {
@@ -68,27 +68,32 @@ function createPortfolio() {
 
 
 function deletePortfolio(e){
-    event.stopPropagation(); 
-    var portfolioId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
-    var http = 'http://localhost:8080/';  
-        $.ajax({  
-            type: "POST",  
-            url: http+"deletePortfolio",  
-            data: {id:portfolioId},  
-            dataType: "json",  
-            timeout: 15000,  
-            success: function (data) {  
-                var json = eval(data);
-                if (json.resultCode == 1) {
-                    document.getElementById('tb_Portfolio').deleteRow(getRow(e));  
-                } else {
-                    alert(json.errorMessage);
+    event.stopPropagation();
+    var like=window.confirm("Are you sure delete this?");
+　　if(like==true) {
+        var portfolioId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+        var http = 'http://localhost:8080/';  
+            $.ajax({  
+                type: "POST",  
+                url: http+"deletePortfolio",  
+                data: {id:portfolioId},  
+                dataType: "json",  
+                timeout: 15000,  
+                success: function (data) {  
+                    var json = eval(data);
+                    if (json.resultCode == 1) {
+                        document.getElementById('tb_Portfolio').deleteRow(getRow(e));  
+                    } else {
+                        alert(json.errorMessage);
+                    }
+                },
+                error: function (xhr, message) {
+                    alert(message);
                 }
-            },
-            error: function (xhr, message) {
-                alert(message);
-            }
-        });
+            });
+    }
+    else
+        return false;
 }
 
 function getRow(r){

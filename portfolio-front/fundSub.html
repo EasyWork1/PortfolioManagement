@@ -120,10 +120,31 @@
                                         </div>
                                         <label style="margin-left: 50px;">quantity:</label>
                                         <input type="text" id="quantityNum" class="form-control">
-                                        <table id= "tb_Result" class="table table-bordered table-hover table-striped" style="display: none">
+                                        <table id= "tb_Bond" class="table table-bordered table-hover table-striped" style="display: none">
+                                            <thead>
+                                                <tr>
+                                                    <th>isin</th>
+                                                    <th>issuer</th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>                   
+                                            </tbody>
+                                        </table>
+                                        <table id= "tb_Future" class="table table-bordered table-hover table-striped" style="display: none">
+                                            <thead>
+                                                <tr>
+                                                    <th>ClrAlias</th>
+                                                    <th>Sym</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>                   
+                                            </tbody>
+                                        </table>
+                                        <table id= "tb_Stock" class="table table-bordered table-hover table-striped" style="display: none">
                                             <thead>
                                                 <tr>
                                                     <th>symbol</th> 
+                                                    <th>name</th>
                                                 </tr>
                                             </thead>
                                             <tbody>                   
