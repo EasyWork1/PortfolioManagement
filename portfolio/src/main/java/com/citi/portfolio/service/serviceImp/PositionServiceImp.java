@@ -119,7 +119,7 @@ public class PositionServiceImp implements PositionService {
                 }
             }
         }
-        if (result != 1) {
+        if (result == 1) {
             Position position = new Position();
             Calendar calendar = Calendar.getInstance();
             position.setLastprice(priceMapper.selectBySymbolAndDate(securityid,new Date()).getBidprice());
