@@ -68,7 +68,7 @@
 
 
 
-        <table tableName="position" domainObjectName="Position"
+        <table tableName="price" domainObjectName="Price"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

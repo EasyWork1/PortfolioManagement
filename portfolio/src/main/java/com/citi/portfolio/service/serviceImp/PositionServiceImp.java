@@ -113,7 +113,7 @@ public class PositionServiceImp implements PositionService {
         if (result != 1) {
             Position position = new Position();
             Calendar calendar = Calendar.getInstance();
-            position.setLastprice(priceMapper.selectByPrimaryKey(securityid).getBidprice());
+            position.setLastprice(priceMapper.selectBySymbolAndDate(securityid,new Date()).getBidprice());
             position.setCurrency(BAECURRENCY);
             position.setDatetime(calendar.getTime());
             position.setQuantity(quantity);
