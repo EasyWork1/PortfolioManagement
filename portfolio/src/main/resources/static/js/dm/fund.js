@@ -34,7 +34,7 @@ function getAllPortfolioInfo() {
 function trClick(e) {
     var Id = e.children[0].innerHTML;
     console.log(Id);
-    self.location = http+"positionForm"; 
+    self.location = "fundSub.html"; 
 }
 
 function createPortfolio() {
