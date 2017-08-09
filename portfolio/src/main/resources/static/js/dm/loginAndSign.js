@@ -1,13 +1,20 @@
 function login() {
+    console.log("begin to login");
     var user = $("#user").val();
     var pass = $("#pwd").val();
     if (user.length == 0 || pass.length == 0) {
-        alert("username or password cannot be none!");
+        alert("username or password cannot be null!");
         cancel();
         return false; 
     } 
     else {
         
+        if(user=='Admin'&&pass=='123456')
+        {
+            self.location = "FundManager.html";
+        }
+        else
+        {
         var http = 'http://localhost:8080/';  
                 $.ajax({  
                     type: "POST",  
@@ -24,9 +31,10 @@ function login() {
                         }
                     },
                     error: function (xhr, message) {
-                        alert(message);
+                        alert("Access Failure!");
                     }
                 });
+        }
     }
 }
 
@@ -52,7 +60,7 @@ function sign() {
                     success: function (data) {  
                         var json = eval(data);
                         if (json.resultCode == 1) {
-                            self.location = "index.html?username="+json.username+"&id="+json.id;
+                            self.location = "fund.html?username="+json.username+"&id="+json.id;
                         } else {
                             alert(json.errorMessage);
                         }
@@ -67,6 +75,10 @@ function sign() {
 function cancel() {
     document.getElementById("user").value="";
     document.getElementById("pwd").value="";
+} 
+
+function signCancel() {
+    self.location = "login.html";
 } 
 
 

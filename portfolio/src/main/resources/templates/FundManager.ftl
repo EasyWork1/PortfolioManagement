@@ -47,19 +47,31 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Admin</a>
+                <a class="navbar-brand" href="">Admin</a>
             </div>
             <!-- Top Menu Items -->
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>Admin <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a href="login.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
            
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                 
                     <li class="active">
-                        <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> Fund Manager</a>
+                        <a href="FundManager.html"><i class="fa fa-fw fa-user""></i> Fund Manager</a>
                     </li>
                      <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Instrument <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-bar-chart-o"></i> Instrument <i class="fa fa-fw "></i></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="stock.html">Stock</a>
@@ -184,7 +196,7 @@
         </div>
         <!-- /#page-wrapper -->
         <footer  style="float: right;" >
-                <p><h4><font color="white">&copy; Copyright 2017.Java Team 3 All rights reserved.</font></h4></p>
+                <p><h4><font color="white">&copy; Copyright 2017.Team EASYWORK All rights reserved.</font></h4></p>
         </footer> 
 
        </div>

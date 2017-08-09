@@ -1,7 +1,7 @@
 $(function(){
 
-    getAllStockInfo();
-    //jsonInfo();
+    //getAllStockInfo();
+    jsonInfo();
 
 });
 
@@ -35,10 +35,29 @@ function getAllStockInfo() {
       });
  }
 
-  function jsonInfo( json)
+  function jsonInfo( )
  {
-        var data = json;
-       // var data = [{"sector":"1","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"}];
+        //var data = json;
+        var data = [{"sector":"1","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"1","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"2","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"3","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"4","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"5","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"6","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"7","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"8","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"9","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"10","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"11","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"12","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"13","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"14","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"15","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"16","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"17","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        {"sector":"18","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"}
+        ];
         
         for(var i=0;i<data.length;i++){ 
              addRow(data[i].symbol, data[i].name,data[i].marketcap,data[i].ipoyear,data[i].sector,data[i].industry,data[i].bidprice,data[i].offerprice,data[i].date);

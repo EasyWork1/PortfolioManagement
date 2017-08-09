@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>portfolio managerment</title>
+    <title>Portfolio Managerment System</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,7 +29,7 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
                
-                <a class="navbar-brand" href="index.html">portfolio managerment</a>
+                <a class="navbar-brand" href="login.html">Portfolio Managerment</a>
             </div>
         </nav>
     <div class="intro-header">
@@ -64,10 +64,10 @@
                         </div>
                         <ul class="list-inline intro-social-buttons login-btn">
                             <li>
-                                <button class="btn btn-default btn-lg" onclick="sign()"">Sign</button>
+                                <button class="btn btn-default btn-lg" onclick="sign()">Sign</button>
                             </li>
                             <li>
-                                <button class="btn btn-default btn-lg" onclick="signCancel()"">Cancel</button>
+                                <button class="btn btn-default btn-lg" onclick="signCancel()">Cancel</button>
                             </li>
                         </ul>
                         
@@ -75,8 +75,10 @@
                 </div>
             </div>
 
+
         </div>
         <!-- /.container -->
+
 
     </div>
 

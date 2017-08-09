@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>portfolio managerment</title>
+    <title>Portfolio Managerment System</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
                
-                <a class="navbar-brand" href="index.html">portfolio managerment</a>
+                <a class="navbar-brand" href="index.html">Portfolio Managerment</a>
             </div>
         </nav>
         <div class="intro-header">
@@ -47,29 +47,27 @@
                     <div class="col-lg-12">
                         <div class="intro-message">
                             <h1>Landing Page</h1>
-                            <form action="/login">
-                                <div class="list-inline intro-social-buttons ">
-                                    <label class="user">Username</label>
-                                    <input type="text" id="user" placeholder="Username">
-                                </div>
-                                <div class="list-inline intro-social-buttons">
-                                    <label class="pwd">Password</label>
-                                    <input type="password" id="pwd" placeholder="Password">
-                                </div>
-                                <ul class="list-inline intro-social-buttons login-btn">
-                                    <li>
-                                        <button class="btn btn-default btn-lg" onclick="login()">Login</button>
-                                        <#--<input class="btn btn-default btn-lg" type="submit">Login</input>-->
-                                    </li>
-                                    <li>
-                                        <button type="reset" class="btn btn-default btn-lg">Cancel</button>
-                                    </li>
-                                </ul>
-                                <div class="sign-row">
-                                    <label class="nocount">No account?</label>
-                                    <a href="sign.ftl"><span class="sign">Sign</span></a>
-                                </div>
-                            </form>
+                            <div class="list-inline intro-social-buttons "> 
+                                <label class="frontLabel">Username</label>
+                                <input type="text" id="user" placeholder="Username">
+                            </div>
+                            <div class="list-inline intro-social-buttons"> 
+                                <label class="frontLabel">Password</label>
+                                <input type="password" id="pwd" placeholder="Password">
+                            </div>
+                            <ul class="list-inline intro-social-buttons login-btn">
+                                <li>
+                                    <button class="btn btn-default btn-lg" onclick="login()">Login</button>
+                                </li>
+                                <li>
+                                    <button type="reset" class="btn btn-default btn-lg" onclick="cancel()">Cancel</button>
+                                </li>
+                            </ul>
+                            <div class="sign-row">
+                                <label class="nocount">No account?</label>
+                                <a href="sign.html"><span class="sign">Sign</span></a> 
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
