@@ -115,7 +115,7 @@ public class PositionServiceImp implements PositionService {
             Position position = new Position();
             Calendar calendar = Calendar.getInstance();
             position.setLastprice(priceMapper.selectBySymbolAndDate(securityid,new Date()).getBidprice());
-            position.setCurrency(BAECURRENCY);
+            position.setCurrency(BASECURRENCY);
             position.setDatetime(calendar.getTime());
             position.setQuantity(quantity);
             position.setSecurityid(securityid);
