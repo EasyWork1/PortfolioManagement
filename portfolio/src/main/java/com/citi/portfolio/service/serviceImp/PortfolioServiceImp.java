@@ -55,6 +55,7 @@ public class PortfolioServiceImp implements PortfolioService {
                 jsonObject.put("errorMessage", "insert error");
             }
         }
+            logger.info("insert portfolio:" + jsonObject);
             return  jsonObject;
     }
 
@@ -72,6 +73,7 @@ public class PortfolioServiceImp implements PortfolioService {
             }
         }
         jsonArray = (JSONArray) JSONObject.toJSON(portfolios);
+        logger.info("show portfolio:" + jsonArray);
         return jsonArray;
 
     }
@@ -81,7 +83,7 @@ public class PortfolioServiceImp implements PortfolioService {
         JSONObject jsonObject = new JSONObject();
         int result = portfolioMapper.deleteByPrimaryKey(id);
         jsonObject.put("resultCode",result);
-        logger.info("delete portfolio: " + id );
+        logger.info("delete portfolio: " + id + jsonObject);
         return jsonObject;
     }
 

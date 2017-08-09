@@ -59,7 +59,7 @@ public class PositionServiceImp implements PositionService {
             jsonObject.put("errorMessage", "delete error :: insert into history error");
         }
         jsonObject.put("resultCode", result);
-        logger.info("insert position: Id=" + positionId);
+        logger.info("insert position: Id=" + positionId + "~~~~~" + jsonObject);
         return jsonObject;
     }
 
@@ -80,8 +80,10 @@ public class PositionServiceImp implements PositionService {
     public JSONArray selectAllPosition(Integer portfolioId) {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioId);
-        logger.info(JSONObject.toJSON(positions));
+
         jsonArray = (JSONArray) JSONObject.toJSON(positions);
+
+        logger.info("show all positions: " + jsonArray);
         return jsonArray;
     }
 
