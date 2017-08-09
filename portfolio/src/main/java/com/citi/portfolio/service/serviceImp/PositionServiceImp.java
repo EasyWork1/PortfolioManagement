@@ -28,7 +28,7 @@ public class PositionServiceImp implements PositionService {
     @Autowired
     FutureMapper futureMapper;
 
-    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PositionServiceImp.class);
 
     static String BASECURRENCY = "USD";
 
@@ -45,7 +45,9 @@ public class PositionServiceImp implements PositionService {
                 positionHistoryMapper.deleteByPrimaryKey(positionId);
                 jsonObject.put("errorMessage", "delete error");
             }else {
-                portfolio.setSymbols(portfolio.getSymbols() -1);
+                portfolio.setSymbols(portfolio.getSymbols()-1);
+                portfolio.setLotvalue(portfolio.getLotvalue());
+                portfolioMapper.updateByPrimaryKey(portfolio);
             }
         } else {
             jsonObject.put("errorMessage", "delete error :: insert into history error");
@@ -73,6 +75,7 @@ public class PositionServiceImp implements PositionService {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioId);
         logger.info(JSONObject.toJSON(positions));
+        logger.info(portfolioMapper.selectByPrimaryKey(portfolioId).getSymbols());
         jsonArray = (JSONArray) JSONObject.toJSON(positions);
         return jsonArray;
     }
@@ -83,19 +86,19 @@ public class PositionServiceImp implements PositionService {
         if("Bond".equals(asset)) {
             ArrayList<Bond> bonds = bondMapper.selectBondBySymbol(querysymbol.toUpperCase().trim());
             if (!bonds.isEmpty()){
-                jsonArray = (JSONArray) JSONObject.toJSON(bonds.subList(0,9));
+                 jsonArray = (bonds.size()< 9)? (JSONArray)JSONObject.toJSON(bonds):(JSONArray)JSONObject.toJSON(bonds.subList(0,9));
             }
         }
         if("Stock".equals(asset)){
             ArrayList<Stock> stocks = stockMapper.selectStockBySymbol(querysymbol.toUpperCase().trim());
             if (!stocks.isEmpty()){
-                jsonArray = (JSONArray) JSONObject.toJSON(stocks.subList(0,9));
+                jsonArray = (stocks.size()< 9)? (JSONArray)JSONObject.toJSON(stocks):(JSONArray)JSONObject.toJSON(stocks.subList(0,9));
             }
         }
         if ("Future".equals(asset)){
             ArrayList<Future> futures = futureMapper.selectFutureBySymbol(querysymbol.toUpperCase().trim());
             if (!futures.isEmpty()) {
-                jsonArray = (JSONArray) JSONObject.toJSON(futures.subList(0, 9));
+                jsonArray = (futures.size()< 9)? (JSONArray)JSONObject.toJSON(futures):(JSONArray)JSONObject.toJSON(futures.subList(0,9));
             }
         }
 
@@ -137,10 +140,11 @@ public class PositionServiceImp implements PositionService {
                     insertPositionHistory(position, "BUY");
                     jsonObject = (JSONObject) JSONObject.toJSON(position);
                     jsonObject.put("id", id);
-
-                        Portfolio portfolio = portfolioMapper.selectByPrimaryKey(positionMapper.selectByPrimaryKey(id).getPortfolioid());
-                        portfolio.setSymbols(portfolio.getSymbols() -1);
-
+                    //update portfolio information
+                     Portfolio portfolio = portfolioMapper.selectByPrimaryKey(position.getPortfolioid());
+                     portfolio.setSymbols(portfolio.getSymbols() + 1);
+                     portfolio.setLotvalue(portfolio.getLotvalue() + position.getQuantity()*position.getLastprice());
+                     portfolioMapper.updateByPrimaryKey(portfolio);
                 }else{
                     result=0;
                     jsonObject.put("errorMessage", "insert error");
@@ -172,21 +176,9 @@ public class PositionServiceImp implements PositionService {
         positionHistory.setSecurityid(position.getSecurityid());
         positionHistory.setBuyorsell(buyOrSell);
         if (positionHistoryMapper.insert(positionHistory) != 0){
-
-            logger.info("Success insert sell position to positionHistory: PositionHistory{" +
-                    "id=" + positionHistory.getId() +
-                    ", securityid='" + positionHistory.getSecurityid() + '\'' +
-                    ", asset='" + positionHistory.getAsset() + '\'' +
-                    ", portfolioid=" + positionHistory.getPortfolioid() +
-                    '}');
+            logger.info(JSONObject.toJSON(positionHistory));
             return true;
         }
-        logger.info("Fail insert sell position to positionHistory: PositionHistory{" +
-                "id=" + positionHistory.getId() +
-                ", securityid='" + positionHistory.getSecurityid() + '\'' +
-                ", asset='" + positionHistory.getAsset() + '\'' +
-                ", portfolioid=" + positionHistory.getPortfolioid() +
-                '}');
         return false;
     }
 }
