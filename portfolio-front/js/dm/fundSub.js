@@ -12,11 +12,10 @@ function getAllSymbolInfo() {
 function addStock() {
     $("#myModal").modal('hide');
     cleanModel();
-	var symbol = $("#searchInput").val();
 	var asset = $("#chooseType").val();
     var quantity = $("#quantityNum").val();
-    console.log("symbol:"+symbol+"asset:"+asset+"quantity"+quantity);
-	if (symbol.length == 0 || asset == "Type" || quantity.length ==0) {
+    console.log("symbol:"+chooseSymbol+"asset:"+asset+"quantity"+quantity);
+	if (chooseSymbol.length == 0 || asset == "Type" || quantity.length ==0) {
         alert("symbol information bad!"); 
         return false; 
     } 
@@ -45,22 +44,31 @@ function addStock() {
 
 function searchSymbol() {
     var type = $("#chooseType").val();
+    var symbol = $("#searchInput").val();
     document.getElementById("tb_Result").style="display:";
     if (type == "Type") {
+        alert("please choose a type!");
     	return false;
     } else {
     	var http = 'http://localhost:8080/';  
         $.ajax({  
             type: "POST",  
             url: http+"searchSecurity",  
-            data: {asset:type,symbol:chooseSymbol},  
+            data: {asset:type,querysymbol:symbol},  
             dataType: "json",  
             timeout: 15000,  
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
                 	$.each(json, function(index, item){
-                		addResultRow(json.symbol);
+                        if (type == "Bond") {
+                            addResultRow(item.isin);
+                        } else if (type == "Future") {
+                            addResultRow(item.clralias);
+                        } else if (type == "Stock") {
+                            addResultRow(item.symbol);
+                        }
+                		
                 	}); 
                 } else {
                     alert(json.errorMessage);
