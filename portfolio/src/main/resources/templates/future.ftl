@@ -198,7 +198,7 @@
                 </div>
             <!--显示操作的表格-->
             <row>
-               <div class="col-lg-6">
+               <div class="col-lg-10">
 
                         <div>
                             <table id= "table_future" class="table table-bordered table-hover table-striped">
