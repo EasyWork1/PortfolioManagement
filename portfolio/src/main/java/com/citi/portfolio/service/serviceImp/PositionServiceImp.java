@@ -46,6 +46,8 @@ public class PositionServiceImp implements PositionService {
                 jsonObject.put("errorMessage", "delete error");
             }else {
                 portfolio.setSymbols(portfolio.getSymbols() -1);
+                portfolio.setLotvalue(portfolio.getLotvalue() - position.getBenifit()-position.getLastprice()*position.getQuantity());
+                portfolioMapper.updateByPrimaryKey(portfolio);
             }
         } else {
             jsonObject.put("errorMessage", "delete error :: insert into history error");
@@ -140,6 +142,8 @@ public class PositionServiceImp implements PositionService {
 
                         Portfolio portfolio = portfolioMapper.selectByPrimaryKey(positionMapper.selectByPrimaryKey(id).getPortfolioid());
                         portfolio.setSymbols(portfolio.getSymbols() -1);
+                        portfolio.setLotvalue(portfolio.getLotvalue() + position.getLastprice()*position.getQuantity());
+                        portfolioMapper.updateByPrimaryKey(portfolio);
 
                 }else{
                     result=0;
@@ -173,20 +177,9 @@ public class PositionServiceImp implements PositionService {
         positionHistory.setBuyorsell(buyOrSell);
         if (positionHistoryMapper.insert(positionHistory) != 0){
 
-            logger.info("Success insert sell position to positionHistory: PositionHistory{" +
-                    "id=" + positionHistory.getId() +
-                    ", securityid='" + positionHistory.getSecurityid() + '\'' +
-                    ", asset='" + positionHistory.getAsset() + '\'' +
-                    ", portfolioid=" + positionHistory.getPortfolioid() +
-                    '}');
             return true;
         }
-        logger.info("Fail insert sell position to positionHistory: PositionHistory{" +
-                "id=" + positionHistory.getId() +
-                ", securityid='" + positionHistory.getSecurityid() + '\'' +
-                ", asset='" + positionHistory.getAsset() + '\'' +
-                ", portfolioid=" + positionHistory.getPortfolioid() +
-                '}');
+
         return false;
     }
 }
