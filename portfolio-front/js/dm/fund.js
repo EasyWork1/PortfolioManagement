@@ -1,15 +1,37 @@
 $(function(){
-
+    var name = localStorage['username'];
+    $("#user-box").html(name);
    getAllPortfolioInfo();
 
 });
 
 var http = 'http://localhost:8080/';
 
+function updateBenefit() {
+    $.ajax({
+        type: "POST",
+        data:{id:1},
+        dataType: "json",
+        url: http+"calculateBenifit",
+        success: function(json) {
+            if (json.resultCode == 1) {
+                $("#tb_Portfolio tr:not(:first)").html("");
+                getAllPortfolioInfo();
+            }
+            
+        },
+        error: function(json) {
+          alert("load fail");
+        }
+      });
+}
+
+
 function getAllPortfolioInfo() {
+    var fundManagerId = localStorage['fundManagerid'];
       $.ajax({
         type: "POST",
-        data:{fundManagerId:1},
+        data:{fundManagerId:fundManagerId},
         dataType: "json",
         url: http+"myportfolio",
         success: function(json) {
@@ -48,10 +70,11 @@ function createPortfolio() {
     } 
     else {
         $("#myModal").modal('hide');
+        var fundManagerId = localStorage['fundManagerid'];
         $.ajax({  
             type: "POST",  
             url: http+"insertPortfolio",  
-            data: {name:portfolioName,fundManagerId:1},  
+            data: {name:portfolioName,fundManagerId:fundManagerId},  
             dataType: "json",  
             timeout: 15000,  
             success: function (data) {  

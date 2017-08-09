@@ -25,7 +25,9 @@ function login() {
                     success: function (data) {  
                         var json = eval(data);
                         if (json.resultCode == 1) {
-                            self.location = "index.html?username="+json.username+"&id="+json.id;
+                            localStorage['username']=json.username;
+                            localStorage['fundManagerid']=json.id;
+                            self.location = "fund.html";
                         } else {
                             alert(json.errorMessage);
                         }
@@ -60,7 +62,9 @@ function sign() {
                     success: function (data) {  
                         var json = eval(data);
                         if (json.resultCode == 1) {
-                            self.location = "fund.html?username="+json.username+"&id="+json.id;
+                            localStorage['username']=json.username;
+                            localStorage['fundManagerid']=json.id;
+                            self.location = "fund.html";
                         } else {
                             alert(json.errorMessage);
                         }

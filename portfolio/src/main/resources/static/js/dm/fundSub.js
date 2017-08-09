@@ -1,5 +1,6 @@
 $(function(){
-
+    var username = localStorage['username'];
+    $("#user-box").html(username);
     getAllSymbolInfo();
     var name =  localStorage['portfolioName'] ;
     console.log("get name from cookies:"+name);
