@@ -161,7 +161,7 @@ public class FundManagerServiceImp implements FundManagerService {
                 BigDecimal bg = new BigDecimal(benifit).setScale(2, RoundingMode.UP);
                 benifit = bg.doubleValue();
                 position.setBenifit(benifit);
-                result  = positionMapper.updateByPrimaryKeySelective(position);
+                result  = positionMapper.updateByPrimaryKey(position);
                 if (result == 0){
                     jsonObject.put("resultCode",0);
                     return jsonObject;

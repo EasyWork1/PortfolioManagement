@@ -12,4 +12,6 @@ public interface PortfolioService {
     JSONObject insertPortfolio(String name,Integer fundmanagerid);
     JSONArray findPortfolioByFundManagerId(Integer fundManagerId);
     JSONObject deletePortfolio(Integer id);
+    double calculateLotvalue(Integer id);
+    double getCost(Integer id);
 }

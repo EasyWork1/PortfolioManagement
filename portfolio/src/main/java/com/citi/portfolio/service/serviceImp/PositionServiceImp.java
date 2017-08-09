@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.dao.*;
 import com.citi.portfolio.entity.*;
+import com.citi.portfolio.service.serviceInterface.FundManagerService;
+import com.citi.portfolio.service.serviceInterface.PortfolioService;
 import com.citi.portfolio.service.serviceInterface.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,11 @@ public class PositionServiceImp implements PositionService {
     StockMapper stockMapper;
     @Autowired
     FutureMapper futureMapper;
+    @Autowired
+    FundManagerService fundManagerService;
+
+    @Autowired
+    PortfolioService portfolioService;
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
@@ -53,7 +60,9 @@ public class PositionServiceImp implements PositionService {
             }else {
                 portfolio.setSymbols(portfolio.getSymbols() -1);
                 portfolio.setLotvalue(portfolio.getLotvalue() - position.getBenifit()-position.getLastprice()*position.getQuantity());
+                //portfolio.setBenefit(portfolioService.calculateLotvalue(portfolio.getId()) - portfolioService.getCost(portfolio.getId()));
                 portfolioMapper.updateByPrimaryKey(portfolio);
+                fundManagerService.calculateBenifit(portfolio.getFundmanagerid());
             }
         } else {
             jsonObject.put("errorMessage", "delete error :: insert into history error");
@@ -73,6 +82,18 @@ public class PositionServiceImp implements PositionService {
     public JSONArray selectAllPosition(Integer portfolioId) {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioId);
+        for (Position p:positions
+             ) {
+            Calendar calendar = Calendar.getInstance();
+            HashMap hashMap = new HashMap();
+            hashMap.put("symbol",p.getSecurityid());
+            hashMap.put("date",calendar.getTime());
+            Price price = priceMapper.selectBySymbolAndDate(hashMap);
+            if (price != null) {
+                p.setBenifit((price.getOfferprice() - p.getLastprice())*p.getQuantity());
+                positionMapper.updateByPrimaryKey(p);
+            }
+        }
         jsonArray = (JSONArray) JSONObject.toJSON(positions);
         logger.info("show all positions: " + jsonArray);
         return jsonArray;
@@ -153,7 +174,7 @@ public class PositionServiceImp implements PositionService {
             position.setQuantity(quantity);
             position.setSecurityid(securityid);
             position.setAsset(asset);
-            position.setBenifit(0d);
+            position.setBenifit((price.getOfferprice() - price.getBidprice())*quantity);
             position.setPortfolioid(portfolioid);
 
             if (positionMapper.insert(position) != 0) { //insert success
@@ -168,8 +189,9 @@ public class PositionServiceImp implements PositionService {
                 jsonObject = (JSONObject) JSONObject.toJSON(position);
                 Portfolio portfolio = portfolioMapper.selectByPrimaryKey(portfolioid);
                 portfolio.setSymbols(portfolio.getSymbols() + 1);
-                portfolio.setLotvalue(portfolio.getLotvalue() + price.getOfferprice());
+                portfolio.setLotvalue(portfolio.getLotvalue() + price.getOfferprice()*quantity);
                 portfolioMapper.updateByPrimaryKey(portfolio);
+                fundManagerService.calculateBenifit(portfolio.getFundmanagerid());
                 }
             } else {
                 jsonObject.put("errorMessage", "insert error");

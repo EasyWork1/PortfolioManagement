@@ -8,6 +8,7 @@ import com.citi.portfolio.entity.MyPortfolio;
 import com.citi.portfolio.entity.Portfolio;
 import com.citi.portfolio.entity.Position;
 import com.citi.portfolio.entity.Stock;
+import com.citi.portfolio.service.serviceInterface.FundManagerService;
 import com.citi.portfolio.service.serviceInterface.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,8 @@ public class PortfolioServiceImp implements PortfolioService {
     PositionMapper positionMapper;
     @Autowired
     PriceMapper priceMapper;
-
+    @Autowired
+    FundManagerService fundManagerService;
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
     /**
@@ -72,7 +74,9 @@ public class PortfolioServiceImp implements PortfolioService {
                 p.setBenefit(calculateLotvalue(p.getId()) - getCost(p.getId()));
                 p.setSymbols(portfolioMapper.getCurrentSymbolsByPortfolioId(p.getId()));
                 p.setLotvalue(calculateLotvalue(p.getId()));
+                portfolioMapper.updateByPrimaryKey(p);
             }
+            fundManagerService.calculateBenifit(fundManagerid);
         }
         jsonArray = (JSONArray) JSONObject.toJSON(portfolios);
         logger.info("show portfolio:" + jsonArray);
@@ -88,7 +92,7 @@ public class PortfolioServiceImp implements PortfolioService {
         logger.info("delete portfolio: " + id + jsonObject);
         return jsonObject;
     }
-
+    @Override
     public double calculateLotvalue(Integer id) {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
         double benefitSum = 0d;
@@ -101,6 +105,7 @@ public class PortfolioServiceImp implements PortfolioService {
         }
         return benefitSum;
     }
+    @Override
     public double getCost(Integer id) {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
         double sumCost = 0d;
