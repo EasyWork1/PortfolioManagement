@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -156,6 +158,8 @@ public class FundManagerServiceImp implements FundManagerService {
                 double benifit = (offerPrice - lastPrice) * quantity;
                 fundManagerBenifitSum += benifit;
                 portfolioBenifitSum += benifit;
+                BigDecimal bg = new BigDecimal(benifit).setScale(2, RoundingMode.UP);
+                benifit = bg.doubleValue();
                 position.setBenifit(benifit);
                 result  = positionMapper.updateByPrimaryKeySelective(position);
                 if (result == 0){
@@ -164,6 +168,8 @@ public class FundManagerServiceImp implements FundManagerService {
                 }
 
             }
+            BigDecimal bg = new BigDecimal(portfolioBenifitSum).setScale(2, RoundingMode.UP);
+            portfolioBenifitSum = bg.doubleValue();
             portfolio.setBenefit(portfolioBenifitSum);
             result = portfolioMapper.updateByPrimaryKey(portfolio);
             if (result == 0){
@@ -172,6 +178,8 @@ public class FundManagerServiceImp implements FundManagerService {
             }
         }
         FundManager fundManager = fundManagerMapper.selectByPrimaryKey(id);
+        BigDecimal bg = new BigDecimal(fundManagerBenifitSum).setScale(2, RoundingMode.UP);
+        fundManagerBenifitSum = bg.doubleValue();
         fundManager.setBalance(fundManagerBenifitSum);
         result = fundManagerMapper.updateByPrimaryKey(fundManager);
         if (result == 0){

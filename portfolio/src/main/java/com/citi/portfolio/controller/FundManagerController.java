@@ -7,11 +7,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.service.serviceInterface.FundManagerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,21 +29,21 @@ public class FundManagerController {
     private static Logger logger = Logger.getLogger(FundManagerController.class);
 
 
-    @RequestMapping("/showFundManagerForm")
+    @RequestMapping("/funManager.html")
     public ModelAndView addManagerForm() {
 
         ModelAndView modelAndView = new ModelAndView("fundManager");
         return modelAndView;
 
     }
-    @RequestMapping("/loginForm")
+    @RequestMapping("/login.html")
     public ModelAndView loginForm() {
 
         ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
 
     }
-    @RequestMapping("/registerForm")
+    @RequestMapping("/sign.html")
     public ModelAndView registerForm() {
 
         ModelAndView modelAndView = new ModelAndView("sign");
@@ -68,8 +71,9 @@ public class FundManagerController {
     }
 
     @RequestMapping("/login")
-    public String login(@RequestParam(value = "username", required = true) String username,
-                              @RequestParam(value = "password",required = true) String password) {
+    public String login(@CookieValue(value="JSESSIONID") Cookie sessionId,
+                        @RequestParam(value = "username", required = true) String username,
+                        @RequestParam(value = "password",required = true) String password) {
 
         String json  = fundManagerService.login(username,password).toJSONString();
         logger.info("login fundManager: "+ json);

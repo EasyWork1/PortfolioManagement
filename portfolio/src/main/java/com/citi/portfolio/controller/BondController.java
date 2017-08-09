@@ -17,7 +17,7 @@ public class BondController {
     BondService bondService;
     private static Logger logger = Logger.getLogger(BondController.class);
 
-    @RequestMapping("/showBondsForm")
+    @RequestMapping("/bond.html")
     public ModelAndView registerForm() {
 
         ModelAndView modelAndView = new ModelAndView("bond");
