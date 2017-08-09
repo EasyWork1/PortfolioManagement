@@ -115,7 +115,7 @@ function cleanModel() {
 function addResultRow(symbol) {
 	console.log("add a new row to tb_Result");
    
-    var tbBody = "<tr><td>" + symbol + "</td></tr>";
+    var tbBody = "<tr onclick=\"trClick(this)\"><td>" + symbol + "</td></tr>";
     $("#tb_Result").append(tbBody);
 }
 
@@ -123,7 +123,7 @@ function addSymbolRow(securityid,lastprice,currency,quantity)
 {
     console.log("add a new row to tb_fundSub");
    
-    var tbBody = "<tr \"trClick(this)\"><td>" + securityid + "</td>"+"<td>" + lastprice + "</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+ "</td>";
+    var tbBody = "<tr ><td>" + securityid + "</td>"+"<td>" + lastprice + "</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+ "</td>";
 
     var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
     tbBody += buttontd;
@@ -133,5 +133,6 @@ function addSymbolRow(securityid,lastprice,currency,quantity)
 
 function trClick(e) {
     chooseSymbol = e.children[0].innerHTML;
+    console.log("choosesymbol:"+chooseSymbol);
 }
 
