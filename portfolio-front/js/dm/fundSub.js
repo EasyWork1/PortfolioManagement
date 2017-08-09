@@ -9,23 +9,24 @@ function getAllSymbolInfo() {
     var http = 'http://localhost:8080/'; 
       $.ajax({
         type: "POST",
-        data:{fundManagerId:1},
+        data:{portfolioid:2},
         dataType: "json",
         url: http+"selectAllPositions",
         success: function(json) {
               //打印信息
             console.log("myPositions查询返回的数据:"+json);
-            var data = json;
+            var data = eval(json);
             var symbol= "";
-            for(var i=0;i<data.length;i++){ 
-                if (data[i].asset == "Bond") {
-                        symbol=data[i].isin;
-                    } else if (data[i].asset == "Future") {
-                        symbol=data[i].clralias;
-                    } else if (data[i].asset == "Stock") {
-                        symbol=data[i].symbol;
-                    }
-                addSymbolRow(data[i].id,symbol,data[i].lastprice,data[i].currency,data[i].quantity,data[i].asset,data[i].dateTime);
+            for(var i=0;i<data.length;i++){
+                console.log("data:"+i+"("+data[i].securityid+data[i].asset+")");
+                // if (data[i].asset == "Bond") {
+                //         symbol=data[i].isin;
+                //     } else if (data[i].asset == "Future") {
+                //         symbol=data[i].clralias;
+                //     } else if (data[i].asset == "Stock") {
+                //         symbol=data[i].symbol;
+                //     }
+                addSymbolRow(data[i].id,data[i].securityid,data[i].lastprice,data[i].currency,data[i].quantity,data[i].asset,data[i].datetime);
         } 
         },
         error: function(json) {
@@ -55,15 +56,7 @@ function addStock() {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    var symbol = "";
-                    if (json.asset == "Bond") {
-                        symbol=json.isin;
-                    } else if (json.asset == "Future") {
-                        symbol=json.clralias;
-                    } else if (json.asset == "Stock") {
-                        symbol=json.symbol;
-                    }
-                    addSymbolRow(json.id,symbol,json.lastprice,json.currency,json.quantity,json.asset,json.dateTime); 
+                    addSymbolRow(json.id,json.securityid,json.lastprice,json.currency,json.quantity,json.asset,json.datetime);
                 } else {
                     alert(json.errorMessage);
                 }
@@ -124,7 +117,7 @@ function deleteStock(e) {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    document.getElementById('tb_fundSub').deleteRow(getRow(e));   
+                    document.getElementById('tb_Symbol').deleteRow(getRow(e));
                 } else {
                     alert(json.errorMessage);
                 }
@@ -154,13 +147,13 @@ function addResultRow(symbol) {
 
 function addSymbolRow(id,securityid,lastprice,currency,quantity,asset,dateTime)
 {
-    console.log("add a new row to tb_fundSub");
+    console.log("add a new row to tb_Symbol");
    
     var tbBody = "<tr><td>" +id+ "</td>"+"<td>"+ securityid + "</td>"+"<td>" + lastprice + "</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+"</td>"+"<td>"+ asset + "</td>"+"<td>"+dateTime+ "</td>";
 
-    var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
+    var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deleteStock(this)\">delete</button>'+"</td></tr>";
     tbBody += buttontd;
-    $("#tb_fundSub").append(tbBody);
+    $("#tb_Symbol").append(tbBody);
 
 }
 

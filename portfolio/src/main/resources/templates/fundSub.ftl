@@ -70,9 +70,6 @@
                     <li >
                         <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
-                    <li>
-                        <a href="fundEarningExhibition.html"><i class="fa fa-fw fa-edit"></i>Fund Earning Exhibition</a>
-                    </li>
                     <li class="active">
                         <a href="fund.html"><i class="fa fa-fw fa-table"></i> Portfolio</a>
                     </li>
@@ -159,17 +156,7 @@
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr >  
-                                        <td>1</td>  
-                                        <td>Ap</td>
-                                        <td>89</td>  
-                                        <td>USD</td>  
-                                        <td>3</td> 
-                                        <td>Bond</td>  
-                                        <td>2017-08-09</td> 
-                                        <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>
-                                    </tr>                     
+                                <tbody>                    
                                 </tbody>
                             </table>
                         </div>
