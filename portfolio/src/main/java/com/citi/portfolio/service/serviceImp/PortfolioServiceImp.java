@@ -36,17 +36,19 @@ public class PortfolioServiceImp implements PortfolioService {
     public JSONObject insertPortfolio(String name, Integer fundmanagerid) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("resultCode",0);
-        
+
         //check the name is available
         if (portfolioMapper.selectByName(name) != null){
             jsonObject.put("errorMessage", "The portfolio name has already exist!");
         }else{
+            //initialize the portfolio
             Portfolio portfolio = new Portfolio();
             portfolio.setFundmanagerid(fundmanagerid);
             portfolio.setName(name);
             portfolio.setLotvalue(0d);
             portfolio.setSymbols(0);
             portfolio.setBenefit(0d);
+
             if (portfolioMapper.insert(portfolio) != 0){
                 jsonObject = (JSONObject)JSONObject.toJSON(portfolio);
                 jsonObject.put("id",portfolioMapper.selectByName(name).getId());
