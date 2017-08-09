@@ -10,7 +10,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    id, bidPrice,offerPrice,date
+    symbol, bidPrice,offerPrice,date
   </sql>
   <insert id="insert" parameterType="com.citi.portfolio.entity.Price">
     insert into price (symbol, bidPrice, offerPrice, 
@@ -50,7 +50,7 @@
     </trim>
   </insert>
 
-  <select id="  selectBySymbolAndDate" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectBySymbolAndDate" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from price

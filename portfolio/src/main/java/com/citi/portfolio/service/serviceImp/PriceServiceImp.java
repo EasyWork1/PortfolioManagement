@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 @Service
 public class PriceServiceImp implements PriceService {
@@ -19,6 +20,10 @@ public class PriceServiceImp implements PriceService {
     PriceMapper priceMapper;
     @Override
     public Double getOfferPriceBySymbol(String symbol,Date date) {
-        return priceMapper.selectBySymbolAndDate(symbol,date).getOfferprice();
+        HashMap hashMap = new HashMap();
+        hashMap.put("symbol",symbol);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        hashMap.put("date",sqlDate);
+        return priceMapper.selectBySymbolAndDate(hashMap).getOfferprice();
     }
 }

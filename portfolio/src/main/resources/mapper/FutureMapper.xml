@@ -35,11 +35,11 @@
   <sql id="FutureDTO_Column_List">
     ClrAlias, ExchID, Exch, Sym, Desce, SecTyp, MatDt, UOMQty,date,bidPrice,offerPrice
   </sql>
-  <select id="selectFutureDTO" resultMap="FutureDTOResultMap">
+  <select id="selectFutureDTO" resultMap="FutureDTOResultMap" parameterType="java.sql.Date">
     select
     <include refid="FutureDTO_Column_List" />
     from future f,price p
-    where f.ClrAlias = p.symbol
+    where f.ClrAlias = p.symbol and p.date = #{date,jdbcType=DATE}
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class BondServiceImp implements BondService {
@@ -22,7 +23,9 @@ public class BondServiceImp implements BondService {
     @Override
     public JSONArray selectAllBonds() {
         JSONArray json = new JSONArray();
-        ArrayList<BondDTO> bonds = bondMapper.selectBondDTO();
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        ArrayList<BondDTO> bonds = bondMapper.selectBondDTO(sqlDate);
         json = (JSONArray) JSONObject.toJSON(bonds);
         return json;
     }

@@ -40,7 +40,7 @@ function getAllBondInfo() {
         var data = json;
        // var data = [{"offerprice":1.0,"issuer":"1","maturityyear":1,"maturitymonth":"1","bidprice":1.0,"date":1502121600000,"coupon":1.0,"isin":"1"}];
 
-        for(var i=0;i<data.length;i++){ 
+        for(var i=0;i<data.length;i++){
              addRow(data[i].isin, data[i].issuer, data[i].coupon,data[i].maturitymonth,data[i].maturityyear,data[i].bidprice,data[i].offerprice,data[i].date);
         } 
 }

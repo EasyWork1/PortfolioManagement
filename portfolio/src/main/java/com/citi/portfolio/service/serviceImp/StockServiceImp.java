@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class StockServiceImp implements StockService {
@@ -23,7 +24,9 @@ public class StockServiceImp implements StockService {
     @Override
     public JSONArray selectAllStocks() {
         JSONArray json = new JSONArray();
-        ArrayList<StockDTO> stocks = stockMapper.selectStockDTO();
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        ArrayList<StockDTO> stocks = stockMapper.selectStockDTO(sqlDate);
         json = (JSONArray) JSONObject.toJSON(stocks);
         return json;
     }

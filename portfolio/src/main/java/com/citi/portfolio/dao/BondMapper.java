@@ -6,6 +6,7 @@ import com.citi.portfolio.entity.FundManager;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.sql.Date;
 
 public interface BondMapper {
     int deleteByPrimaryKey(String isin);
@@ -14,7 +15,7 @@ public interface BondMapper {
 
     int insertSelective(Bond record);
 
-    ArrayList<BondDTO> selectBondDTO();
+    ArrayList<BondDTO> selectBondDTO(Date date);
 
     ArrayList<Bond> selectBondBySymbol(@Param("querysymbol")String querysymbol);
 

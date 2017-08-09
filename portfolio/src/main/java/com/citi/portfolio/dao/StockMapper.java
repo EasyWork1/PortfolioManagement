@@ -6,6 +6,7 @@ import com.citi.portfolio.entity.Stock;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface StockMapper {
     int deleteByPrimaryKey(String symbol);
@@ -13,7 +14,7 @@ public interface StockMapper {
     int insert(Stock record);
 
     int insertSelective(Stock record);
-    ArrayList<StockDTO> selectStockDTO();
+    ArrayList<StockDTO> selectStockDTO(Date date);
 
     Stock selectByPrimaryKey(String symbol);
 
