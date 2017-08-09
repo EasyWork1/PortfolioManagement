@@ -29,8 +29,11 @@ public class FundManagerServiceImp implements FundManagerService {
 
     @Autowired
     FundManagerMapper fundManagerMapper;
+    @Autowired
     PortfolioMapper portfolioMapper;
+    @Autowired
     PositionMapper positionMapper;
+    @Autowired
     PriceMapper priceMapper;
 
     @Override
@@ -136,6 +139,7 @@ public class FundManagerServiceImp implements FundManagerService {
         ArrayList<Portfolio> portfolios = portfolioMapper.selectByfundManagerId(id);
         double fundManagerBenifitSum = 0;
         double portfolioBenifitSum = 0;
+        int result = 0;
         for (Portfolio portfolio : portfolios) {
             portfolioBenifitSum = 0;
             int porfolioId = portfolio.getId();
@@ -144,21 +148,37 @@ public class FundManagerServiceImp implements FundManagerService {
                 double lastPrice = position.getLastprice();
                 double quantity = position.getQuantity();
                 String securitySymbol = position.getSecurityid();
-                Price price = priceMapper.selectBySymbolAndDate(securitySymbol, new Date());
+                HashMap hashMap = new HashMap();
+                hashMap.put("symbol",securitySymbol);
+                hashMap.put("date",new Date());
+                Price price = priceMapper.selectBySymbolAndDate(hashMap);
                 double offerPrice = price.getOfferprice();
                 double benifit = (offerPrice - lastPrice) * quantity;
                 fundManagerBenifitSum += benifit;
                 portfolioBenifitSum += benifit;
                 position.setBenifit(benifit);
-                positionMapper.updateByPrimaryKeySelective(position);
+                result  = positionMapper.updateByPrimaryKeySelective(position);
+                if (result == 0){
+                    jsonObject.put("resultCode",0);
+                    return jsonObject;
+                }
+
             }
-
             portfolio.setBenefit(portfolioBenifitSum);
-
-
+            result = portfolioMapper.updateByPrimaryKey(portfolio);
+            if (result == 0){
+                jsonObject.put("resultCode",0);
+                return jsonObject;
+            }
         }
-        //TODO:fundmanager add benifit
-        //fundManagerMapper.updateByPrimaryKey()
+        FundManager fundManager = fundManagerMapper.selectByPrimaryKey(id);
+        fundManager.setBalance(fundManagerBenifitSum);
+        result = fundManagerMapper.updateByPrimaryKey(fundManager);
+        if (result == 0){
+            jsonObject.put("resultCode",0);
+            return jsonObject;
+        }
+        jsonObject.put("resultCode",1);
         return jsonObject;
     }
 }

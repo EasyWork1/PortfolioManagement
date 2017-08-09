@@ -160,13 +160,13 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Instrument <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
-                            <a href="selectAllStocks">Stock</a>
+                            <a href="showStocksForm">Stock</a>
                         </li>
                         <li>
-                            <a href="selectAllBonds">Bond</a>
+                            <a href="showBondsForm">Bond</a>
                         </li>
                         <li>
-                            <a href="selectAllFutures">Future</a>
+                            <a href="showFuturesForm">Future</a>
                         </li>
                     </ul>
                 </li>

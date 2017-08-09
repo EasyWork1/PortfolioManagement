@@ -90,7 +90,10 @@ public class PortfolioServiceImp implements PortfolioService {
         double benefitSum = 0d;
         Calendar calendar = Calendar.getInstance();
         for (Position p :positions) {
-            benefitSum += priceMapper.selectBySymbolAndDate(p.getSecurityid(),calendar.getTime()).getOfferprice() * p.getQuantity();
+            HashMap hashMap = new HashMap();
+            hashMap.put("symbol",p.getSecurityid());
+            hashMap.put("date",calendar.getTime());
+            benefitSum += priceMapper.selectBySymbolAndDate(hashMap).getOfferprice() * p.getQuantity();
         }
         return benefitSum;
     }

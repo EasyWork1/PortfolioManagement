@@ -34,11 +34,11 @@
     from bond
     where isin = #{isin,jdbcType=VARCHAR}
   </select>
-  <select id="selectBondDTO" resultMap="BondDTOResultMap">
+  <select id="selectBondDTO" resultMap="BondDTOResultMap" parameterType="java.sql.Date">
     select
     <include refid="BondDTO_Column_List" />
     from bond s,price p
-    where s.isin = p.symbol
+    where s.isin = p.symbol and p.date = #{date,jdbcType=DATE}
   </select>
 
   <select id="selectBondBySymbol" parameterType="java.lang.String" resultMap="BaseResultMap">

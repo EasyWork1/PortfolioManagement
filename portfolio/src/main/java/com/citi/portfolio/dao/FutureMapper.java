@@ -6,6 +6,7 @@ import com.citi.portfolio.entity.Future;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface FutureMapper {
     int deleteByPrimaryKey(String clralias);
@@ -16,7 +17,7 @@ public interface FutureMapper {
 
     Future selectByPrimaryKey(String clralias);
 
-    ArrayList<FutureDTO> selectFutureDTO();
+    ArrayList<FutureDTO> selectFutureDTO(Date date);
 
     ArrayList<Future> selectFutureBySymbol(@Param("querysymbol")String querysymbol);
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class FutureServiceImp implements FutureService {
@@ -20,7 +21,9 @@ public class FutureServiceImp implements FutureService {
     @Override
     public JSONArray selectAllFutures() {
         JSONArray json = new JSONArray();
-        ArrayList<FutureDTO> bonds = futureMapper.selectFutureDTO();
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        ArrayList<FutureDTO> bonds = futureMapper.selectFutureDTO(sqlDate);
         json = (JSONArray) JSONObject.toJSON(bonds);
         return json;
     }

@@ -3,6 +3,7 @@ package com.citi.portfolio.dao;
 import com.citi.portfolio.entity.Price;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public interface PriceMapper {
 
@@ -11,7 +12,7 @@ public interface PriceMapper {
 
     int insertSelective(Price record);
 
-    Price selectBySymbolAndDate(String symbol,Date date);
+    Price selectBySymbolAndDate(HashMap hashMap);
 
 
 }

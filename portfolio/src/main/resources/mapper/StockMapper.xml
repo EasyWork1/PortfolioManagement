@@ -48,11 +48,11 @@
     from stock
     where symbol LIKE '%${querysymbol}%'
   </select>
-  <select id="selectStockDTO" resultMap="StockDTOResultMap">
+  <select id="selectStockDTO" resultMap="StockDTOResultMap" parameterType="java.sql.Date">
     select 
     <include refid="StockDTO_Column_List" />
     from stock s,price p
-    where s.symbol = p.symbol
+    where s.symbol = p.symbol and p.date = #{date,jdbcType=DATE}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from stock
