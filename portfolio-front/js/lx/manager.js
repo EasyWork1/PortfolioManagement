@@ -226,10 +226,11 @@ function modManager(obj){
    
     if(obj.value == "modify"){
                     obj.value = "ok";
-                    operatorCell1.innerHTML ="<input value='"+operatorCell1.innerHTML+"'/>";//把内容变成文本框
-                    operatorCell2.innerHTML ="<input value='"+operatorCell2.innerHTML+"'/>";
-                    operatorCell3.innerHTML ="<input value='"+operatorCell3.innerHTML+"'/>";
-                    operatorCell4.innerHTML ="<input value='"+operatorCell4.innerHTML+"'/>";
+                    operatorCell1.innerHTML ="<input class='form-control' value='"+operatorCell1.innerHTML+"'/>";//把内容变成文本框
+                    operatorCell2.innerHTML ="<input class='form-control' value='"+operatorCell2.innerHTML+"'/>";
+                    operatorCell3.innerHTML ="<input  class='form-control' value='"+operatorCell3.innerHTML+"'/>";
+                    //operatorCell4.innerHTML ="<input value='"+operatorCell4.innerHTML+"'/>";
+                    operatorCell4.innerHTML ="<input class='form-control' value='"+operatorCell4.innerHTML+"'/>";
                     //做修改操作
             }else{
 
@@ -261,8 +262,8 @@ function modManager(obj){
                         var json = eval(data);
                         if (json.resultCode == 1) {
                             alert("Modify Success!"); 
-                            self.location = "showFundManagerForm";
-                            //obj.value = "modify";                          
+                            obj.value = "modify"; 
+                            self.location = "showFundManagerForm";                                                    
                         } else {
                             alert(json.errorMessage);
                         }
@@ -270,7 +271,7 @@ function modManager(obj){
                     },
                     error: function (xhr, message) {
                         alert("Access Failure!");
-
+                        obj.value = "modify"; 
                         console.log("访问失败");
                         
                     }
