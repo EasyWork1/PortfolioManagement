@@ -3,6 +3,7 @@ package com.citi.portfolio.dao;
 import com.citi.portfolio.entity.Bond;
 import com.citi.portfolio.entity.DTO.BondDTO;
 import com.citi.portfolio.entity.FundManager;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public interface BondMapper {
 
     ArrayList<BondDTO> selectBondDTO();
 
-    ArrayList<Bond> selectBondBySymbol(String symbol);
+    ArrayList<Bond> selectBondBySymbol(@Param("querysymbol")String querysymbol);
 
     Bond selectByPrimaryKey(String isin);
 

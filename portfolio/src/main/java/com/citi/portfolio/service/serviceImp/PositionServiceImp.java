@@ -33,7 +33,7 @@ public class PositionServiceImp implements PositionService {
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
-    String BAECURRENCY = "USD";
+    static String BASECURRENCY = "USD";
 
     PositionHistoryService positionHistoryService;
 
@@ -81,6 +81,7 @@ public class PositionServiceImp implements PositionService {
         JSONArray jsonArray = new JSONArray();
         if("Bond".equals(asset)) {
             ArrayList<Bond> bonds = bondMapper.selectBondBySymbol(querysymbol.toUpperCase().trim());
+            logger.info(bonds.get(0).getIsin());
             jsonArray = (JSONArray) JSONObject.toJSON(bonds.subList(0,9));
         }
         if("Stock".equals(asset)){
@@ -114,7 +115,7 @@ public class PositionServiceImp implements PositionService {
             Position position = new Position();
             Calendar calendar = Calendar.getInstance();
             position.setLastprice(priceMapper.selectByPrimaryKey(securityid).getBidprice());
-            position.setCurrency(BAECURRENCY);
+            position.setCurrency(BASECURRENCY);
             position.setDatetime(calendar.getTime());
             position.setQuantity(quantity);
             position.setSecurityid(securityid);

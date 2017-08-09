@@ -40,11 +40,12 @@
     from bond s,price p
     where s.isin = p.symbol
   </select>
+
   <select id="selectBondBySymbol" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from bond
-    where isin LIKE '%${symbol}%'
+    where isin LIKE '%${querysymbol}%'
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from bond
