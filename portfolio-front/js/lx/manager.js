@@ -231,7 +231,7 @@ function modManager(obj){
                     operatorCell3.innerHTML ="<input  style='width:12px' class='form-control' value='"+operatorCell3.innerHTML+"'/>";
                     //operatorCell4.innerHTML ="<input value='"+operatorCell4.innerHTML+"'/>";
                     operatorCell4.innerHTML ="<input style='width:140px' class='form-control' value='"+operatorCell4.innerHTML+"'/>";
-                    //做修改操作
+                    
             }else{
 
                     var firstname = operatorCell1.getElementsByTagName("input")[0].value;
