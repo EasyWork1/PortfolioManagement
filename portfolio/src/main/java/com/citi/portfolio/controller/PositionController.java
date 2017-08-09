@@ -29,7 +29,7 @@ public class PositionController {
     }
 
     @RequestMapping("/selectAllPositions")
-    public String selectAll(@RequestParam(value = "portfolio", required = true)Integer portfolioId) {
+    public String selectAll(@RequestParam(value = "portfolioid", required = true)Integer portfolioId) {
             String json= positionService.selectAllPosition(portfolioId).toJSONString();
             return json;
     }

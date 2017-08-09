@@ -46,6 +46,9 @@ public class PositionServiceImp implements PositionService {
             if (result == 0) {
                 positionHistoryMapper.deleteByPrimaryKey(positionId);
                 jsonObject.put("errorMessage", "delete error");
+            }else {
+                Portfolio portfolio = portfolioMapper.selectByPrimaryKey(positionMapper.selectByPrimaryKey(positionId).getPortfolioid());
+                portfolio.setSymbols(portfolio.getSymbols() -1);
             }
         } else {
             jsonObject.put("errorMessage", "delete error :: insert into history error");
@@ -120,7 +123,7 @@ public class PositionServiceImp implements PositionService {
             Position position = new Position();
             Calendar calendar = Calendar.getInstance();
             position.setLastprice(priceMapper.selectBySymbolAndDate(securityid,new Date()).getBidprice());
-            position.setCurrency(BAECURRENCY);
+            position.setCurrency(BASECURRENCY);
             position.setDatetime(calendar.getTime());
             position.setQuantity(quantity);
             position.setSecurityid(securityid);
@@ -134,6 +137,10 @@ public class PositionServiceImp implements PositionService {
                     positionHistoryService.insertPositionHistory(positionMapper.selectByPrimaryKey(id), "buy");
                     jsonObject = (JSONObject) JSONObject.toJSON(position);
                     jsonObject.put("id", id);
+
+                        Portfolio portfolio = portfolioMapper.selectByPrimaryKey(positionMapper.selectByPrimaryKey(id).getPortfolioid());
+                        portfolio.setSymbols(portfolio.getSymbols() -1);
+
                 }else{
                     result=0;
                     jsonObject.put("errorMessage", "insert error");
