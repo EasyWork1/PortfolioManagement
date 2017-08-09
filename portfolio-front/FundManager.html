@@ -182,7 +182,7 @@
 
                 <!-- Page Heading -->
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-9">
                         <h1 class="page-header">
                             FundManager
                         </h1>
@@ -191,44 +191,46 @@
                 </div>
                 <!-- /.row -->
 
-                <row>
-                     <div class="btn-group" role="group" aria-label="...">
+                <row class="col-lg-9">
+                     <div class="btn-group" role="group" aria-label="..." >
                             <button type="button" class="btn btn-primary btn-sm" id="add_btn" onclick="changeVisibility()">
                             <span class="glyphicon glyphicon-plus"></span>Add a New Manager
                             </button>
                           
                      </div>
-                </row>                    
+                </row>    
+
+                <br/>                
 
                 <row>
-                     <div id="add_edit_div" style="display: none">
+                     <div id="add_edit_div" style="display: none" class="col-lg-10">
 
-                     <table id="stuRecordTable" >
+                     <table  >
                      <tr>
-                         <th style="width:210px; height:70px">
+                         <th style="width:150px; height:70px">
                                 <label>First Name</label>
-                                <input class="form-control" style="width:200px;" id="i1">                           
+                                <input class="form-control" style="width:140px;" id="i1">                           
                         </th> 
-                         <th style="width:210px;">
+                         <th style="width:150px;">
                                 <label>Last Name</label>
-                                <input class="form-control" style="width:200px;" id="i2">                           
+                                <input class="form-control" style="width:140px;" id="i2">                           
                          </th>
-                         <th style="width:210px;">
+                         <th style="width:150px;">
                                 <label>Telephone</label>
-                                <input class="form-control" style="width:200px;" id="i3">                           
+                                <input class="form-control" style="width:140px;" id="i3">                           
                         </th>
                      
-                         <th style="width:210px; height:70px">
+                         <th style="width:150px; height:70px">
                                 <label>Email</label>
-                                <input class="form-control" style="width:200px;" id="i4">
+                                <input class="form-control" style="width:140px;" id="i4">
                          </th>
-                         <th style="width:210px; height:70px">
+                         <th style="width:150px; height:70px">
                                 <label>User Name</label>
-                                <input class="form-control" style="width:200px;" id="i5">
+                                <input class="form-control" style="width:140px;" id="i5">
                          </th>
-                         <th style="width:210px; height:70px">
+                         <th style="width:150px; height:70px">
                                 <label>Password</label>
-                                <input class="form-control" style="width:200px;" id="i6">
+                                <input class="form-control" style="width:140px;" id="i6">
                           </th>
                      </tr>
                      <tr>
@@ -242,13 +244,13 @@
                     
                       
                     </table>
-                    <br/>
+                    
                     </div>  
                 </row>
                 <br/>
 
                 <row >
-                     <div class="col-lg-6"> 
+                     <div class="col-lg-12"> 
 
                         <div>
                             <table class="table table-bordered table-hover table-striped" id="tb_manager">

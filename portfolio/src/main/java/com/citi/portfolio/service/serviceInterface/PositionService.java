@@ -14,6 +14,7 @@ public interface PositionService {
     JSONObject insertPosition(String securityid, String asset, Integer portfolioid,Double quantity) ;
     Integer selectByPortfolioIdAndSecurityId(String securityid, Integer portfolioid);
     JSONArray selectAllPosition(Integer portfolioId);
+    JSONArray selectSymbol(String asset, String querysymbol);
 
 }
 

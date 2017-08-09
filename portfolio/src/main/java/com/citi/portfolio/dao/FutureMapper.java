@@ -17,6 +17,8 @@ public interface FutureMapper {
 
     ArrayList<FutureDTO> selectFutureDTO();
 
+    ArrayList<Future> selectFutureBySymbol(String symbol);
+
     int updateByPrimaryKeySelective(Future record);
 
     int updateByPrimaryKey(Future record);
