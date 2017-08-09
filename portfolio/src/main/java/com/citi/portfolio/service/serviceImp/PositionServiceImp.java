@@ -33,6 +33,11 @@ public class PositionServiceImp implements PositionService {
 
     static String BASECURRENCY = "USD";
 
+    /**
+     *
+     * @param positionId
+     * @return JSONObject of resultCode , if error occurs, add errorMessage information
+     */
     @Override
     public JSONObject deletePosition(Integer positionId) {
         JSONObject jsonObject = new JSONObject();
@@ -126,34 +131,40 @@ public class PositionServiceImp implements PositionService {
             HashMap hashMap = new HashMap();
             hashMap.put("symbol",securityid);
             hashMap.put("date",calendar.getTime());
-            position.setLastprice(priceMapper.selectBySymbolAndDate(hashMap).getBidprice());
-            position.setCurrency(BASECURRENCY);
-            position.setDatetime(calendar.getTime());
-            position.setQuantity(quantity);
-            position.setSecurityid(securityid);
-            position.setAsset(asset);
-            position.setBenifit(0d);
-            position.setPortfolioid(portfolioid);
-            if (positionMapper.insert(position) != 0) {
-                Integer id = selectByPortfolioIdAndSecurityId(securityid, portfolioid);
-                position.setId(id);
-                if (id != -1) {
-                    //add to position history
-                    insertPositionHistory(position, "BUY");
-                    jsonObject = (JSONObject) JSONObject.toJSON(position);
-                    jsonObject.put("id", id);
+            if(priceMapper.selectBySymbolAndDate(hashMap)==null){
+                result = 0;
+                jsonObject.put("errorMessage", "not update price yet!");
+            }
+            else {
+                position.setLastprice(priceMapper.selectBySymbolAndDate(hashMap).getBidprice());
+                position.setCurrency(BASECURRENCY);
+                position.setDatetime(calendar.getTime());
+                position.setQuantity(quantity);
+                position.setSecurityid(securityid);
+                position.setAsset(asset);
+                position.setBenifit(0d);
+                position.setPortfolioid(portfolioid);
+                if (positionMapper.insert(position) != 0) {
+                    Integer id = selectByPortfolioIdAndSecurityId(securityid, portfolioid);
+                    position.setId(id);
+                    if (id != -1) {
+                        //add to position history
+                        insertPositionHistory(position, "BUY");
+                        jsonObject = (JSONObject) JSONObject.toJSON(position);
+                        jsonObject.put("id", id);
 
                         Portfolio portfolio = portfolioMapper.selectByPrimaryKey(positionMapper.selectByPrimaryKey(id).getPortfolioid());
                         portfolio.setSymbols(portfolio.getSymbols() + 1);
                         portfolio.setLotvalue(portfolio.getLotvalue() + priceMapper.selectBySymbolAndDate(hashMap).getOfferprice());
                         portfolioMapper.updateByPrimaryKey(portfolio);
 
-                }else{
-                    result=0;
+                    } else {
+                        result = 0;
+                        jsonObject.put("errorMessage", "insert error");
+                    }
+                } else {
                     jsonObject.put("errorMessage", "insert error");
                 }
-            }else {
-                jsonObject.put("errorMessage", "insert error");
             }
 
         }

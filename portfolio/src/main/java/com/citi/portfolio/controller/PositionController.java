@@ -20,7 +20,7 @@ public class PositionController {
     private static Logger logger = Logger.getLogger(PositionController.class);
 
 
-    @RequestMapping("/positionForm")
+    @RequestMapping("/fundSub.html")
     public ModelAndView positionForm() {
 
         ModelAndView modelAndView = new ModelAndView("fundSub");

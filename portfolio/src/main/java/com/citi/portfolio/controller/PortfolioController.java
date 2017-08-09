@@ -16,7 +16,7 @@ public class PortfolioController {
     PortfolioService portfolioService;
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioController.class);
 
-    @RequestMapping("/portfolioForm")
+    @RequestMapping("/fund.html")
     public ModelAndView portfolioForm() {
 
         ModelAndView modelAndView = new ModelAndView("fund");
