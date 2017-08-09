@@ -8,9 +8,10 @@ $(function(){
 var http = 'http://localhost:8080/';
 
 function updateBenefit() {
+    var fundManagerId = localStorage['fundManagerid'];
     $.ajax({
         type: "POST",
-        data:{id:1},
+        data:{id:fundManagerId},
         dataType: "json",
         url: http+"calculateBenifit",
         success: function(json) {
