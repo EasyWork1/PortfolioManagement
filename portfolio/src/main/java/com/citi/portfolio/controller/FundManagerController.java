@@ -71,8 +71,7 @@ public class FundManagerController {
     }
 
     @RequestMapping("/login")
-    public String login(@CookieValue(value="JSESSIONID") Cookie sessionId,
-                        @RequestParam(value = "username", required = true) String username,
+    public String login(@RequestParam(value = "username", required = true) String username,
                         @RequestParam(value = "password",required = true) String password) {
 
         String json  = fundManagerService.login(username,password).toJSONString();
@@ -81,8 +80,9 @@ public class FundManagerController {
 
     }
     @RequestMapping("/selectAllFundManagers")
-    public String selectAll() {
+    public String selectAll(HttpSession session) {
 
+        System.out.print(session.getAttribute("username"));
         String json= fundManagerService.selectAll().toJSONString();
         logger.info("select all fundManager: "+ json);
         return json;

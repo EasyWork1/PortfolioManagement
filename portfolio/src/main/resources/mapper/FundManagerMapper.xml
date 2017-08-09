@@ -25,7 +25,7 @@
   <select id="selectAll" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />
-    from fundmanager ORDER BY balance DESC
+    from fundmanager ORDER BY balance
   </select>
   <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
