@@ -59,20 +59,16 @@ function searchSymbol() {
             timeout: 15000,  
             success: function (data) {  
                 var json = eval(data);
-                if (json.resultCode == 1) {
-                	$.each(json, function(index, item){
-                        if (type == "Bond") {
-                            addResultRow(item.isin);
-                        } else if (type == "Future") {
-                            addResultRow(item.clralias);
-                        } else if (type == "Stock") {
-                            addResultRow(item.symbol);
-                        }
-                		
-                	}); 
-                } else {
-                    alert(json.errorMessage);
-                }
+            	$.each(json, function(index, item){
+                    if (type == "Bond") {
+                        addResultRow(item.isin);
+                    } else if (type == "Future") {
+                        addResultRow(item.clralias);
+                    } else if (type == "Stock") {
+                        addResultRow(item.symbol);
+                    }
+            		
+            	}); 
             },
             error: function (xhr, message) {
                 alert(message);
