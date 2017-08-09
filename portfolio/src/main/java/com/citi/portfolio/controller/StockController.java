@@ -17,7 +17,7 @@ public class StockController {
     StockService stockService;
     private static Logger logger = Logger.getLogger(StockController.class);
 
-    @RequestMapping("/showStocksForm")
+    @RequestMapping("/stock.html")
     public ModelAndView registerForm() {
 
         ModelAndView modelAndView = new ModelAndView("stock");

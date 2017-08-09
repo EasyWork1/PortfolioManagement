@@ -18,7 +18,7 @@ public class FutureController {
     private static Logger logger = Logger.getLogger(FutureController.class);
 
 
-    @RequestMapping("/showFuturesForm")
+    @RequestMapping("/future.html")
     public ModelAndView registerForm() {
 
         ModelAndView modelAndView = new ModelAndView("future");
