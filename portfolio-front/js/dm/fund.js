@@ -1,11 +1,12 @@
 $(function(){
 
     getAllPortfolioInfo();
-
+    var http = 'http://localhost:8080/';
 });
 
+
+
 function getAllPortfolioInfo() {
-      var http = 'http://localhost:8080/'; 
       $.ajax({
         type: "POST",
         data:{fundManagerId:1},
@@ -33,7 +34,7 @@ function getAllPortfolioInfo() {
 function trClick(e) {
     var Id = e.children[0].innerHTML;
     console.log(Id);
-    self.location = "http://localhost:8080/positionForm"; 
+    self.location = http+"fundSub.html"; 
 }
 
 function createPortfolio() {
@@ -44,7 +45,6 @@ function createPortfolio() {
     } 
     else {
         $("#myModal").modal('hide');
-        var http = 'http://localhost:8080/';  
         $.ajax({  
             type: "POST",  
             url: http+"insertPortfolio",  
@@ -72,7 +72,6 @@ function deletePortfolio(e){
     var like=window.confirm("Are you sure delete this?");
 　　if(like==true) {
         var portfolioId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
-        var http = 'http://localhost:8080/';  
             $.ajax({  
                 type: "POST",  
                 url: http+"deletePortfolio",  

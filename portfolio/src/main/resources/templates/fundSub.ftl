@@ -65,16 +65,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i>Instrument</a>
+                        <a href=http+"index.html"><i class="fa fa-fw fa-dashboard"></i>Instrument</a>
                     </li>
                     <li >
-                        <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
+                        <a href=http+"FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
                     <li class="active">
-                        <a href="fund.html"><i class="fa fa-fw fa-table"></i> Portfolio</a>
+                        <a href=http+"fund.html"><i class="fa fa-fw fa-table"></i> Portfolio</a>
                     </li>
                     <li>
-                        <a href="history.html"><i class="fa fa-fw fa-desktop"></i> History</a>
+                        <a href=http+"history.html"><i class="fa fa-fw fa-desktop"></i> History</a>
                     </li>
                 </ul>
             </div>
@@ -134,7 +134,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>ClrAlias</th>
-                                                    <th>Sym</th>
+                                                    <th>Exch</th>
                                                 </tr>
                                             </thead>
                                             <tbody>                   
