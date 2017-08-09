@@ -68,9 +68,6 @@
                     <li >
                         <a href="FundManager.html"><i class="fa fa-fw fa-bar-chart-o"></i> FundManager</a>
                     </li>
-                    <li>
-                        <a href="fundEarningExhibition.html"><i class="fa fa-fw fa-edit"></i>Fund Earning Exhibition</a>
-                    </li>
                     <li class="active">
                         <a href="fund.html"><i class="fa fa-fw fa-table"></i> Portfolio</a>
                     </li>
@@ -133,15 +130,7 @@
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr onclick="trClick(this)">  
-                                        <td >1</td>  
-                                        <td>aaa</td>  
-                                        <td>3</td>
-                                        <td>9</td>
-                                        <td>10%</td> 
-                                        <td><button class="btn btn-primary btn-sm" onclick="deletePortfolio(this)">delete</button></td>         
-                                    </tr>                                    
+                                <tbody>                                  
                                 </tbody>
                             </table>
                         </div>
