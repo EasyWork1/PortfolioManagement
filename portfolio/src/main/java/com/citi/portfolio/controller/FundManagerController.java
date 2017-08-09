@@ -29,7 +29,7 @@ public class FundManagerController {
     private static Logger logger = Logger.getLogger(FundManagerController.class);
 
 
-    @RequestMapping("/funManager.html")
+    @RequestMapping("/FundManager.html")
     public ModelAndView addManagerForm() {
 
         ModelAndView modelAndView = new ModelAndView("fundManager");

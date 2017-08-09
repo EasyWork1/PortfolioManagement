@@ -6,10 +6,11 @@ $(function(){
 var chooseSymbol = "";
 
 function getAllSymbolInfo() {
-    var http = 'http://localhost:8080/'; 
+    var http = 'http://localhost:8080/';
+    var Id =  getCookie("portfolioid");
       $.ajax({
         type: "POST",
-        data:{portfolioid:2},
+        data:{portfolioid:Id},
         dataType: "json",
         url: http+"selectAllPositions",
         success: function(json) {
@@ -40,10 +41,11 @@ function addStock() {
     } 
     else {
         var http = 'http://localhost:8080/';  
+        var Id =  getCookie("portfolioid");
         $.ajax({  
             type: "POST",  
             url: http+"insertPosition",  
-            data: {securityid:chooseSymbol,asset:asset,portfolioid:2,quantity:quantity},  
+            data: {securityid:chooseSymbol,asset:asset,portfolioid:Id,quantity:quantity},  
             dataType: "json",  
             timeout: 15000,  
             success: function (data) {  
@@ -196,5 +198,21 @@ function trClick(e) {
      }  
     }  
 
+}
+
+function getCookie(c_name)
+{
+    if (document.cookie.length>0)
+      {
+      c_start=document.cookie.indexOf(c_name + "=")
+      if (c_start!=-1)
+        { 
+        c_start=c_start + c_name.length+1 
+        c_end=document.cookie.indexOf(";",c_start)
+        if (c_end==-1) c_end=document.cookie.length
+        return unescape(document.cookie.substring(c_start,c_end))
+        } 
+      }
+    return ""
 }
 
