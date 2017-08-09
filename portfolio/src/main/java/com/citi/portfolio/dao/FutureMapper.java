@@ -3,6 +3,7 @@ package com.citi.portfolio.dao;
 import com.citi.portfolio.entity.DTO.BondDTO;
 import com.citi.portfolio.entity.DTO.FutureDTO;
 import com.citi.portfolio.entity.Future;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public interface FutureMapper {
 
     ArrayList<FutureDTO> selectFutureDTO();
 
-    ArrayList<Future> selectFutureBySymbol(String symbol);
+    ArrayList<Future> selectFutureBySymbol(@Param("querysymbol")String querysymbol);
 
     int updateByPrimaryKeySelective(Future record);
 
