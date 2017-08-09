@@ -1,5 +1,7 @@
 package com.citi.portfolio.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class Position {
@@ -13,6 +15,7 @@ public class Position {
 
     private String securityid;
 
+    @JSONField(format="yyyy-MM-dd")
     private Date datetime;
 
     private String asset;

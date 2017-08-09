@@ -72,6 +72,7 @@ public class PositionServiceImp implements PositionService {
     public JSONArray selectAllPosition(Integer portfolioId) {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioId);
+        logger.info(JSONObject.toJSON(positions));
         jsonArray = (JSONArray) JSONObject.toJSON(positions);
         return jsonArray;
     }
