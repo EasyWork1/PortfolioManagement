@@ -6,7 +6,32 @@ $(function(){
 var chooseSymbol = "";
 
 function getAllSymbolInfo() {
-
+    var http = 'http://localhost:8080/'; 
+      $.ajax({
+        type: "POST",
+        data:{fundManagerId:1},
+        dataType: "json",
+        url: http+"selectAllPositions",
+        success: function(json) {
+              //打印信息
+            console.log("myPositions查询返回的数据:"+json);
+            var data = json;
+            var symbol= "";
+            for(var i=0;i<data.length;i++){ 
+                if (data[i].asset == "Bond") {
+                        symbol=data[i].isin;
+                    } else if (data[i].asset == "Future") {
+                        symbol=data[i].clralias;
+                    } else if (data[i].asset == "Stock") {
+                        symbol=data[i].symbol;
+                    }
+                addSymbolRow(data[i].id,symbol,data[i].lastprice,data[i].currency,data[i].quantity,data[i].asset,data[i].dateTime);
+        } 
+        },
+        error: function(json) {
+          alert("load fail");
+        }
+      });
 }
 
 function addStock() {
@@ -30,7 +55,15 @@ function addStock() {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    addSymbolRow(json.securityid,json.lastprice,json.currency,json.quantity); 
+                    var symbol = "";
+                    if (json.asset == "Bond") {
+                        symbol=json.isin;
+                    } else if (json.asset == "Future") {
+                        symbol=json.clralias;
+                    } else if (json.asset == "Stock") {
+                        symbol=json.symbol;
+                    }
+                    addSymbolRow(json.id,symbol,json.lastprice,json.currency,json.quantity,json.asset,json.dateTime); 
                 } else {
                     alert(json.errorMessage);
                 }
@@ -80,12 +113,12 @@ function searchSymbol() {
 
 function deleteStock(e) {
 	event.stopPropagation();
-    var portfolioId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+    var positionId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
     var http = 'http://localhost:8080/';  
         $.ajax({  
             type: "POST",  
-            url: http+"deletePortfolio",  
-            data: {id:portfolioId},  
+            url: http+"deletePosition",  
+            data: {id:positionId},  
             dataType: "json",  
             timeout: 15000,  
             success: function (data) {  
@@ -119,11 +152,11 @@ function addResultRow(symbol) {
     $("#tb_Result").append(tbBody);
 }
 
-function addSymbolRow(securityid,lastprice,currency,quantity)
+function addSymbolRow(id,securityid,lastprice,currency,quantity,asset,dateTime)
 {
     console.log("add a new row to tb_fundSub");
    
-    var tbBody = "<tr><td>" + securityid + "</td>"+"<td>" + lastprice + "</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+ "</td>";
+    var tbBody = "<tr><td>" +id+ "</td>"+"<td>"+ securityid + "</td>"+"<td>" + lastprice + "</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+"</td>"+"<td>"+ asset + "</td>"+"<td>"+dateTime+ "</td>";
 
     var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
     tbBody += buttontd;
