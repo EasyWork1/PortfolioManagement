@@ -55,6 +55,7 @@ function addStock() {
                 var json = eval(data);
                 if (json.resultCode == 1) {
                     addSymbolRow(json.id,json.securityid,json.lastprice,json.currency,json.quantity,json.asset,json.datetime);
+                    chooseSymbol="";
                 } else {
                     alert(json.errorMessage);
                 }
