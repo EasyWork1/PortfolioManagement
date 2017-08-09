@@ -17,7 +17,7 @@ function getAllPortfolioInfo() {
             jsonInfo(json);
         },
         error: function(json) {
-          alert("加载失败");
+          alert("load fail");
         }
       });
  }

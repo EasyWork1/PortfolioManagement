@@ -99,7 +99,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="col-lg-6">
+                <div class="col-lg-10">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-plus fa-fw"></i><span class="network-name">Add symbol</span>
                          </button>
@@ -149,19 +149,25 @@
                             <table id= "tb_Symbol" class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>symbol</th> 
                                         <th>lastprice</th>   
                                         <th>currency</th>
                                         <th>quantity</th>
+                                        <th>asset</th>
+                                        <th>dateTime</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr >  
                                         <td>1</td>  
-                                        <td>Bond</td>  
+                                        <td>Ap</td>
+                                        <td>89</td>  
                                         <td>USD</td>  
                                         <td>3</td> 
+                                        <td>Bond</td>  
+                                        <td>2017-08-09</td> 
                                         <td><button class="btn btn-primary btn-sm" onclick="deleteStock(this)">delete</button></td>
                                     </tr>                     
                                 </tbody>
