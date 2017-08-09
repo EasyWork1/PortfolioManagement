@@ -1,7 +1,7 @@
 $(function(){
 
-    //getAllStockInfo();
-    jsonInfo();
+    getAllStockInfo();
+    //jsonInfo();
 
 });
 
@@ -35,10 +35,10 @@ function getAllStockInfo() {
       });
  }
 
-  function jsonInfo( )
+  function jsonInfo(json)
  {
-        //var data = json;
-        var data = [{"sector":"1","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
+        var data = json;
+        /*var data = [{"sector":"1","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
         {"sector":"1","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
         {"sector":"2","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
         {"sector":"3","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
@@ -57,7 +57,7 @@ function getAllStockInfo() {
         {"sector":"16","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
         {"sector":"17","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"},
         {"sector":"18","lastsale":1.0,"offerprice":1.0,"marketcap":1,"symbol":"1","name":"1","bidprice":1.0,"industry":"1","date":1502121600000,"ipoyear":1,"currency":"1"}
-        ];
+        ];*/
         
         for(var i=0;i<data.length;i++){ 
              addRow(data[i].symbol, data[i].name,data[i].marketcap,data[i].ipoyear,data[i].sector,data[i].industry,data[i].bidprice,data[i].offerprice,data[i].date);

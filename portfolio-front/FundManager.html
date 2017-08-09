@@ -175,7 +175,6 @@
                                         <th>Telephone</th> 
                                         <th>Email</th>   
                                         <th>UserName</th> 
-                                        <th>Password</th> 
                                         <th>Profit</th> 
                                         <th>Edit</th>     
                                     </tr>

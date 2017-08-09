@@ -42,7 +42,7 @@ function getAllManagerInfo() {
        //var data = [{"id":15,"username":"1","email":"1","lastname":"1","firstname":"1","telephone":"1","password":"xMpCOKC5I4INzFCab3WEmw=="},{"id":16,"username":"2","email":"2","lastname":"2","firstname":"2","telephone":"2","password":"yB5yjZ1ML2NvBn+JzBSGLA=="},{"id":17,"username":"pyr","email":"385121039@qq.com","lastname":"Pan","firstname":"Youran","telephone":"17621587563","password":"ICy5YqxZB1uWSwcVLSNLcA=="},{"id":18,"username":"zjh","email":"385121038@qq.com","lastname":"Zhou","firstname":"Jiehui","telephone":"18428367563","password":"ICy5YqxZB1uWSwcVLSNLcA=="}];
         
         for(var i=0;i<data.length;i++){ 
-             addRow(data[i].id,data[i].firstname,data[i].lastname,data[i].telephone,data[i].email,data[i].username,data[i].password,data[i].balance);
+             addRow(data[i].id,data[i].firstname,data[i].lastname,data[i].telephone,data[i].email,data[i].username,data[i].balance);
         } 
 }
 
@@ -209,7 +209,7 @@ function addRow(id,firstName,lastName,telephone,email,username,password,balance)
 {
     console.log("add a new row to table");
    
-    var tbBody = "<tr><td>" + id + "</td>"+"<td>" + firstName + "</td>"+"<td>" + lastName + "</td>"+"<td>" + telephone + "</td>"+"<td>" + email + "</td>"+"<td>" + username + "</td>"+"<td>" + password + "</td>" +"<td>" + balance+ "</td>";
+    var tbBody = "<tr><td>" + id + "</td>"+"<td>" + firstName + "</td>"+"<td>" + lastName + "</td>"+"<td>" + telephone + "</td>"+"<td>" + email + "</td>"+"<td>" + username + "</td>"+ "<td>" + balance+ "</td>";
 
     var buttontd = "<td>"+'<input type="button" value="delete" class="btn btn-primary btn-sm" style="float:left" onclick="deleteManager(this);"/><input type="button" value="modify" class="btn btn-primary btn-sm" style="float:right" onclick="modManager(this);"/>'+"</td></tr>";
     tbBody += buttontd;
