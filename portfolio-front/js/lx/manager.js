@@ -102,7 +102,7 @@ function deleteManager(r)
                        // document.getElementById('tb_manager').deleteRow(getRow(r));
                         var json = eval(data);
                         if (json.resultCode == 1) {
-                            self.location = "showFundManagerForm";
+                            self.location = "FundManager.html";
                             alert("Delete Success!"); 
                         } else {
                             alert(json.errorMessage);
@@ -166,7 +166,7 @@ function addManager()
                        // addRow(id,firstName,lastName,telephone,email,username,password);
                         var json = eval(data);
                         if (json.resultCode == 1) {
-                            self.location = "showFundManagerForm";
+                            self.location = "FundManager.html";
                             alert("Add Success！"); 
                         } else {
                             alert(json.errorMessage);
@@ -263,7 +263,7 @@ function modManager(obj){
                         if (json.resultCode == 1) {
                             alert("Modify Success!"); 
                             obj.value = "modify"; 
-                            self.location = "showFundManagerForm";                                                    
+                            self.location = "FundManager.html";                                                    
                         } else {
                             alert(json.errorMessage);
                         }
