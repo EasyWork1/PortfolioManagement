@@ -4,16 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.citi.portfolio.dao.*;
 import com.citi.portfolio.entity.*;
-import com.citi.portfolio.service.serviceInterface.PositionHistoryService;
 import com.citi.portfolio.service.serviceInterface.PositionService;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
 
 @Service
 public class PositionServiceImp implements PositionService {
