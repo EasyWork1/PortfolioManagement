@@ -226,11 +226,11 @@ function modManager(obj){
    
     if(obj.value == "modify"){
                     obj.value = "ok";
-                    operatorCell1.innerHTML ="<input class='form-control' value='"+operatorCell1.innerHTML+"'/>";//把内容变成文本框
-                    operatorCell2.innerHTML ="<input class='form-control' value='"+operatorCell2.innerHTML+"'/>";
-                    operatorCell3.innerHTML ="<input  class='form-control' value='"+operatorCell3.innerHTML+"'/>";
+                    operatorCell1.innerHTML ="<input style='width:80px' class='form-control' value='"+operatorCell1.innerHTML+"'/>";//把内容变成文本框
+                    operatorCell2.innerHTML ="<input style='width:80px' class='form-control' value='"+operatorCell2.innerHTML+"'/>";
+                    operatorCell3.innerHTML ="<input  style='width:12px' class='form-control' value='"+operatorCell3.innerHTML+"'/>";
                     //operatorCell4.innerHTML ="<input value='"+operatorCell4.innerHTML+"'/>";
-                    operatorCell4.innerHTML ="<input class='form-control' value='"+operatorCell4.innerHTML+"'/>";
+                    operatorCell4.innerHTML ="<input style='width:140px' class='form-control' value='"+operatorCell4.innerHTML+"'/>";
                     //做修改操作
             }else{
 
