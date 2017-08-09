@@ -119,10 +119,7 @@ function cleanModel() {
 function addResultRow(symbol) {
 	console.log("add a new row to tb_Result");
    
-    var tbBody = "<tr><td>" + symbol + "</td>";
-
-    var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
-    tbBody += buttontd;
+    var tbBody = "<tr><td>" + symbol + "</td></tr>";
     $("#tb_Result").append(tbBody);
 }
 
