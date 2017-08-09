@@ -19,6 +19,7 @@
      <link href="css/sb-admin.css" rel="stylesheet">
 
     <link href="css/height.css" rel="stylesheet">
+    <link href="css/fund.css" rel="stylesheet">
     <script type="text/javascript" src="js/dm/fund.js"></script>
 </head>
 
@@ -130,15 +131,7 @@
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
-                                <tbody>  
-                                    <tr onclick="trClick(this)">   
-                                        <td>1</td> 
-                                        <td>Demi</td> 
-                                        <td>haha</td> 
-                                        <td>flej</td>
-                                        <td>lseifj</td>
-                                        <td>Edit</td>
-                                     </tr>                     
+                                <tbody>                     
                                 </tbody>
                             </table>
                         </div>

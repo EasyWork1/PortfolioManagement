@@ -13,3 +13,7 @@
 	display: inline-flex;
 	width: 100px;
 }
+
+#PortfolioName {
+	width: 300px;
+}
