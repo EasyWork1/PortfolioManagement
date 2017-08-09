@@ -19,13 +19,6 @@ function getAllSymbolInfo() {
             var symbol= "";
             for(var i=0;i<data.length;i++){
                 console.log("data:"+i+"("+data[i].securityid+data[i].asset+")");
-                // if (data[i].asset == "Bond") {
-                //         symbol=data[i].isin;
-                //     } else if (data[i].asset == "Future") {
-                //         symbol=data[i].clralias;
-                //     } else if (data[i].asset == "Stock") {
-                //         symbol=data[i].symbol;
-                //     }
                 addSymbolRow(data[i].id,data[i].securityid,data[i].lastprice,data[i].currency,data[i].quantity,data[i].asset,data[i].datetime);
         } 
         },
@@ -69,10 +62,11 @@ function addStock() {
 }
 
 function searchSymbol() {
-    $("#tb_Result tr:not(:first)").html("");
+    $("#tb_Bond tr:not(:first)").html("");
+    $("#tb_Stock tr:not(:first)").html("");
+    $("#tb_Future tr:not(:first)").html("");
     var type = $("#chooseType").val();
     var symbol = $("#searchInput").val();
-    document.getElementById("tb_Result").style="display:";
     if (type == "Type") {
         alert("please choose a type!");
     	return false;
@@ -88,11 +82,14 @@ function searchSymbol() {
                 var json = eval(data);
             	$.each(json, function(index, item){
                     if (type == "Bond") {
-                        addResultRow(item.isin);
+                        document.getElementById("tb_Bond").style="display:";
+                        addResultRow(item.isin,item.issuer,type);
                     } else if (type == "Future") {
-                        addResultRow(item.clralias);
+                        document.getElementById("tb_Future").style="display:";
+                        addResultRow(item.clralias,item.sym,type);
                     } else if (type == "Stock") {
-                        addResultRow(item.symbol);
+                        document.getElementById("tb_Stock").style="display:";
+                        addResultRow(item.symbol,item.name,type);
                     }
             		
             	}); 
@@ -106,26 +103,33 @@ function searchSymbol() {
 
 function deleteStock(e) {
 	event.stopPropagation();
-    var positionId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
-    var http = 'http://localhost:8080/';  
-        $.ajax({  
-            type: "POST",  
-            url: http+"deletePosition",  
-            data: {id:positionId},  
-            dataType: "json",  
-            timeout: 15000,  
-            success: function (data) {  
-                var json = eval(data);
-                if (json.resultCode == 1) {
-                    document.getElementById('tb_Symbol').deleteRow(getRow(e));
-                } else {
-                    alert(json.errorMessage);
+    var like=window.confirm("Are you sure delete this?");
+　　if(like==true) {
+        var positionId = e.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+        var http = 'http://localhost:8080/';  
+            $.ajax({  
+                type: "POST",  
+                url: http+"deletePosition",  
+                data: {id:positionId},  
+                dataType: "json",  
+                timeout: 15000,  
+                success: function (data) {  
+                    var json = eval(data);
+                    if (json.resultCode == 1) {
+                        document.getElementById('tb_Symbol').deleteRow(getRow(e));
+                    } else {
+                        alert(json.errorMessage);
+                    }
+                },
+                error: function (xhr, message) {
+                    alert(message);
                 }
-            },
-            error: function (xhr, message) {
-                alert(message);
-            }
-        });
+            });
+    }
+　　else
+        return false;
+
+    
 }
 
 function getRow(r){
@@ -134,15 +138,26 @@ function getRow(r){
 }
 
 function cleanModel() {
-	$("#tb_Result tr:not(:first)").html("");
-	document.getElementById("tb_Result").style="display:none";
+	$("#tb_Bond tr:not(:first)").html("");
+    $("#tb_Stock tr:not(:first)").html("");
+    $("#tb_Future tr:not(:first)").html("");
+	document.getElementById("tb_Future").style="display:none";
+    document.getElementById("tb_Stock").style="display:none";
+    document.getElementById("tb_Bond").style="display:none";
 	document.getElementById("searchInput").value="";
 }
 
-function addResultRow(symbol) {
+function addResultRow(symbol,descripe,asset) {
 	console.log("add a new row to tb_Result");
-    var tbBody = "<tr onclick=\"trClick(this)\"><td>" + symbol + "</td></tr>";
-    $("#tb_Result").append(tbBody);
+    var tbBody = "<tr onclick=\"trClick(this)\"><td>" + symbol + "</td><td>" + descripe + "</td></tr>";
+    if (asset == "Bond") {
+        $("#tb_Bond").append(tbBody);
+    } else if (asset == "Future") {
+        $("#tb_Future").append(tbBody);
+    } else if (asset == "Stock") {
+        $("#tb_Stock").append(tbBody);
+    }
+    
 }
 
 function addSymbolRow(id,securityid,lastprice,currency,quantity,asset,dateTime)
@@ -160,7 +175,15 @@ function addSymbolRow(id,securityid,lastprice,currency,quantity,asset,dateTime)
 function trClick(e) {
     chooseSymbol = e.children[0].innerHTML;
     console.log("choosesymbol:"+chooseSymbol);
-    var trs = document.getElementById('tb_Result').getElementsByTagName('tr'); 
+    var type = $("#chooseType").val();
+    var trs ;
+    if (type == "Bond") {
+        trs = document.getElementById('tb_Bond').getElementsByTagName('tr'); 
+    } else if (type == "Future") {
+        trs = document.getElementById('tb_Future').getElementsByTagName('tr');
+    } else if (type == "Stock") {
+        trs = document.getElementById('tb_Stock').getElementsByTagName('tr');
+    }
     for( var o=0; o<trs.length; o++ ){  
      if( trs[o] == e ){  
         trs[o].style.backgroundColor = '#337ab7';  

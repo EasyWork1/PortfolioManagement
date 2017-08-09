@@ -94,7 +94,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="col-lg-6">
+                <div class="col-lg-10">
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-plus fa-fw"></i><span class="network-name">Add a new portfolio</span>
                             </button>
