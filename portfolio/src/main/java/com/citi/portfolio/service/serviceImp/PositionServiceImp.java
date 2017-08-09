@@ -6,6 +6,7 @@ import com.citi.portfolio.dao.*;
 import com.citi.portfolio.entity.*;
 import com.citi.portfolio.service.serviceInterface.PositionHistoryService;
 import com.citi.portfolio.service.serviceInterface.PositionService;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,19 +36,19 @@ public class PositionServiceImp implements PositionService {
 
     static String BASECURRENCY = "USD";
 
-    PositionHistoryService positionHistoryService;
-
     @Override
     public JSONObject deletePosition(Integer positionId) {
         JSONObject jsonObject = new JSONObject();
         int result = 0;
-        if (positionHistoryService.insertPositionHistory(positionMapper.selectByPrimaryKey(positionId), "sell")) {
+        Position position = positionMapper.selectByPrimaryKey(positionId);
+        Portfolio portfolio = portfolioMapper.selectByPrimaryKey(position.getPortfolioid());
+
+        if (insertPositionHistory(position, "SELL")) {
             result = positionMapper.deleteByPrimaryKey(positionId);
             if (result == 0) {
                 positionHistoryMapper.deleteByPrimaryKey(positionId);
                 jsonObject.put("errorMessage", "delete error");
             }else {
-                Portfolio portfolio = portfolioMapper.selectByPrimaryKey(positionMapper.selectByPrimaryKey(positionId).getPortfolioid());
                 portfolio.setSymbols(portfolio.getSymbols() -1);
             }
         } else {
@@ -122,7 +123,8 @@ public class PositionServiceImp implements PositionService {
         if (result == 1) {
             Position position = new Position();
             Calendar calendar = Calendar.getInstance();
-            position.setLastprice(priceMapper.selectBySymbolAndDate(securityid,new Date()).getBidprice());
+            //position.setLastprice(priceMapper.selectBySymbolAndDate(securityid,new Date()).getBidprice());
+            position.setLastprice(3d);
             position.setCurrency(BASECURRENCY);
             position.setDatetime(calendar.getTime());
             position.setQuantity(quantity);
@@ -132,9 +134,10 @@ public class PositionServiceImp implements PositionService {
             position.setPortfolioid(portfolioid);
             if (positionMapper.insert(position) != 0) {
                 Integer id = selectByPortfolioIdAndSecurityId(securityid, portfolioid);
+                position.setId(id);
                 if (id != -1) {
                     //add to position history
-                    positionHistoryService.insertPositionHistory(positionMapper.selectByPrimaryKey(id), "buy");
+                    insertPositionHistory(position, "BUY");
                     jsonObject = (JSONObject) JSONObject.toJSON(position);
                     jsonObject.put("id", id);
 
@@ -153,5 +156,40 @@ public class PositionServiceImp implements PositionService {
         jsonObject.put("resultCode", result);
         logger.info("insert position: " + jsonObject);
         return jsonObject;
+    }
+    public boolean insertPositionHistory(Position position, String buyOrSell) {
+        Calendar calendar = Calendar.getInstance();
+
+        PositionHistory positionHistory = new PositionHistory();
+        positionHistory.setAsset(position.getAsset());
+        positionHistory.setCurrency(position.getCurrency());
+        positionHistory.setDatetime(calendar.getTime());
+        if ("SELL".equals(buyOrSell.toUpperCase())){
+            //positionHistory.setLastprice(priceMapper.selectBySymbolAndDate(position.getSecurityid(),calendar.getTime()).getOfferprice());
+            positionHistory.setLastprice(position.getLastprice());
+        }else {
+            positionHistory.setLastprice(position.getLastprice());
+        }
+        positionHistory.setPortfolioid(position.getPortfolioid());
+        positionHistory.setQuantity(position.getQuantity());
+        positionHistory.setSecurityid(position.getSecurityid());
+        positionHistory.setBuyorsell(buyOrSell);
+        if (positionHistoryMapper.insert(positionHistory) != 0){
+
+            logger.info("Success insert sell position to positionHistory: PositionHistory{" +
+                    "id=" + positionHistory.getId() +
+                    ", securityid='" + positionHistory.getSecurityid() + '\'' +
+                    ", asset='" + positionHistory.getAsset() + '\'' +
+                    ", portfolioid=" + positionHistory.getPortfolioid() +
+                    '}');
+            return true;
+        }
+        logger.info("Fail insert sell position to positionHistory: PositionHistory{" +
+                "id=" + positionHistory.getId() +
+                ", securityid='" + positionHistory.getSecurityid() + '\'' +
+                ", asset='" + positionHistory.getAsset() + '\'' +
+                ", portfolioid=" + positionHistory.getPortfolioid() +
+                '}');
+        return false;
     }
 }
