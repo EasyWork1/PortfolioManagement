@@ -28,7 +28,6 @@ public class PortfolioController {
     public String insertPortfolio(@RequestParam(value = "name", required = true) String name,
                                         @RequestParam(value = "fundManagerId", required = true) Integer fundManagerId) {
         String json  = portfolioService.insertPortfolio(name,fundManagerId).toJSONString();
-        logger.info("insert portfolio "+ json);
         return  json;
     }
     @RequestMapping("/deletePortfolio")
@@ -40,7 +39,6 @@ public class PortfolioController {
     public String myPortfolio(@RequestParam(value = "fundManagerId", required = true) Integer fundManagerId) {
 
         String json  = portfolioService.findPortfolioByFundManagerId(fundManagerId).toJSONString();
-        logger.info("show my portfolio "+ json);
         return  json;
 
     }

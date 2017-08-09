@@ -23,6 +23,13 @@
     from positionhistory
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAllByPortfolioId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from positionhistory
+    where portfolioid = #{portfolioid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from positionhistory
     where id = #{id,jdbcType=INTEGER}

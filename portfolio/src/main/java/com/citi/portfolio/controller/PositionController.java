@@ -43,7 +43,6 @@ public class PositionController {
     public String insertPosition(@RequestParam(value = "asset", required = true)String asset,
                                  @RequestParam(value = "querysymbol", required = true)String querysymbol){
         String json  = positionService.selectSymbol(asset,querysymbol).toJSONString();
-        logger.info("search security "+ json);
         return  json;
 
     }
