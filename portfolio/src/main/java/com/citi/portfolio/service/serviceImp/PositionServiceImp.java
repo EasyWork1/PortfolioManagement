@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 @Service
 public class PositionServiceImp implements PositionService {
@@ -85,19 +86,19 @@ public class PositionServiceImp implements PositionService {
         if("Bond".equals(asset)) {
             ArrayList<Bond> bonds = bondMapper.selectBondBySymbol(querysymbol.toUpperCase().trim());
             if (!bonds.isEmpty()){
-                jsonArray = (JSONArray) JSONObject.toJSON(bonds.subList(0,9));
+                jsonArray = (bonds.size()<9)? (JSONArray) JSONObject.toJSON(bonds):(JSONArray) JSONObject.toJSON(bonds.subList(0,9));
             }
         }
         if("Stock".equals(asset)){
             ArrayList<Stock> stocks = stockMapper.selectStockBySymbol(querysymbol.toUpperCase().trim());
             if (!stocks.isEmpty()){
-                jsonArray = (JSONArray) JSONObject.toJSON(stocks.subList(0,9));
+                jsonArray = (stocks.size()<9)? (JSONArray) JSONObject.toJSON(stocks):(JSONArray) JSONObject.toJSON(stocks.subList(0,9));
             }
         }
         if ("Future".equals(asset)){
             ArrayList<Future> futures = futureMapper.selectFutureBySymbol(querysymbol.toUpperCase().trim());
             if (!futures.isEmpty()) {
-                jsonArray = (JSONArray) JSONObject.toJSON(futures.subList(0, 9));
+                jsonArray = (futures.size()<9)? (JSONArray) JSONObject.toJSON(futures):(JSONArray) JSONObject.toJSON(futures.subList(0,9));
             }
         }
 
@@ -122,8 +123,10 @@ public class PositionServiceImp implements PositionService {
         if (result == 1) {
             Position position = new Position();
             Calendar calendar = Calendar.getInstance();
-            //position.setLastprice(priceMapper.selectBySymbolAndDate(securityid,new Date()).getBidprice());
-            position.setLastprice(3d);
+            HashMap hashMap = new HashMap();
+            hashMap.put("symbol",securityid);
+            hashMap.put("date",calendar.getTime());
+            position.setLastprice(priceMapper.selectBySymbolAndDate(hashMap).getBidprice());
             position.setCurrency(BASECURRENCY);
             position.setDatetime(calendar.getTime());
             position.setQuantity(quantity);
@@ -141,8 +144,8 @@ public class PositionServiceImp implements PositionService {
                     jsonObject.put("id", id);
 
                         Portfolio portfolio = portfolioMapper.selectByPrimaryKey(positionMapper.selectByPrimaryKey(id).getPortfolioid());
-                        portfolio.setSymbols(portfolio.getSymbols() -1);
-                        portfolio.setLotvalue(portfolio.getLotvalue() + position.getLastprice()*position.getQuantity());
+                        portfolio.setSymbols(portfolio.getSymbols() + 1);
+                        portfolio.setLotvalue(portfolio.getLotvalue() + priceMapper.selectBySymbolAndDate(hashMap).getOfferprice());
                         portfolioMapper.updateByPrimaryKey(portfolio);
 
                 }else{
@@ -166,8 +169,11 @@ public class PositionServiceImp implements PositionService {
         positionHistory.setCurrency(position.getCurrency());
         positionHistory.setDatetime(calendar.getTime());
         if ("SELL".equals(buyOrSell.toUpperCase())){
-            //positionHistory.setLastprice(priceMapper.selectBySymbolAndDate(position.getSecurityid(),calendar.getTime()).getOfferprice());
-            positionHistory.setLastprice(position.getLastprice());
+            HashMap hashMap = new HashMap();
+            hashMap.put("symbol",position.getSecurityid());
+            hashMap.put("date",calendar.getTime());
+            positionHistory.setLastprice(priceMapper.selectBySymbolAndDate(hashMap).getOfferprice());
+
         }else {
             positionHistory.setLastprice(position.getLastprice());
         }
