@@ -34,6 +34,7 @@ function getAllPortfolioInfo() {
 function trClick(e) {
     var Id = e.children[0].innerHTML;
     console.log(Id);
+    setCookie("portfolioId",Id,1);
     self.location = "fundSub.html"; 
 }
 
@@ -111,6 +112,16 @@ function addPortfolioRow(id,name,symbols,Lotvalue,benefit)
     $("#tb_Portfolio").append(tbBody);
 
 }
+
+function setCookie(c_name,value,expiredays)
+{
+    var exdate=new Date()
+    exdate.setDate(exdate.getDate()+expiredays)
+    document.cookie=c_name+ "=" +escape(value)+
+    ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+}
+
+
 
 
 
