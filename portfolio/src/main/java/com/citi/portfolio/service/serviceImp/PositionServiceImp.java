@@ -81,16 +81,21 @@ public class PositionServiceImp implements PositionService {
         JSONArray jsonArray = new JSONArray();
         if("Bond".equals(asset)) {
             ArrayList<Bond> bonds = bondMapper.selectBondBySymbol(querysymbol.toUpperCase().trim());
-            logger.info(bonds.get(0).getIsin());
-            jsonArray = (JSONArray) JSONObject.toJSON(bonds.subList(0,9));
+            if (!bonds.isEmpty()){
+                jsonArray = (JSONArray) JSONObject.toJSON(bonds.subList(0,9));
+            }
         }
         if("Stock".equals(asset)){
             ArrayList<Stock> stocks = stockMapper.selectStockBySymbol(querysymbol.toUpperCase().trim());
-            jsonArray = (JSONArray) JSONObject.toJSON(stocks.subList(0,9));
+            if (!stocks.isEmpty()){
+                jsonArray = (JSONArray) JSONObject.toJSON(stocks.subList(0,9));
+            }
         }
         if ("Future".equals(asset)){
             ArrayList<Future> futures = futureMapper.selectFutureBySymbol(querysymbol.toUpperCase().trim());
-            jsonArray = (JSONArray) JSONObject.toJSON(futures.subList(0,9));
+            if (!futures.isEmpty()) {
+                jsonArray = (JSONArray) JSONObject.toJSON(futures.subList(0, 9));
+            }
         }
 
         return  jsonArray;
