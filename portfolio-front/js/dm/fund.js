@@ -1,7 +1,7 @@
 $(function(){
 
     getAllPortfolioInfo();
-    
+
 });
 
 var http = 'http://localhost:8080/';
@@ -34,7 +34,7 @@ function getAllPortfolioInfo() {
 function trClick(e) {
     var Id = e.children[0].innerHTML;
     console.log(Id);
-    self.location = http+"fundSub.html"; 
+    self.location = http+"positionForm"; 
 }
 
 function createPortfolio() {
