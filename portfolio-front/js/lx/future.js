@@ -38,17 +38,17 @@ function getAllFutureInfo() {
   function jsonInfo(json)
  {
         var data = json;
-       // var data = [{"offerprice":1.0,"uomqty":1.0,"desc":"1","clralias":"1","exchid":"1","bidprice":1.0,"sym":"1","sectyp":"1","date":1502121600000,"matdt":1504022400000,"exch":"1"}];
+        //var data = [{"offerprice":1.0,"uomqty":1.0,"desc":"1","clralias":"1","exchid":"1","bidprice":1.0,"sym":"1","sectyp":"1","date":1502121600000,"matdt":1504022400000,"exch":"1"}];
 
         for(var i=0;i<data.length;i++){ 
-             addRow(data[i].exchid, data[i].exch, data[i].desc,data[i].sectyp,data[i].matdt,data[i].uomqty,data[i].bidprice,data[i].offerprice,data[i].date);
+             addRow(data[i].clralias,data[i].exchid, data[i].exch, data[i].desc,data[i].sectyp,data[i].matdt,data[i].uomqty,data[i].bidprice,data[i].offerprice,data[i].date);
         } 
 }
 
-function addRow(exchid,exchName,desc,secTyp,maturity,uomQty,bidPrice,offerPrice,date)
+function addRow(clralias,exchid,exchName,desc,secTyp,maturity,uomQty,bidPrice,offerPrice,date)
 {
 
-    var tbBody = "<tr><td>"+ exchid+ "</td>"+"<td>" +exchName + "</td>"+"<td>" + desc + "</td>"+"<td>" + secTyp + "</td>"+"<td>" + maturity + "</td>"+"<td>" + uomQty + "</td>"+"<td>" + bidPrice + "</td>"+"<td>"+offerPrice+"</td>"+"<td>"+date+"</td></tr>" ;
+    var tbBody = "<tr><td>"+ clralias+ "</td>"+"<td>"+ exchid+ "</td>"+"<td>" +exchName + "</td>"+"<td>" + desc + "</td>"+"<td>" + secTyp + "</td>"+"<td>" + maturity + "</td>"+"<td>" + uomQty + "</td>"+"<td>" + bidPrice + "</td>"+"<td>"+offerPrice+"</td>"+"<td>"+date+"</td></tr>" ;
 
     $("#futureTb").append(tbBody);
 
