@@ -130,7 +130,15 @@
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
-                                <tbody>                                  
+                                <tbody>  
+                                    <tr onclick="trClick(this)">   
+                                        <td>1</td> 
+                                        <td>Demi</td> 
+                                        <td>haha</td> 
+                                        <td>flej</td>
+                                        <td>lseifj</td>
+                                        <td>Edit</td>
+                                     </tr>                     
                                 </tbody>
                             </table>
                         </div>
