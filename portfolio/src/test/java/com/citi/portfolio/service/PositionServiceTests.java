@@ -24,10 +24,8 @@ public class PositionServiceTests {
 	PositionService positionService;
 	@Test
 	public void testSelectSymbolData() {
-		String symbol="CLBS";
-
-		JSONArray jsonArray = positionService.selectSymbolData(6);
-
+		String symbol="AAMC";
+		JSONArray jsonArray = positionService.selectSymbolData(symbol);
 		Assert.assertFalse(jsonArray.isEmpty());
 	}
 	@Test

@@ -57,9 +57,9 @@ public class PositionController {
         return  json;
 
     }
-    @RequestMapping("/selectPositionData")
-    public String insertPosition(@RequestParam(value = "portfolioid", required = true)Integer portfolioid) {
-        String json = positionService.selectSymbolData(portfolioid).toJSONString();
+    @RequestMapping("/selectSymbolData")
+    public String selectSymbolData(@RequestParam(value = "portfolioid", required = true)String symbol) {
+        String json = positionService.selectSymbolData(symbol).toJSONString();
         logger.info("select symbol data position " + json);
         return json;
 

@@ -10,10 +10,8 @@ import com.citi.portfolio.service.serviceInterface.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class PositionServiceImp implements PositionService {
@@ -133,36 +131,23 @@ public class PositionServiceImp implements PositionService {
     }
 
     @Override
-    public JSONArray selectSymbolData(Integer portfolioid) {
+    public JSONArray selectSymbolData(String symbol) {
         JSONArray jsonArray = new JSONArray();
-        JSONArray finalJsonArray = new JSONArray();
-        JSONObject jsonObject = new JSONObject();
-        ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioid);
-        Map<String,ArrayList<Price>> map = new HashMap<String,ArrayList<Price>>();
+        ArrayList<Price> prices = priceMapper.selectBySymbol(symbol);
+        ArrayList<String[]> data = new ArrayList<>();
 
-        if (!positions.isEmpty()){
-            for (Position p:positions
-                 ) {
-
-                   ArrayList<Price> prices = priceMapper.selectBySymbol(p.getSecurityid());
-                  if (!prices.isEmpty()){
-                      for (Price price:prices
-                           ) {
-                          if(price.getDate().getMonth() == 8){
-                              
-                          }
-                      }
-                      jsonObject = new JSONObject();
-                      jsonObject.put("symbol",p.getSecurityid());
-                      map.put(p.getSecurityid(),prices);
-                      jsonArray = (JSONArray) JSONArray.toJSON(prices);
-                      jsonObject.put("price",jsonArray);
-                  }
-                  finalJsonArray.add(jsonObject);
-            }
+        for (Price p:prices){
+            SimpleDateFormat formatter;
+            formatter = new SimpleDateFormat ("yyyy-MM-dd");
+            String time = formatter.format(p.getDate()).replace("-",", ");
+            String date = "Date.UTC(" + time + ")";
+            String price=p.getOfferprice().toString();
+            String[] times = {date,price};
+            data.add(times);
         }
-logger.info(finalJsonArray);
-        return finalJsonArray;
+        jsonArray = (JSONArray)JSONObject.toJSON(prices);
+        logger.info("symbol data for " + symbol + " result :" + jsonArray);
+        return jsonArray;
     }
 
     @Override

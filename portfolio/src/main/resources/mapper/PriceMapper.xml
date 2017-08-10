@@ -61,7 +61,7 @@
     select
     <include refid="Base_Column_List" />
     from price
-    where symbol = #{symbol,jdbcType=VARCHAR}
+    where symbol = #{symbol,jdbcType=VARCHAR} ORDER BY DATE desc limit 10
   </select>
 
 </mapper>
