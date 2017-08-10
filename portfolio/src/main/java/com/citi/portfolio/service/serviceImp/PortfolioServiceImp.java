@@ -71,7 +71,7 @@ public class PortfolioServiceImp implements PortfolioService {
         if (!portfolios.isEmpty()){
             for (Portfolio p:portfolios
                     ) {
-                p.setBenefit(calculateLotvalue(p.getId()) - getCost(p.getId()));
+                //p.setBenefit(calculateLotvalue(p.getId()) - getCost(p.getId()));
                 p.setSymbols(portfolioMapper.getCurrentSymbolsByPortfolioId(p.getId()));
                 p.setLotvalue(calculateLotvalue(p.getId()));
                 portfolioMapper.updateByPrimaryKey(p);

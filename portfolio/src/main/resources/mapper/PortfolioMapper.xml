@@ -30,7 +30,7 @@
     select
     <include refid="Base_Column_List" />
     from portfolio
-    where fundManagerId = #{fundmanagerid,jdbcType=INTEGER}
+    where fundManagerId = #{fundmanagerid,jdbcType=INTEGER} ORDER BY  benefit DESC
   </select>
   <select id="getCurrentSymbolsByPortfolioId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
     select
