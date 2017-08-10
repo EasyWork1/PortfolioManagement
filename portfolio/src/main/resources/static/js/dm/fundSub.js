@@ -120,6 +120,7 @@ $(function () {
 });
 
 var chooseSymbol = "";
+var series = "series: [";
 function getSymbolData() {
     var http = 'http://localhost:8080/';
     var Id =  localStorage['portfolioId'];
@@ -139,11 +140,14 @@ function getSymbolData() {
                 console.log("select symbol data查询返回的数据:"+json);
                 symbol=data[i].symbol;
                 price =data[i].price;
+                series += "{" + "name: " + symbol +"data:[";
                 for(var n=0;n<price.length;n++){
                     offerprice=price[n].offerprice;
                     date=price[n].date;
-                    dataFormatChange(offerprice,date);
+                    series += dataFormatChange(offerprice,date) + ",";
                 }
+                series-=",";
+                series +="]}";
 
             }
         },
@@ -314,6 +318,7 @@ function addResultRow(symbol,descripe,asset) {
 }
 function dataFormatChange(offerprice,date){
     var dataFormat = "[Date.UTC("+date.getYear() +" ," +date.getMonth() + " ," +date.getDay() +" ," + offerprice +"]";
+    return dataFormat;
 }
 
 function addSymbolRow(id,securityid,lastprice,currency,quantity,asset,dateTime)
