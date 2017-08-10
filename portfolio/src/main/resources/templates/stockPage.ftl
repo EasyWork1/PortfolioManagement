@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Admin</a>
+                <a class="navbar-brand">Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -71,13 +71,13 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-bar-chart-o"></i> Instrument <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="stock.html">Stock</a>
+                                <a href="stockPage.html">Stock</a>
                             </li>
                             <li>
-                                <a href="bond.html">Bond</a>
+                                <a href="bondPage.html">Bond</a>
                             </li>
                             <li>
-                                <a href="future.html">Future</a>
+                                <a href="futurePage.html">Future</a>
                             </li>
                         </ul>
                     </li>
@@ -158,7 +158,7 @@
 	        </uib-pagination>
 	  </div> 
 	 
-	 <div>
+	 <div class="pull-right" style="margin-right: 20px">
 		<input type="text" class="form-control" style="width:100px;margin:25px 0" name="" ng-model="go"/>
 		<a class="btn btn-primary btn-sm" ng-click="setPage(go)">跳转</a>
 	 </div>  

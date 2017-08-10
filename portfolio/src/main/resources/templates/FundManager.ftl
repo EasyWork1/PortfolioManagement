@@ -74,13 +74,13 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-bar-chart-o"></i> Instrument <i class="fa fa-fw "></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="stock.html">Stock</a>
+                                <a href="stockPage.html">Stock</a>
                             </li>
                             <li>
-                                <a href="bond.html">Bond</a>
+                                <a href="bondPage.html">Bond</a>
                             </li>
                             <li>
-                                <a href="Future.html">Future</a>
+                                <a href="FuturePage.html">Future</a>
                             </li>
                         </ul>
                     </li>

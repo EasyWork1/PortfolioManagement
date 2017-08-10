@@ -93,7 +93,7 @@
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Stocks</h1>
+                        <h1 class="page-header">Futures</h1>
                         
                     </div>
                 </div>
@@ -112,29 +112,31 @@
 	        <table class="table table-bordered table-hover table-striped">
 		       <thead>
 			     <tr>
-                 <th>Symbol</th>
-                 <th>Name</th>
-                 <th>MarketCap</th>
-                 <th>IPOYear</th>
-                 <th>Sector</th>
-                 <th>Industry</th>
-                 <th>BidPrice</th>
-                 <th>OfferPrice</th>
-                 <th>Date</th>
+                   <th>Clralias</th>
+                                        <th>ExchId</th>
+                                        <th>ExchName</th>
+                                        <th>Desc</th>
+                                        <th>SecTyp</th>
+                                        <th>MaturityDate</th>
+                                        <th>UomQty</th>
+                                        <th>BidPrice</th>
+                                        <th>OfferPrice</th>
+                                        <th>Date</th>
 			     </tr>
 		      </thead>
 		    <tbody>
-			     <tr  ng-repeat="data in datas">
-				 <td>{{data.symbol}}</td>
-                 <td>{{data.name}}</td>
-                 <td>{{data.marketcap}}</td>
-                 <td>{{data.ipoyear}}</td>
-                 <td>{{data.sector}}</td>
-                 <td>{{data.industry}}</td>
-                 <td>{{data.bidprice}}</td>
-                 <td>{{data.offerprice}}</td>
-                 <td>{{data.date}}</td>
-			     </tr>
+			   <tr  ng-repeat="data in datas">
+                    <td class="active">{{data.clralias}}</td>
+                    <td class="success">{{data.exchid}}</td>
+                    <td class="warning">{{data.exch}}</td>
+                    <td class="danger">{{data.desc}}</td>
+                    <td class="active">{{data.sectyp}}</td>
+                    <td class="success">{{data.matdt}}</td>
+                    <td class="warning">{{data.uomqty}}</td>
+                    <td class="danger">{{data.bidprice}}</td>
+                    <td class="active">{{data.offerprice}}</td>
+                    <td class="success">{{data.date}}</td>
+                </tr>  
 		    </tbody>
 	       </table>
     
@@ -179,7 +181,7 @@
 
     <script type="text/javascript" src="js/lx/angular.min.js"></script>
     <script type="text/javascript" src="js/lx/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="js/lx/stockPage.js"></script>
+    <script type="text/javascript" src="js/lx/futurePage.js"></script>
 
 </body>
 

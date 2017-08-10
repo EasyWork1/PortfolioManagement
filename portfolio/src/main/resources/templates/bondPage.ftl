@@ -93,7 +93,7 @@
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Stocks</h1>
+                        <h1 class="page-header">Bonds</h1>
                         
                     </div>
                 </div>
@@ -112,29 +112,27 @@
 	        <table class="table table-bordered table-hover table-striped">
 		       <thead>
 			     <tr>
-                 <th>Symbol</th>
-                 <th>Name</th>
-                 <th>MarketCap</th>
-                 <th>IPOYear</th>
-                 <th>Sector</th>
-                 <th>Industry</th>
+                 <th>ISIN</th>
+                 <th>Issuer</th>
+                 <th>Coupon</th>
+                 <th>MadurityMonth</th>
+                 <th>MadurityYear</th>                                       
                  <th>BidPrice</th>
                  <th>OfferPrice</th>
                  <th>Date</th>
 			     </tr>
 		      </thead>
 		    <tbody>
-			     <tr  ng-repeat="data in datas">
-				 <td>{{data.symbol}}</td>
-                 <td>{{data.name}}</td>
-                 <td>{{data.marketcap}}</td>
-                 <td>{{data.ipoyear}}</td>
-                 <td>{{data.sector}}</td>
-                 <td>{{data.industry}}</td>
-                 <td>{{data.bidprice}}</td>
-                 <td>{{data.offerprice}}</td>
-                 <td>{{data.date}}</td>
-			     </tr>
+			   <tr  ng-repeat="data in datas">
+                    <td class="active">{{data.isin}}</td>
+                    <td class="success">{{data.issuer}}</td>
+                    <td class="warning">{{data.coupon}}</td>
+                    <td class="danger">{{data.maturitymonth}}</td>
+                    <td class="active">{{data.maturityyear}}</td>
+                    <td class="success">{{data.bidprice}}</td>
+                    <td class="warning">{{data.offerprice}}</td>
+                    <td class="active">{{data.date}}</td>
+                </tr>  
 		    </tbody>
 	       </table>
     
@@ -179,7 +177,7 @@
 
     <script type="text/javascript" src="js/lx/angular.min.js"></script>
     <script type="text/javascript" src="js/lx/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="js/lx/stockPage.js"></script>
+    <script type="text/javascript" src="js/lx/bondPage.js"></script>
 
 </body>
 
