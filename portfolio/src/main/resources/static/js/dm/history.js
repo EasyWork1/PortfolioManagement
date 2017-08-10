@@ -1,6 +1,7 @@
 $(function(){
     var username = localStorage['username'];
     $("#user-box").html(username);
+    console.log("history begin");
     getAllHistory();
 
 });

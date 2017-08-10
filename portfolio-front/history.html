@@ -11,6 +11,7 @@
 
     <title>Admin</title>
 
+    <script src="Scripts/jquery-1.10.2.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
