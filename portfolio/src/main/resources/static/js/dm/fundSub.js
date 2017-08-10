@@ -134,11 +134,17 @@ function getSymbolData() {
             var data = eval(json);
             var symbol= "";
             var offerprice="";
+            var date="";
             for(var i=0;i<data.length;i++){
                 console.log("select symbol data查询返回的数据:"+json);
-                symbol=data[i].symbol();
-                offerprice =data[i].
-                addSymbolRow(data[i].id,data[i].securityid,data[i].lastprice,data[i].currency,data[i].quantity,data[i].asset,data[i].datetime);
+                symbol=data[i].symbol;
+                price =data[i].price;
+                for(var n=0;n<price.length;n++){
+                    offerprice=price[n].offerprice;
+                    date=price[n].date;
+                    dataFormatChange(offerprice,date);
+                }
+
             }
         },
         error: function(json) {
@@ -305,6 +311,9 @@ function addResultRow(symbol,descripe,asset) {
         $("#tb_Stock").append(tbBody);
     }
     
+}
+function dataFormatChange(offerprice,date){
+    var dataFormat = "[Date.UTC("+date.getYear() +" ," +date.getMonth() + " ," +date.getDay() +" ," + offerprice +"]";
 }
 
 function addSymbolRow(id,securityid,lastprice,currency,quantity,asset,dateTime)
