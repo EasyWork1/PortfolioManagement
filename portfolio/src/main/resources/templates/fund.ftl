@@ -126,8 +126,7 @@
 
             </div>
             <!-- /.container-fluid -->
-            <div id="container" style="min-width: 400px;hight=400px"></div>
-            <div class="message"></div>
+
 
         </div>
         <!-- /#page-wrapper -->
