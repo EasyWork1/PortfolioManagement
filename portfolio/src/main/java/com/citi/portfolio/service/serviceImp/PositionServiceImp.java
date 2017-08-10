@@ -10,6 +10,8 @@ import com.citi.portfolio.service.serviceInterface.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -31,9 +33,10 @@ public class PositionServiceImp implements PositionService {
     FutureMapper futureMapper;
     @Autowired
     FundManagerService fundManagerService;
-
     @Autowired
     PortfolioService portfolioService;
+
+    static String testDate="2017-04-03";
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
@@ -83,10 +86,9 @@ public class PositionServiceImp implements PositionService {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioId);
         for (Position p:positions
              ) {
-            Calendar calendar = Calendar.getInstance();
             HashMap hashMap = new HashMap();
             hashMap.put("symbol",p.getSecurityid());
-            hashMap.put("date",calendar.getTime());
+            hashMap.put("date",testDate);
             Price price = priceMapper.selectBySymbolAndDate(hashMap);
             fundManagerService.calculateBenifit(portfolioMapper.selectByPrimaryKey(portfolioId).getFundmanagerid());
         }
@@ -132,16 +134,16 @@ public class PositionServiceImp implements PositionService {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Price> prices = priceMapper.selectBySymbol(symbol);
         ArrayList<String[]> data = new ArrayList<>();
-
-        for (Price p:prices){
-            SimpleDateFormat formatter;
-            formatter = new SimpleDateFormat ("yyyy-MM-dd");
-            String time = formatter.format(p.getDate()).replace("-",", ");
-            String date = "Date.UTC(" + time + ")";
-            String price=p.getOfferprice().toString();
-            String[] times = {date,price};
-            data.add(times);
-        }
+//
+//        for (Price p:prices){
+//            SimpleDateFormat formatter;
+//            formatter = new SimpleDateFormat ("yyyy-MM-dd");
+//            String time = formatter.format(p.getDate()).replace("-",", ");
+//            String date = "Date.UTC(" + time + ")";
+//            String price=p.getOfferprice().toString();
+//            String[] times = {date,price};
+//            data.add(times);
+//        }
         jsonArray = (JSONArray)JSONObject.toJSON(prices);
         logger.info("symbol data for " + symbol + " result :" + jsonArray);
         return jsonArray;
@@ -170,10 +172,9 @@ public class PositionServiceImp implements PositionService {
         }
 
         //check the price exists
-        Calendar calendar = Calendar.getInstance();
         HashMap hashMap = new HashMap();
         hashMap.put("symbol",securityid);
-        hashMap.put("date",calendar.getTime());
+        hashMap.put("date",testDate);
         Price price = priceMapper.selectBySymbolAndDate(hashMap);
         if(price == null){
             result = 0;
@@ -186,32 +187,40 @@ public class PositionServiceImp implements PositionService {
             //initialize the position
             position.setLastprice(price.getBidprice());
             position.setCurrency(BASECURRENCY);
-            position.setDatetime(calendar.getTime());
-            position.setQuantity(quantity);
-            position.setSecurityid(securityid);
-            position.setAsset(asset);
-            position.setBenifit((price.getOfferprice() - price.getBidprice())*quantity);
-            position.setPortfolioid(portfolioid);
+            DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+            try {
+                Date date = format.parse(testDate);
+                position.setDatetime(date);
+                position.setQuantity(quantity);
+                position.setSecurityid(securityid);
+                position.setAsset(asset);
+                position.setBenifit((price.getOfferprice() - price.getBidprice())*quantity);
+                position.setPortfolioid(portfolioid);
 
-            if (positionMapper.insert(position) != 0) { //insert success
-                Integer id = selectByPortfolioIdAndSecurityId(securityid, portfolioid);
-                position.setId(id);
-                //add to position history
-                if(!insertPositionHistory(position, "BUY")) {
-                    positionMapper.deleteByPrimaryKey(id);
-                    result = 0;
-                    jsonObject.put("errorMessage", "insert into position history error");
-                }else {
-                jsonObject = (JSONObject) JSONObject.toJSON(position);
-                Portfolio portfolio = portfolioMapper.selectByPrimaryKey(portfolioid);
-                portfolio.setSymbols(portfolio.getSymbols() + 1);
-                portfolio.setLotvalue(portfolio.getLotvalue() + price.getOfferprice()*quantity);
-                portfolioMapper.updateByPrimaryKey(portfolio);
-                fundManagerService.calculateBenifit(portfolio.getFundmanagerid());
+                if (positionMapper.insert(position) != 0) { //insert success
+                    Integer id = selectByPortfolioIdAndSecurityId(securityid, portfolioid);
+                    position.setId(id);
+                    //add to position history
+                    if(!insertPositionHistory(position, "BUY")) {
+                        positionMapper.deleteByPrimaryKey(id);
+                        result = 0;
+                        jsonObject.put("errorMessage", "insert into position history error");
+                    }else {
+                        jsonObject = (JSONObject) JSONObject.toJSON(position);
+                        Portfolio portfolio = portfolioMapper.selectByPrimaryKey(portfolioid);
+                        portfolio.setSymbols(portfolio.getSymbols() + 1);
+                        portfolio.setLotvalue(portfolio.getLotvalue() + price.getOfferprice()*quantity);
+                        portfolioMapper.updateByPrimaryKey(portfolio);
+                        fundManagerService.calculateBenifit(portfolio.getFundmanagerid());
+                    }
+                } else {
+                    jsonObject.put("errorMessage", "insert error");
                 }
-            } else {
-                jsonObject.put("errorMessage", "insert error");
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
+
+
         }
         jsonObject.put("resultCode", result);
         logger.info("insert position: " + jsonObject);
@@ -226,28 +235,34 @@ public class PositionServiceImp implements PositionService {
      * when add or delete position, add to position history
      */
     public boolean insertPositionHistory(Position position, String buyOrSell) {
-        Calendar calendar = Calendar.getInstance();
+
 
         PositionHistory positionHistory = new PositionHistory();
         positionHistory.setAsset(position.getAsset());
         positionHistory.setCurrency(position.getCurrency());
-        positionHistory.setDatetime(calendar.getTime());
-        if ("SELL".equals(buyOrSell.toUpperCase())){
-            HashMap hashMap = new HashMap();
-            hashMap.put("symbol",position.getSecurityid());
-            hashMap.put("date",calendar.getTime());
-            positionHistory.setLastprice(priceMapper.selectBySymbolAndDate(hashMap).getOfferprice());
+        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        try {
+            Date date = format.parse(testDate);
+            if ("SELL".equals(buyOrSell.toUpperCase())){
+                HashMap hashMap = new HashMap();
+                hashMap.put("symbol",position.getSecurityid());
+                hashMap.put("date",testDate);
+                positionHistory.setLastprice(priceMapper.selectBySymbolAndDate(hashMap).getOfferprice());
 
-        }else {
-            positionHistory.setLastprice(position.getLastprice());
+            }else {
+                positionHistory.setLastprice(position.getLastprice());
+            }
+            positionHistory.setPortfolioid(position.getPortfolioid());
+            positionHistory.setQuantity(position.getQuantity());
+            positionHistory.setSecurityid(position.getSecurityid());
+            positionHistory.setBuyorsell(buyOrSell);
+            if (positionHistoryMapper.insert(positionHistory) != 0){
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        positionHistory.setPortfolioid(position.getPortfolioid());
-        positionHistory.setQuantity(position.getQuantity());
-        positionHistory.setSecurityid(position.getSecurityid());
-        positionHistory.setBuyorsell(buyOrSell);
-        if (positionHistoryMapper.insert(positionHistory) != 0){
-            return true;
-        }
+
         return false;
     }
 

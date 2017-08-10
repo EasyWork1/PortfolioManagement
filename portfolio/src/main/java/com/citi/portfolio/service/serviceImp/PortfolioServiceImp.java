@@ -28,6 +28,7 @@ public class PortfolioServiceImp implements PortfolioService {
     FundManagerService fundManagerService;
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
+    static String testDate="2017-04-03";
     /**
      * @author keira
      * @param name
@@ -96,11 +97,10 @@ public class PortfolioServiceImp implements PortfolioService {
     public double calculateLotvalue(Integer id) {
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(id);
         double benefitSum = 0d;
-        Calendar calendar = Calendar.getInstance();
         for (Position p :positions) {
             HashMap hashMap = new HashMap();
             hashMap.put("symbol",p.getSecurityid());
-            hashMap.put("date",calendar.getTime());
+            hashMap.put("date",testDate);
             benefitSum += priceMapper.selectBySymbolAndDate(hashMap).getOfferprice() * p.getQuantity();
         }
         return benefitSum;
