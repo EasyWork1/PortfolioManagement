@@ -89,10 +89,7 @@ public class PositionServiceImp implements PositionService {
             hashMap.put("symbol",p.getSecurityid());
             hashMap.put("date",calendar.getTime());
             Price price = priceMapper.selectBySymbolAndDate(hashMap);
-            if (price != null) {
-                p.setBenifit((price.getOfferprice() - p.getLastprice())*p.getQuantity());
-                positionMapper.updateByPrimaryKey(p);
-            }
+            fundManagerService.calculateBenifit(portfolioMapper.selectByPrimaryKey(portfolioId).getFundmanagerid());
         }
         jsonArray = (JSONArray) JSONObject.toJSON(positions);
         logger.info("show all positions: " + jsonArray);
