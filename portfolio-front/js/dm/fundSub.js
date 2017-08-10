@@ -220,7 +220,7 @@ function PositionClick(e) {
         timeout: 15000,  
         success: function (data) {  
             var dateArray = new Array();
-            $.each(json, function(index, item){
+            $.each(data, function(index, item){
                     var date= new Date(item.date);
                     var dateutc=Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
                     var myDate=new Array();
@@ -256,7 +256,7 @@ function showChart(positionName,dateArray) {
         },
         tooltip: {
             headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+            pointFormat: '{point.x:%e. %b}: ${point.y:.2f} '
         },
         plotOptions: {
             spline: {
