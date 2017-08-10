@@ -1,8 +1,9 @@
 $(function(){
-	var username = localStorage['username'];
+    var username = localStorage['username'];
     $("#user-box").html(username);
     getAllHistory();
-}
+
+});
 
 function getAllHistory() {
     var http = 'http://localhost:8080/';

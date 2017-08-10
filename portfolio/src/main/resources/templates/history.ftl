@@ -84,7 +84,7 @@
                         <div>
                             <table id= "tb_History" class="table table-bordered table-hover table-striped">
                                 <thead>
-                                    <tr>securityid,asset,lastprice,quantity,buyorsell,currency,datetime
+                                    <tr>
                                         <th>securityid</th> 
                                         <th>asset</th> 
                                         <th>lastprice</th> 
