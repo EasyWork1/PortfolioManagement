@@ -230,7 +230,7 @@ function PositionClick(e) {
                     myDate.push(item.bidprice);
                     bidpriceArray.push(myDate);
                     offerDate.push(dateutc);
-                    offerDate.push(offerprice);
+                    offerDate.push(item.offerprice);
                     offerpriceArray.push(offerDate);
                 }); 
             showChart(symbol,bidpriceArray,offerpriceArray);
@@ -273,13 +273,13 @@ function showChart(positionName,bidpriceArray,offerpriceArray) {
             }
         },
         series: [{
-            name: bidprice,
+            name: "bidprice",
             data: bidpriceArray
         },{
-            name: offerprice,
+            name: "offerprice",
             data: offerpriceArray
         }
-        }]
+        ]
     });
 }
 
