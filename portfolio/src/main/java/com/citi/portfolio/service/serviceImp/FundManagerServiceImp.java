@@ -157,7 +157,7 @@ public class FundManagerServiceImp implements FundManagerService {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 java.sql.Date sqlDate = null;
                 try {
-                    sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
+                    sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-03-30").getTime());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

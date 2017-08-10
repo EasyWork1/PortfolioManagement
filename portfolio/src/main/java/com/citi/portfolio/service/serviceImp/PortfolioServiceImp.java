@@ -28,7 +28,7 @@ public class PortfolioServiceImp implements PortfolioService {
     FundManagerService fundManagerService;
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
-    static String testDate="2017-04-03";
+    static String testDate="2017-03-30";
     /**
      * @author keira
      * @param name

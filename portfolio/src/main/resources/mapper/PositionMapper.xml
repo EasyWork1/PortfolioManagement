@@ -27,7 +27,7 @@
     select
     <include refid="Base_Column_List" />
     from position
-    where portfolioId = #{portfolioid,jdbcType=INTEGER} ORDER BY benifit
+    where portfolioId = #{portfolioid,jdbcType=INTEGER} ORDER BY benifit DESC
   </select>
 
 

@@ -36,7 +36,7 @@ public class PositionServiceImp implements PositionService {
     @Autowired
     PortfolioService portfolioService;
 
-    static String testDate="2017-04-03";
+    static String testDate="2017-03-30";
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
@@ -60,11 +60,11 @@ public class PositionServiceImp implements PositionService {
                 positionHistoryMapper.deleteByPrimaryKey(positionId);
                 jsonObject.put("errorMessage", "delete error");
             }else {
+                fundManagerService.calculateBenifit(portfolio.getFundmanagerid());
                 portfolio.setSymbols(portfolio.getSymbols() -1);
                 portfolio.setLotvalue(portfolio.getLotvalue() - position.getBenifit()-position.getLastprice()*position.getQuantity());
                 //portfolio.setBenefit(portfolioService.calculateLotvalue(portfolio.getId()) - portfolioService.getCost(portfolio.getId()));
                 portfolioMapper.updateByPrimaryKey(portfolio);
-                fundManagerService.calculateBenifit(portfolio.getFundmanagerid());
             }
         } else {
             jsonObject.put("errorMessage", "delete error :: insert into history error");
@@ -133,7 +133,27 @@ public class PositionServiceImp implements PositionService {
     public JSONArray selectSymbolData(String symbol) {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Price> prices = priceMapper.selectBySymbol(symbol);
-        ArrayList<String[]> data = new ArrayList<>();
+        ArrayList<Price> finalPrice =new ArrayList<>();
+        try {
+            for (Price p:prices
+             ) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date = format.parse(testDate);
+                if (p.getDate().compareTo(date) != 1){
+                    finalPrice.add(p);
+                }
+
+        }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        jsonArray = (JSONArray)JSONObject.toJSON(prices);
+        logger.info("symbol data for " + symbol + " result :" + jsonArray);
+        jsonArray = (JSONArray)JSONObject.toJSON(finalPrice);
+        logger.info("symbol data for " + symbol + " result :" + jsonArray);
+        return jsonArray;
+//        ArrayList<String[]> data = new ArrayList<>();
 //
 //        for (Price p:prices){
 //            SimpleDateFormat formatter;
@@ -144,9 +164,7 @@ public class PositionServiceImp implements PositionService {
 //            String[] times = {date,price};
 //            data.add(times);
 //        }
-        jsonArray = (JSONArray)JSONObject.toJSON(prices);
-        logger.info("symbol data for " + symbol + " result :" + jsonArray);
-        return jsonArray;
+
     }
 
     @Override
@@ -187,7 +205,7 @@ public class PositionServiceImp implements PositionService {
             //initialize the position
             position.setLastprice(price.getBidprice());
             position.setCurrency(BASECURRENCY);
-            DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date date = format.parse(testDate);
                 position.setDatetime(date);
@@ -240,7 +258,7 @@ public class PositionServiceImp implements PositionService {
         PositionHistory positionHistory = new PositionHistory();
         positionHistory.setAsset(position.getAsset());
         positionHistory.setCurrency(position.getCurrency());
-        DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = format.parse(testDate);
             if ("SELL".equals(buyOrSell.toUpperCase())){
