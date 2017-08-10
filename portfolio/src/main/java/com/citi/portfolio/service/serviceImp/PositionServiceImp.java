@@ -10,9 +10,8 @@ import com.citi.portfolio.service.serviceInterface.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class PositionServiceImp implements PositionService {
@@ -126,6 +125,26 @@ public class PositionServiceImp implements PositionService {
 
         return  jsonArray;
 
+    }
+
+    @Override
+    public JSONArray selectSymbolData(String symbol) {
+        JSONArray jsonArray = new JSONArray();
+        ArrayList<Price> prices = priceMapper.selectBySymbol(symbol);
+        ArrayList<String[]> data = new ArrayList<>();
+
+        for (Price p:prices){
+            SimpleDateFormat formatter;
+            formatter = new SimpleDateFormat ("yyyy-MM-dd");
+            String time = formatter.format(p.getDate()).replace("-",", ");
+            String date = "Date.UTC(" + time + ")";
+            String price=p.getOfferprice().toString();
+            String[] times = {date,price};
+            data.add(times);
+        }
+        jsonArray = (JSONArray)JSONObject.toJSON(prices);
+        logger.info("symbol data for " + symbol + " result :" + jsonArray);
+        return jsonArray;
     }
 
     @Override
