@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class PositionServiceImp implements PositionService {
@@ -129,6 +130,34 @@ public class PositionServiceImp implements PositionService {
 
         return  jsonArray;
 
+    }
+
+    @Override
+    public JSONArray selectSymbolData(Integer portfolioid) {
+        JSONArray jsonArray = new JSONArray();
+        JSONArray finalJsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+        ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioid);
+        Map<String,ArrayList<Price>> map = new HashMap<String,ArrayList<Price>>();
+
+        if (!positions.isEmpty()){
+            for (Position p:positions
+                 ) {
+
+                   ArrayList<Price> prices = priceMapper.selectBySymbol(p.getSecurityid());
+                  if (!prices.isEmpty()){
+                      jsonObject = new JSONObject();
+                      jsonObject.put("symbol",p.getSecurityid());
+                      logger.info("symbol:" + p.getSecurityid() + "   prices: "+ prices.get(0).getBidprice());
+                      map.put(p.getSecurityid(),prices);
+                      jsonArray = (JSONArray) JSONArray.toJSON(prices);
+                      jsonObject.put("price",jsonArray);
+                  }
+                  finalJsonArray.add(jsonObject);
+            }
+        }
+logger.info(finalJsonArray);
+        return finalJsonArray;
     }
 
     @Override

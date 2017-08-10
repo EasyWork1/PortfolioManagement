@@ -20,7 +20,8 @@
 
     <link href="css/height.css" rel="stylesheet">
     <link href="css/fund.css" rel="stylesheet">
-    <script type="text/javascript" src="js/dm/fund.js"></script>
+
+
 </head>
 
 <body>
@@ -125,6 +126,8 @@
 
             </div>
             <!-- /.container-fluid -->
+            <div id="container" style="min-width: 400px;hight=400px"></div>
+            <div class="message"></div>
 
         </div>
         <!-- /#page-wrapper -->

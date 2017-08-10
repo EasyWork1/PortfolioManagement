@@ -22,13 +22,14 @@ public class PositionServiceTests {
 
 	@Autowired
 	PositionService positionService;
-//positionService
-//	@Test
-//	public void testDeletePosition() {
-//		Integer fundmanagerid=1;
-//		JSONArray jsonArray = positionHistoryService.selectAllPosition(fundmanagerid);
-//		Assert.assertFalse(jsonArray.isEmpty());
-//	}
+	@Test
+	public void testSelectSymbolData() {
+		String symbol="CLBS";
+
+		JSONArray jsonArray = positionService.selectSymbolData(6);
+
+		Assert.assertFalse(jsonArray.isEmpty());
+	}
 	@Test
 	public void testInsertPosition() {
 		JSONObject jsonObject = positionService.insertPosition("JOB","Stock",1,1000d);

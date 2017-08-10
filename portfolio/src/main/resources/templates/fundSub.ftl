@@ -22,6 +22,9 @@
     <link href="css/height.css" rel="stylesheet">
     <link href="css/fund.css" rel="stylesheet">
     <script type="text/javascript" src="js/dm/fundSub.js"></script>
+    <script type="text/javascript" src="js/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="js/highcharts.modules/exporting.js"></script>
+    <script type="text/javascript" src="js/highcharts.modules/data.js"></script>
 </head>
 
 <body>
