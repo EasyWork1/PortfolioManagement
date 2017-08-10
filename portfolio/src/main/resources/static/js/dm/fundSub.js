@@ -219,16 +219,21 @@ function PositionClick(e) {
         dataType: "json",  
         timeout: 15000,  
         success: function (data) {  
-            var dateArray = new Array();
+            var bidpriceArray = new Array();
+            var offerpriceArray = new Array();
             $.each(data, function(index, item){
                     var date= new Date(item.date);
                     var dateutc=Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
                     var myDate=new Array();
+                    var offerDate = new Array();
                     myDate.push(dateutc);
-                    myDate.push(item.offerprice);
-                    dateArray.push(myDate);
+                    myDate.push(item.bidprice);
+                    bidpriceArray.push(myDate);
+                    offerDate.push(dateutc);
+                    offerDate.push(offerprice);
+                    offerpriceArray.push(offerDate);
                 }); 
-            showChart(symbol,dateArray);
+            showChart(symbol,bidpriceArray,offerpriceArray);
         },
         error: function (xhr, message) {
             alert(message);
@@ -236,11 +241,13 @@ function PositionClick(e) {
     });
 }
 
-function showChart(positionName,dateArray) {
+function showChart(positionName,bidpriceArray,offerpriceArray) {
     $("#lineModal").modal('show');
     $('#container').highcharts({
         chart: {
             type: 'spline'
+        },title: {
+            text: positionName
         },
         xAxis: {
             type: 'datetime',
@@ -266,8 +273,12 @@ function showChart(positionName,dateArray) {
             }
         },
         series: [{
-            name: positionName,
-            data: dateArray
+            name: bidprice,
+            data: bidpriceArray
+        },{
+            name: offerprice,
+            data: offerpriceArray
+        }
         }]
     });
 }
