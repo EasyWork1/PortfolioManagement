@@ -205,7 +205,7 @@ function deleteInputText()
     
 }; */
 
-function addRow(id,firstName,lastName,telephone,email,username,password,balance)
+function addRow(id,firstName,lastName,telephone,email,username,balance)
 {
     console.log("add a new row to table");
    
