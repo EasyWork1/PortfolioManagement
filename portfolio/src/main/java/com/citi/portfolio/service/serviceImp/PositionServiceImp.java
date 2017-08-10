@@ -146,9 +146,14 @@ public class PositionServiceImp implements PositionService {
 
                    ArrayList<Price> prices = priceMapper.selectBySymbol(p.getSecurityid());
                   if (!prices.isEmpty()){
+                      for (Price price:prices
+                           ) {
+                          if(price.getDate().getMonth() == 8){
+                              
+                          }
+                      }
                       jsonObject = new JSONObject();
                       jsonObject.put("symbol",p.getSecurityid());
-                      logger.info("symbol:" + p.getSecurityid() + "   prices: "+ prices.get(0).getBidprice());
                       map.put(p.getSecurityid(),prices);
                       jsonArray = (JSONArray) JSONArray.toJSON(prices);
                       jsonObject.put("price",jsonArray);
