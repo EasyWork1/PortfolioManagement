@@ -34,7 +34,7 @@ function addHistoryRow(securityid,asset,lastprice,quantity,buyorsell,currency,da
 {
     console.log("add a new row to tb_History");
    
-    var tbBody = "<tr><td>" + securityid + "</td>"+"<td>" + asset + "</td>"+"<td>" + lastprice + "</td>"+"<td>" +quantity+ "</td>"+"<td>"+ buyorsell + "</td>"+"<td>" +currency+ "</td>"+"<td>" +datetime+"</td></tr>";
+    var tbBody = "<tr><td class=\"active\">" + securityid + "</td>"+"<td class=\"success\">" + asset + "</td>"+"<td class=\"warning\">" + lastprice + "</td>"+"<td class=\"danger\">" +quantity+ "</td>"+"<td class=\"active\">"+ buyorsell + "</td>"+"<td class=\"success\">" +currency+ "</td>"+"<td class=\"warning\">" +datetime+"</td></tr>";
 
     $("#tb_History").append(tbBody);
 
@@ -45,7 +45,7 @@ function setColor(){
         if($(this).text() == "SELL") {
             $(this).css("color", "#f00");
         } else{
-            $(this).css("color", "#7FFF00");
+            $(this).css("color", "#228B22");
         }
     });
 }

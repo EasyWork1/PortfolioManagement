@@ -28,7 +28,7 @@ public class BondServiceImp implements BondService {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         java.sql.Date sqlDate = null;
         try {
-            sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-03-30").getTime());
+            sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
             ArrayList<BondDTO> bonds = bondMapper.selectBondDTO(sqlDate);
             JSONArray BondsJson = (JSONArray) JSONObject.toJSON(bonds);
             json.put("total",bonds.size());

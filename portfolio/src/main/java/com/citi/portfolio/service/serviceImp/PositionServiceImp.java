@@ -36,7 +36,8 @@ public class PositionServiceImp implements PositionService {
     @Autowired
     PortfolioService portfolioService;
 
-    static String testDate="2017-03-30";
+
+
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PortfolioServiceImp.class);
 
@@ -83,15 +84,17 @@ public class PositionServiceImp implements PositionService {
     @Override
     public JSONArray selectAllPosition(Integer portfolioId) {
         JSONArray jsonArray = new JSONArray();
+
+//        for (Position p:positions
+//             ) {
+//            HashMap hashMap = new HashMap();
+//            hashMap.put("symbol",p.getSecurityid());
+//            hashMap.put("date",testDate);
+//            Price price = priceMapper.selectBySymbolAndDate(hashMap);
+//            fundManagerService.calculateBenifit(portfolioMapper.selectByPrimaryKey(portfolioId).getFundmanagerid());
+//        }
+        fundManagerService.calculateBenifit(portfolioMapper.selectByPrimaryKey(portfolioId).getFundmanagerid());
         ArrayList<Position> positions = positionMapper.selectByPortfolioId(portfolioId);
-        for (Position p:positions
-             ) {
-            HashMap hashMap = new HashMap();
-            hashMap.put("symbol",p.getSecurityid());
-            hashMap.put("date",testDate);
-            Price price = priceMapper.selectBySymbolAndDate(hashMap);
-            fundManagerService.calculateBenifit(portfolioMapper.selectByPrimaryKey(portfolioId).getFundmanagerid());
-        }
         jsonArray = (JSONArray) JSONObject.toJSON(positions);
         logger.info("show all positions: " + jsonArray);
         return jsonArray;
@@ -134,20 +137,24 @@ public class PositionServiceImp implements PositionService {
         JSONArray jsonArray = new JSONArray();
         ArrayList<Price> prices = priceMapper.selectBySymbol(symbol);
         ArrayList<Price> finalPrice =new ArrayList<>();
-        try {
-            for (Price p:prices
-             ) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-                Date date = format.parse(testDate);
-                if (p.getDate().compareTo(date) != 1){
+            for (Price p:prices) {
+
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                java.sql.Date sqlDate = null;
+                try {
+                    sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
+
+                if (p.getDate().compareTo(sqlDate) != 1){
                     finalPrice.add(p);
                 }
 
-        }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
         jsonArray = (JSONArray)JSONObject.toJSON(prices);
         logger.info("symbol data for " + symbol + " result :" + jsonArray);
         jsonArray = (JSONArray)JSONObject.toJSON(finalPrice);
@@ -192,7 +199,14 @@ public class PositionServiceImp implements PositionService {
         //check the price exists
         HashMap hashMap = new HashMap();
         hashMap.put("symbol",securityid);
-        hashMap.put("date",testDate);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date sqlDate = null;
+        try {
+            sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        hashMap.put("date",sqlDate);
         Price price = priceMapper.selectBySymbolAndDate(hashMap);
         if(price == null){
             result = 0;
@@ -205,10 +219,7 @@ public class PositionServiceImp implements PositionService {
             //initialize the position
             position.setLastprice(price.getBidprice());
             position.setCurrency(BASECURRENCY);
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date date = format.parse(testDate);
-                position.setDatetime(date);
+                position.setDatetime(sqlDate);
                 position.setQuantity(quantity);
                 position.setSecurityid(securityid);
                 position.setAsset(asset);
@@ -224,21 +235,17 @@ public class PositionServiceImp implements PositionService {
                         result = 0;
                         jsonObject.put("errorMessage", "insert into position history error");
                     }else {
-                        jsonObject = (JSONObject) JSONObject.toJSON(position);
+
                         Portfolio portfolio = portfolioMapper.selectByPrimaryKey(portfolioid);
                         portfolio.setSymbols(portfolio.getSymbols() + 1);
                         portfolio.setLotvalue(portfolio.getLotvalue() + price.getOfferprice()*quantity);
                         portfolioMapper.updateByPrimaryKey(portfolio);
                         fundManagerService.calculateBenifit(portfolio.getFundmanagerid());
+                        jsonObject = (JSONObject) JSONObject.toJSON(positionMapper.selectByPrimaryKey(id));
                     }
                 } else {
                     jsonObject.put("errorMessage", "insert error");
                 }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-
         }
         jsonObject.put("resultCode", result);
         logger.info("insert position: " + jsonObject);
@@ -259,12 +266,17 @@ public class PositionServiceImp implements PositionService {
         positionHistory.setAsset(position.getAsset());
         positionHistory.setCurrency(position.getCurrency());
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = format.parse(testDate);
+        java.sql.Date sqlDate = null;
+            try {
+                sqlDate = new java.sql.Date(format.parse("2017-04-03").getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             if ("SELL".equals(buyOrSell.toUpperCase())){
                 HashMap hashMap = new HashMap();
                 hashMap.put("symbol",position.getSecurityid());
-                hashMap.put("date",testDate);
+                hashMap.put("date",sqlDate);
                 positionHistory.setLastprice(priceMapper.selectBySymbolAndDate(hashMap).getOfferprice());
 
             }else {
@@ -274,12 +286,11 @@ public class PositionServiceImp implements PositionService {
             positionHistory.setQuantity(position.getQuantity());
             positionHistory.setSecurityid(position.getSecurityid());
             positionHistory.setBuyorsell(buyOrSell);
+            positionHistory.setDatetime(sqlDate);
             if (positionHistoryMapper.insert(positionHistory) != 0){
                 return true;
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
 
         return false;
     }

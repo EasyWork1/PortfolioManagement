@@ -133,7 +133,7 @@ function addPortfolioRow(id,name,symbols,Lotvalue,benefit)
 {
     console.log("add a new row to tb_Portfolio");
    
-    var tbBody = "<tr onclick=\"trClick(this)\"><td>" + id + "</td>"+"<td>" + name + "</td>"+"<td>" + symbols + "</td>"+"<td>" +Lotvalue+ "</td>"+"<td>"+ benefit +"</td>";
+    var tbBody = "<tr onclick=\"trClick(this)\"><td class=\"active\">" + id + "</td>"+"<td class=\"success\">" + name + "</td>"+"<td class=\"warning\">" + symbols + "</td>"+"<td class=\"danger\">" +Lotvalue+ "</td>"+"<td class=\"active\">"+ benefit +"</td>";
 
     var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deletePortfolio(this)\">delete</button>'+"</td></tr>";
     tbBody += buttontd;
@@ -146,7 +146,7 @@ function setColor() {
         if(parseFloat($(this).text()) < 0) {
             $(this).css("color", "#f00");
         } else{
-            $(this).css("color", "#7FFF00");
+            $(this).css("color", "#228B22");
         }
     });
 }

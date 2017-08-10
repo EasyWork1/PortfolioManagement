@@ -30,14 +30,11 @@
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand">Portfolio Management</a>
+            <div class="navbar-header" style="margin-left: 5px">
+
+                <img src="img/logo.png" width="60" height="39" style="float:left"/>
+                <a class="navbar-brand"><font size="5">WePortfolio</font></a >
+
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">    
@@ -79,7 +76,7 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="col-lg-10">
+                <div class="col-lg-12">
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-plus fa-fw"></i><span class="network-name">Add a new portfolio</span>
                             </button>
@@ -128,7 +125,9 @@
 
         </div>
         <!-- /#page-wrapper -->
-
+        <footer  style="float: right;" >
+            <p><h4><font color="white">&copy; Copyright 2017.EASYWORK TEAM All rights reserved.</font></h4></p>
+        </footer>
     </div>
     
 

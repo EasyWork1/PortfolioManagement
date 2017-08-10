@@ -181,7 +181,7 @@ function addSymbolRow(id,securityid,lastprice,benefit,currency,quantity,asset,da
 {
     console.log("add a new row to tb_Symbol");
    
-    var tbBody = "<tr onclick=\"PositionClick(this)\"><td>" +id+ "</td>"+"<td>"+ securityid + "</td>"+"<td>" + lastprice +"</td>"+"<td>"+ benefit+"</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+"</td>"+"<td>"+ asset + "</td>"+"<td>"+dateTime+ "</td>";
+    var tbBody = "<tr onclick=\"PositionClick(this)\"><td class=\"active\">" +id+ "</td>"+"<td class=\"success\">"+ securityid + "</td>"+"<td class=\"warning\">" + lastprice +"</td>"+"<td class=\"danger\">"+ benefit+"</td>"+"<td class=\"active\">" + currency + "</td>"+"<td class=\"success\">" +quantity+"</td>"+"<td class=\"warning\">"+ asset + "</td>"+"<td class=\"danger\">"+dateTime+ "</td>";
 
     var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deleteStock(this)\">delete</button>'+"</td></tr>";
     tbBody += buttontd;
@@ -293,7 +293,7 @@ function setColor() {
         if(parseFloat($(this).text()) < 0) {
             $(this).css("color", "#f00");
         } else{
-            $(this).css("color", "#7FFF00");
+            $(this).css("color", "#228B22");
         }
     });
 }
@@ -320,6 +320,9 @@ function showPieChart(data,totalAmount)
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false
+        },
+        title:{
+          text:'Percentage'
         },
         tooltip: {
             headerFormat: '{series.name}<br>',

@@ -27,7 +27,7 @@ public class FutureServiceImp implements FutureService {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         java.sql.Date sqlDate = null;
         try {
-            sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-03-30").getTime());
+            sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
             ArrayList<FutureDTO> futures = futureMapper.selectFutureDTO(sqlDate);
             JSONArray futuresJson = (JSONArray) JSONObject.toJSON(futures);
             json.put("total", futures.size());

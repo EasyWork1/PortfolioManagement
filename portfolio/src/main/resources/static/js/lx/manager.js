@@ -209,7 +209,7 @@ function addRow(id,firstName,lastName,telephone,email,username,balance)
 {
     console.log("add a new row to table");
    
-    var tbBody = "<tr><td>" + id + "</td>"+"<td>" + firstName + "</td>"+"<td>" + lastName + "</td>"+"<td>" + telephone + "</td>"+"<td>" + email + "</td>"+"<td>" + username + "</td>"+ "<td>" + balance+ "</td>";
+    var tbBody = "<tr><td class=\"active\">" + id + "</td>"+"<td class=\"success\">" + firstName + "</td>"+"<td class=\"warning\">" + lastName + "</td>"+"<td class=\"danger\">" + telephone + "</td>"+"<td class=\"active\">" + email + "</td>"+"<td class=\"success\">" + username + "</td>"+ "<td class=\"warning\">" + balance+ "</td>";
 
     var buttontd = "<td>"+'<input type="button" value="delete" class="btn btn-primary btn-sm" style="float:left" onclick="deleteManager(this);"/><input type="button" value="modify" class="btn btn-primary btn-sm" style="float:right" onclick="modManager(this);"/>'+"</td></tr>";
     tbBody += buttontd;
