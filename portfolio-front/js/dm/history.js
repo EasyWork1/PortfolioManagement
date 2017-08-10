@@ -3,13 +3,7 @@ $(function(){
     $("#user-box").html(username);
     console.log("history begin");
     getAllHistory();
-    $("#tb_History tr td:nth-child(5)").each(function() {
-        if($(this).text() == "SELL") {
-            $(this).css("color", "#f00");
-        } else{
-            $(this).css("color", "#7FFF00");
-        }
-    });
+    
 
 });
 
@@ -26,7 +20,8 @@ function getAllHistory() {
             for(var i=0;i<data.length;i++){
                 console.log("data:"+i+"("+data[i].securityid+data[i].asset+")");
                 addHistoryRow(data[i].securityid,data[i].asset,data[i].lastprice,data[i].quantity,data[i].buyorsell,data[i].currency,data[i].datetime);
-        } 
+        	} 
+        	setColor();
         },
         error: function(json) {
           alert("load fail");
@@ -43,4 +38,14 @@ function addHistoryRow(securityid,asset,lastprice,quantity,buyorsell,currency,da
 
     $("#tb_History").append(tbBody);
 
+}
+
+function setColor(){
+	$("#tb_History tr td:nth-child(5)").each(function() {
+        if($(this).text() == "SELL") {
+            $(this).css("color", "#f00");
+        } else{
+            $(this).css("color", "#7FFF00");
+        }
+    });
 }

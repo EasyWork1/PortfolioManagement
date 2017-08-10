@@ -5,13 +5,7 @@ $(function(){
     var name =  localStorage['portfolioName'] ;
     console.log("get name from cookies:"+name);
     $("#PortfolioNameSub").html(name);
-    $("#tb_Symbol tr td:nth-child(4)").each(function() {
-        if(parseFloat($(this).text()) < 0) {
-            $(this).css("color", "#f00");
-        } else{
-            $(this).css("color", "#7FFF00");
-        }
-    });
+    
 });
 
 var chooseSymbol = "";
@@ -32,7 +26,8 @@ function getAllSymbolInfo() {
             for(var i=0;i<data.length;i++){
                 console.log("data:"+i+"("+data[i].securityid+data[i].asset+")");
                 addSymbolRow(data[i].id,data[i].securityid,data[i].lastprice,data[i].benefit,data[i].currency,data[i].quantity,data[i].asset,data[i].datetime);
-        } 
+            } 
+            setColor();
         },
         error: function(json) {
           alert("load fail");
@@ -64,6 +59,7 @@ function addStock() {
                 if (json.resultCode == 1) {
                     addSymbolRow(json.id,json.securityid,json.lastprice,json.benefit,json.currency,json.quantity,json.asset,json.datetime);
                     chooseSymbol="";
+                    setColor();
                 } else {
                     alert(json.errorMessage);
                 }
@@ -210,6 +206,16 @@ function trClick(e) {
      }  
     }  
 
+}
+
+function setColor() {
+    $("#tb_Symbol tr td:nth-child(4)").each(function() {
+        if(parseFloat($(this).text()) < 0) {
+            $(this).css("color", "#f00");
+        } else{
+            $(this).css("color", "#7FFF00");
+        }
+    });
 }
 
 

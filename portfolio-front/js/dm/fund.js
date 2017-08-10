@@ -2,14 +2,6 @@ $(function(){
     var name = localStorage['username'];
     $("#user-box").html(name);
    getAllPortfolioInfo();
-   $("#tb_Portfolio tr td:nth-child(5)").each(function() {
-        if(parseFloat($(this).text()) < 0) {
-            $(this).css("color", "#f00");
-        } else{
-            $(this).css("color", "#7FFF00");
-        }
-    });
-
 });
 
 var http = 'http://localhost:8080/';
@@ -46,6 +38,7 @@ function getAllPortfolioInfo() {
               //打印信息
             console.log("myportfolio查询返回的数据:"+json);
             jsonInfo(json);
+            setColor();
         },
         error: function(json) {
           alert("load fail");
@@ -89,6 +82,7 @@ function createPortfolio() {
                 var json = eval(data);
                 if (json.resultCode == 1) {
                     addPortfolioRow(json.id,json.name,json.symbols,json.lotvalue,json.benefit); 
+                    setColor();
                 } else {
                     alert(json.errorMessage);
                 }
@@ -146,6 +140,15 @@ function addPortfolioRow(id,name,symbols,Lotvalue,benefit)
 
 }
 
+function setColor() {
+    $("#tb_Portfolio tr td:nth-child(5)").each(function() {
+        if(parseFloat($(this).text()) < 0) {
+            $(this).css("color", "#f00");
+        } else{
+            $(this).css("color", "#7FFF00");
+        }
+    });
+}
 
 
 
