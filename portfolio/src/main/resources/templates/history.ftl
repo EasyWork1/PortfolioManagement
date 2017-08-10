@@ -80,27 +80,21 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="col-lg-6">
+                <div class="col-lg-10">
                         <div>
-                            <table id= "tb_fundmanager" class="table table-bordered table-hover table-striped">
+                            <table id= "tb_History" class="table table-bordered table-hover table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>FirstName</th> 
-                                        <th>Last Name</th> 
-                                        <th>Telephone</th> 
-                                        <th>Email</th>
-                                        <th>功能</th>
-                                        
+                                    <tr>securityid,asset,lastprice,quantity,buyorsell,currency,datetime
+                                        <th>securityid</th> 
+                                        <th>asset</th> 
+                                        <th>lastprice</th> 
+                                        <th>quantity</th>
+                                        <th>buyorsell</th>
+                                        <th>currency</th> 
+                                        <th>datetime</th> 
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr id="cloneTr">  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>  
-                                    <td></td>           
-                                    </tr>                                    
+                                <tbody>                                   
                                 </tbody>
                             </table>
                         </div>
