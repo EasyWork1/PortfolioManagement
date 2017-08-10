@@ -25,6 +25,13 @@ public class FutureController {
         return modelAndView;
 
     }
+    @RequestMapping("/futurePage.html")
+    public ModelAndView stockPage() {
+
+        ModelAndView modelAndView = new ModelAndView("futurePage");
+        return modelAndView;
+
+    }
     @RequestMapping("/selectAllFutures")
     public String selectAll() {
 

@@ -4,5 +4,5 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public interface StockService {
-    JSONArray selectAllStocks();
+    JSONObject selectAllStocks();
 }

@@ -11,6 +11,8 @@ import com.citi.portfolio.service.serviceInterface.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,12 +23,19 @@ public class BondServiceImp implements BondService {
     BondMapper bondMapper;
 
     @Override
-    public JSONArray selectAllBonds() {
-        JSONArray json = new JSONArray();
-        Date date = new Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        ArrayList<BondDTO> bonds = bondMapper.selectBondDTO(sqlDate);
-        json = (JSONArray) JSONObject.toJSON(bonds);
+    public JSONObject selectAllBonds() {
+        JSONObject json = new JSONObject();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date sqlDate = null;
+        try {
+            sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
+            ArrayList<BondDTO> bonds = bondMapper.selectBondDTO(sqlDate);
+            JSONArray BondsJson = (JSONArray) JSONObject.toJSON(bonds);
+            json.put("total",bonds.size());
+            json.put("data",BondsJson);
+        } catch (ParseException e) {
+        e.printStackTrace();
+    }
         return json;
     }
 }

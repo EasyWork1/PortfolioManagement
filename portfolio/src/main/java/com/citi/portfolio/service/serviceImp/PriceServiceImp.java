@@ -10,6 +10,8 @@ import com.citi.portfolio.service.serviceInterface.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,12 +20,20 @@ import java.util.HashMap;
 public class PriceServiceImp implements PriceService {
     @Autowired
     PriceMapper priceMapper;
+
     @Override
-    public Double getOfferPriceBySymbol(String symbol,Date date) {
+    public Double getOfferPriceBySymbol(String symbol, Date date) {
         HashMap hashMap = new HashMap();
-        hashMap.put("symbol",symbol);
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        hashMap.put("date",sqlDate);
+        hashMap.put("symbol", symbol);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date sqlDate = null;
+        try {
+            sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
+            hashMap.put("date", sqlDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return priceMapper.selectBySymbolAndDate(hashMap).getOfferprice();
+
     }
 }

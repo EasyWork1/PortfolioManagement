@@ -11,6 +11,8 @@ import com.citi.portfolio.service.serviceInterface.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,12 +24,19 @@ public class StockServiceImp implements StockService {
 
 
     @Override
-    public JSONArray selectAllStocks() {
-        JSONArray json = new JSONArray();
-        Date date = new Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+    public JSONObject selectAllStocks() {
+        JSONObject json = new JSONObject();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date sqlDate = null;
+        try {
+            sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         ArrayList<StockDTO> stocks = stockMapper.selectStockDTO(sqlDate);
-        json = (JSONArray) JSONObject.toJSON(stocks);
+        JSONArray StockJson = (JSONArray) JSONObject.toJSON(stocks);
+        json.put("total",stocks.size());
+        json.put("data",StockJson);
         return json;
     }
 

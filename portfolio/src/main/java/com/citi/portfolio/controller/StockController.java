@@ -24,6 +24,13 @@ public class StockController {
         return modelAndView;
 
     }
+    @RequestMapping("/stockPage.html")
+    public ModelAndView stockPage() {
+
+        ModelAndView modelAndView = new ModelAndView("stockPage");
+        return modelAndView;
+
+    }
 
     @RequestMapping("/selectAllStocks")
     public String selectAll() {

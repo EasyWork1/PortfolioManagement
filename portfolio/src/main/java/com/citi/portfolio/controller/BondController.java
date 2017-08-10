@@ -24,6 +24,13 @@ public class BondController {
         return modelAndView;
 
     }
+    @RequestMapping("/bondPage.html")
+    public ModelAndView stockPage() {
+
+        ModelAndView modelAndView = new ModelAndView("bondPage");
+        return modelAndView;
+
+    }
 
     @RequestMapping("/selectAllBonds")
     public String selectAll() {

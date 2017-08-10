@@ -21,6 +21,8 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -151,8 +153,15 @@ public class FundManagerServiceImp implements FundManagerService {
                 double quantity = position.getQuantity();
                 String securitySymbol = position.getSecurityid();
                 HashMap hashMap = new HashMap();
-                hashMap.put("symbol",securitySymbol);
-                hashMap.put("date",new Date());
+                hashMap.put("symbol", securitySymbol);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                java.sql.Date sqlDate = null;
+                try {
+                    sqlDate = new java.sql.Date(simpleDateFormat.parse("2017-04-03").getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                hashMap.put("date", sqlDate);
                 Price price = priceMapper.selectBySymbolAndDate(hashMap);
                 double offerPrice = price.getOfferprice();
                 double benifit = (offerPrice - lastPrice) * quantity;
@@ -161,32 +170,34 @@ public class FundManagerServiceImp implements FundManagerService {
                 BigDecimal bg = new BigDecimal(benifit).setScale(2, RoundingMode.UP);
                 benifit = bg.doubleValue();
                 position.setBenifit(benifit);
-                result  = positionMapper.updateByPrimaryKey(position);
-                if (result == 0){
-                    jsonObject.put("resultCode",0);
+                result = positionMapper.updateByPrimaryKey(position);
+                if (result == 0) {
+                    jsonObject.put("resultCode", 0);
                     return jsonObject;
                 }
-
+                bg = new BigDecimal(portfolioBenifitSum).setScale(2, RoundingMode.UP);
+                portfolioBenifitSum = bg.doubleValue();
+                portfolio.setBenefit(portfolioBenifitSum);
+                result = portfolioMapper.updateByPrimaryKey(portfolio);
+                if (result == 0) {
+                    jsonObject.put("resultCode", 0);
+                    return jsonObject;
+                }
             }
-            BigDecimal bg = new BigDecimal(portfolioBenifitSum).setScale(2, RoundingMode.UP);
-            portfolioBenifitSum = bg.doubleValue();
-            portfolio.setBenefit(portfolioBenifitSum);
-            result = portfolioMapper.updateByPrimaryKey(portfolio);
-            if (result == 0){
-                jsonObject.put("resultCode",0);
+            FundManager fundManager = fundManagerMapper.selectByPrimaryKey(id);
+            BigDecimal bg = new BigDecimal(fundManagerBenifitSum).setScale(2, RoundingMode.UP);
+            fundManagerBenifitSum = bg.doubleValue();
+            fundManager.setBalance(fundManagerBenifitSum);
+            result = fundManagerMapper.updateByPrimaryKey(fundManager);
+            if (result == 0) {
+                jsonObject.put("resultCode", 0);
                 return jsonObject;
             }
-        }
-        FundManager fundManager = fundManagerMapper.selectByPrimaryKey(id);
-        BigDecimal bg = new BigDecimal(fundManagerBenifitSum).setScale(2, RoundingMode.UP);
-        fundManagerBenifitSum = bg.doubleValue();
-        fundManager.setBalance(fundManagerBenifitSum);
-        result = fundManagerMapper.updateByPrimaryKey(fundManager);
-        if (result == 0){
-            jsonObject.put("resultCode",0);
+            jsonObject.put("resultCode", 1);
             return jsonObject;
         }
-        jsonObject.put("resultCode",1);
         return jsonObject;
     }
 }
+
+
