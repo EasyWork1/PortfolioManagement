@@ -72,7 +72,7 @@
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header" id="PortfolioName">
+                        <h1 class="page-header" id="PortfolioNameSub">
                             My symbols
                         </h1>
                         
@@ -153,7 +153,8 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>symbol</th> 
-                                        <th>lastprice</th>   
+                                        <th>lastprice</th>
+                                        <th>benefit</th>   
                                         <th>currency</th>
                                         <th>quantity</th>
                                         <th>asset</th>

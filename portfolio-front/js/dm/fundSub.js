@@ -4,7 +4,14 @@ $(function(){
     getAllSymbolInfo();
     var name =  localStorage['portfolioName'] ;
     console.log("get name from cookies:"+name);
-    $("#PortfolioName").html(name);
+    $("#PortfolioNameSub").html(name);
+    $("#tb_Symbol tr td:nth-child(4)").each(function() {
+        if(parseFloat($(this).text()) < 0) {
+            $(this).css("color", "#f00");
+        } else{
+            $(this).css("color", "#7FFF00");
+        }
+    });
 });
 
 var chooseSymbol = "";
@@ -24,7 +31,7 @@ function getAllSymbolInfo() {
             var symbol= "";
             for(var i=0;i<data.length;i++){
                 console.log("data:"+i+"("+data[i].securityid+data[i].asset+")");
-                addSymbolRow(data[i].id,data[i].securityid,data[i].lastprice,data[i].currency,data[i].quantity,data[i].asset,data[i].datetime);
+                addSymbolRow(data[i].id,data[i].securityid,data[i].lastprice,data[i].benefit,data[i].currency,data[i].quantity,data[i].asset,data[i].datetime);
         } 
         },
         error: function(json) {
@@ -55,7 +62,7 @@ function addStock() {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    addSymbolRow(json.id,json.securityid,json.lastprice,json.currency,json.quantity,json.asset,json.datetime);
+                    addSymbolRow(json.id,json.securityid,json.lastprice,json.benefit,json.currency,json.quantity,json.asset,json.datetime);
                     chooseSymbol="";
                 } else {
                     alert(json.errorMessage);
@@ -170,11 +177,11 @@ function addResultRow(symbol,descripe,asset) {
     
 }
 
-function addSymbolRow(id,securityid,lastprice,currency,quantity,asset,dateTime)
+function addSymbolRow(id,securityid,lastprice,benefit,currency,quantity,asset,dateTime)
 {
     console.log("add a new row to tb_Symbol");
    
-    var tbBody = "<tr><td>" +id+ "</td>"+"<td>"+ securityid + "</td>"+"<td>" + lastprice + "</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+"</td>"+"<td>"+ asset + "</td>"+"<td>"+dateTime+ "</td>";
+    var tbBody = "<tr><td>" +id+ "</td>"+"<td>"+ securityid + "</td>"+"<td>" + lastprice +"</td>"+"<td>"+ benefit+"</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+"</td>"+"<td>"+ asset + "</td>"+"<td>"+dateTime+ "</td>";
 
     var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deleteStock(this)\">delete</button>'+"</td></tr>";
     tbBody += buttontd;

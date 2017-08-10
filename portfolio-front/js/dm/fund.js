@@ -2,6 +2,13 @@ $(function(){
     var name = localStorage['username'];
     $("#user-box").html(name);
    getAllPortfolioInfo();
+   $("#tb_Portfolio tr td:nth-child(5)").each(function() {
+        if(parseFloat($(this).text()) < 0) {
+            $(this).css("color", "#f00");
+        } else{
+            $(this).css("color", "#7FFF00");
+        }
+    });
 
 });
 

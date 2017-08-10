@@ -3,6 +3,13 @@ $(function(){
     $("#user-box").html(username);
     console.log("history begin");
     getAllHistory();
+    $("#tb_History tr td:nth-child(5)").each(function() {
+        if($(this).text() == "SELL") {
+            $(this).css("color", "#f00");
+        } else{
+            $(this).css("color", "#7FFF00");
+        }
+    });
 
 });
 
