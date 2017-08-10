@@ -125,15 +125,15 @@
 		      </thead>
 		    <tbody>
 			     <tr  ng-repeat="data in datas">
-				 <td>{{data.symbol}}</td>
-                 <td>{{data.name}}</td>
-                 <td>{{data.marketcap}}</td>
-                 <td>{{data.ipoyear}}</td>
-                 <td>{{data.sector}}</td>
-                 <td>{{data.industry}}</td>
-                 <td>{{data.bidprice}}</td>
-                 <td>{{data.offerprice}}</td>
-                 <td>{{data.date}}</td>
+				 <td class="active">{{data.symbol}}</td>
+                 <td class="success">{{data.name}}</td>
+                 <td class="warning">{{data.marketcap}}</td>
+                 <td class="danger">{{data.ipoyear}}</td>
+                 <td class="active">{{data.sector}}</td>
+                 <td class="success">{{data.industry}}</td>
+                 <td class="warning">{{data.bidprice}}</td>
+                 <td class="active">{{data.offerprice}}</td>
+                 <td class="success">{{data.date}}</td>
 			     </tr>
 		    </tbody>
 	       </table>

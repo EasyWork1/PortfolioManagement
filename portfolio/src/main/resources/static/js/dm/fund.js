@@ -60,6 +60,7 @@ function trClick(e) {
     console.log(Id);
     localStorage['portfolioName'] = name;
     localStorage['portfolioId'] = Id;
+	localStorage['lotvalue']= e.children[3].innerHTML;
     self.location = "fundSub.html"; 
 }
 

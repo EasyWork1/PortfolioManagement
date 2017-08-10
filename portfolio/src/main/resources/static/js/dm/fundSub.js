@@ -21,6 +21,10 @@ function getAllSymbolInfo() {
         success: function(json) {
               //打印信息
             console.log("myPositions查询返回的数据:"+json);
+			var totalAmount = localStorage['lotvalue'];
+			
+			showPieChart(json,totalAmount);
+			
             var data = eval(json);
             var symbol= "";
             for(var i=0;i<data.length;i++){
@@ -293,6 +297,56 @@ function setColor() {
         }
     });
 }
+
+//前面要调用这个方法
+function showPieChart(data,totalAmount)
+{    
+    var arr = new Array();  
+    var obj;
+    
+    for(var i=0;i<data.length;i++){ 
+        
+        obj = new Array();
+        obj[0] = data[i].securityid;
+        obj[1] = (data[i].quantity * data[i].lastprice + data[i].benifit)/totalAmount;
+        console.log("饼图值:"+obj[0]+":"+obj[1] );
+        
+        arr.push(obj);
+    } 
+
+
+    $('#pieContainer').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        tooltip: {
+            headerFormat: '{series.name}<br>',
+            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'occupation',
+            data: arr
+        }]
+    });
+
+}
+
 
 
 

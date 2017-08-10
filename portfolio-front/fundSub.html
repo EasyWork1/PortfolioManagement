@@ -81,6 +81,14 @@
                     </div>
                 </div>
                 <!-- /.row -->
+				   <!-- show pie chart -->
+                <div class="row">
+                    <div class="col-lg-12">
+                       <div id="pieContainer" style="min-width:300px;height:300px"></div>
+                        
+                    </div>
+                </div>
+				
 
                 <div class="col-lg-10">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
