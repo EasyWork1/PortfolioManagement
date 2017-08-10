@@ -25,7 +25,7 @@ function getAllSymbolInfo() {
             var symbol= "";
             for(var i=0;i<data.length;i++){
                 console.log("data:"+i+"("+data[i].securityid+data[i].asset+")");
-                addSymbolRow(data[i].id,data[i].securityid,data[i].lastprice,data[i].benefit,data[i].currency,data[i].quantity,data[i].asset,data[i].datetime);
+                addSymbolRow(data[i].id,data[i].securityid,data[i].lastprice,data[i].benifit,data[i].currency,data[i].quantity,data[i].asset,data[i].datetime);
             } 
             setColor();
         },
@@ -57,7 +57,7 @@ function addStock() {
             success: function (data) {  
                 var json = eval(data);
                 if (json.resultCode == 1) {
-                    addSymbolRow(json.id,json.securityid,json.lastprice,json.benefit,json.currency,json.quantity,json.asset,json.datetime);
+                    addSymbolRow(json.id,json.securityid,json.lastprice,json.benifit,json.currency,json.quantity,json.asset,json.datetime);
                     chooseSymbol="";
                     setColor();
                 } else {
