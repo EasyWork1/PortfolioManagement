@@ -177,7 +177,7 @@ function addSymbolRow(id,securityid,lastprice,benefit,currency,quantity,asset,da
 {
     console.log("add a new row to tb_Symbol");
    
-    var tbBody = "<tr><td>" +id+ "</td>"+"<td>"+ securityid + "</td>"+"<td>" + lastprice +"</td>"+"<td>"+ benefit+"</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+"</td>"+"<td>"+ asset + "</td>"+"<td>"+dateTime+ "</td>";
+    var tbBody = "<tr onclick=\"PositionClick(this)\"><td>" +id+ "</td>"+"<td>"+ securityid + "</td>"+"<td>" + lastprice +"</td>"+"<td>"+ benefit+"</td>"+"<td>" + currency + "</td>"+"<td>" +quantity+"</td>"+"<td>"+ asset + "</td>"+"<td>"+dateTime+ "</td>";
 
     var buttontd = "<td>"+'<button class=\"btn btn-primary btn-sm\" onclick=\"deleteStock(this)\">delete</button>'+"</td></tr>";
     tbBody += buttontd;
@@ -207,6 +207,71 @@ function trClick(e) {
     }  
 
 }
+
+function PositionClick(e) {
+    console.log("dianji");
+    var symbol = e.children[1].innerHTML;
+    var http = 'http://localhost:8080/';  
+    $.ajax({  
+        type: "POST",  
+        url: http+"selectSymbolData",  
+        data: {symbol:symbol},  
+        dataType: "json",  
+        timeout: 15000,  
+        success: function (data) {  
+            var dateArray = new Array();
+            $.each(json, function(index, item){
+                    var date= new Date(item.date);
+                    var dateutc=Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+                    var myDate=new Array();
+                    myDate.push(dateutc);
+                    myDate.push(item.offerprice);
+                    dateArray.push(myDate);
+                }); 
+            showChart(symbol,dateArray);
+        },
+        error: function (xhr, message) {
+            alert(message);
+        }
+    });
+}
+
+function showChart(positionName,dateArray) {
+    $("#lineModal").modal('show');
+    $('#container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        xAxis: {
+            type: 'datetime',
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'price ($)'
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            name: positionName,
+            data: dateArray
+        }]
+    });
+}
+
 
 function setColor() {
     $("#tb_Symbol tr td:nth-child(4)").each(function() {

@@ -22,6 +22,8 @@
     <link href="css/height.css" rel="stylesheet">
     <link href="css/fund.css" rel="stylesheet">
     <script type="text/javascript" src="js/dm/fundSub.js"></script>
+    <script type="text/javascript" src="js/dm/highcharts.js"></script>
+    <script type="text/javascript" src="js/dm/exporting.js"></script>
 </head>
 
 <body>
@@ -142,8 +144,24 @@
                                     
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal -->
-                        </div>
-                        
+                        </div><!-- /modalend -->
+                        <div class="modal fade" id="lineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Show Detail</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="container" style="min-width:400px;height:400px"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                    
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div><!-- /modalend -->
                         <div>
                          
                         <div>
@@ -162,7 +180,7 @@
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
-                                <tbody>                    
+                                <tbody>                   
                                 </tbody>
                             </table>
                         </div>
